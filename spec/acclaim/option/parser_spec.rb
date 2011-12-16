@@ -66,6 +66,16 @@ describe Acclaim::Option::Parser do
         args.should == %w(cmd subcmd -- FILE1 FILE2)
       end
 
+      context 'when not given a required parameter' do
+
+        let!(:args) { %w(-b) }
+
+        it 'should raise an error' do
+          expect { subject.parse! }.to raise_error
+        end
+
+      end
+
     end
 
   end
