@@ -32,12 +32,12 @@ describe Acclaim::Option::Parser do
       let(:options) do
         [].tap do |opts|
           ('a'..'f').each do |c|
-            hash = { name: c, short: "-#{c}" }
+            hash = { key: c, names: ["-#{c}"] }
             hash[:arity] = [1, 0] if c == 'b' or c == 'f'
             opts << Acclaim::Option.new(hash)
           end
-          opts << Acclaim::Option.new(name: 'long', long: '--long')
-          opts << Acclaim::Option.new(name: 'params', long: '--parameters',
+          opts << Acclaim::Option.new(key: 'long', names: ['--long'])
+          opts << Acclaim::Option.new(key: 'params', names: ['--parameters'],
                                       arity: [1, 1], default: [])
         end
       end

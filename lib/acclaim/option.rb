@@ -3,7 +3,7 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
-    attributes = %w(name short long description arity default).map!(&:to_sym).freeze
+    attributes = %w(key names description arity default).map!(&:to_sym).freeze
 
     attr_accessor *attributes
 
@@ -15,8 +15,7 @@ module Acclaim
     end
 
     def =~(str)
-      str = str.strip
-      long == str or short == str
+      names.include? str.strip
     end
 
     def flag?

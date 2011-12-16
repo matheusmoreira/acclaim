@@ -59,7 +59,7 @@ module Acclaim
       def build_options_instance!
         Options.new.tap do |options_instance|
           options.each do |option|
-            key = option.name.to_s.to_sym
+            key = option.key.to_sym
             options_instance[key] = option.default
             args = argv.find_all { |arg| option =~ arg }
             if args.any?
