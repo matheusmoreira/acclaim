@@ -9,6 +9,7 @@ Gem::Specification.new('acclaim') do |gem|
   gem.version     = Acclaim::Version::STRING
   gem.summary     = 'Command-line option parser and command interface.'
   gem.description = gem.summary
+  gem.homepage    = 'https://github.com/matheusmoreira/acclaim'
 
   gem.author = 'Matheus Afonso Martins Moreira'
   gem.email  = 'matheus.a.m.moreira@gmail.com'
