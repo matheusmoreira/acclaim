@@ -6,7 +6,7 @@ describe Acclaim::Option::Parser do
   describe '#parse!' do
 
     let!(:args) do
-      %w(cmd subcmd -a -b PARAM1 -cdef PARAM2 --long --parameters PARAM3 PARAM4 -- FILE1 FILE2)
+      %w(cmd subcmd -a -b PARAM1 -cdef PARAM2 --long --parameters PARAM3 PARAM4 PARAM5 -- FILE1 FILE2)
     end
 
     subject { Acclaim::Option::Parser.new(args) }
@@ -38,7 +38,7 @@ describe Acclaim::Option::Parser do
           end
           opts << Acclaim::Option.new(name: 'long', long: '--long')
           opts << Acclaim::Option.new(name: 'params', long: '--parameters',
-                                      arity: [1, -1], default: [])
+                                      arity: [1, 1], default: [])
         end
       end
 
@@ -63,7 +63,7 @@ describe Acclaim::Option::Parser do
 
       it 'should leave unparsed arguments in argv' do
         subject.parse!
-        args.should == %w(cmd subcmd -- FILE1 FILE2)
+        args.should == %w(cmd subcmd PARAM5 -- FILE1 FILE2)
       end
 
       context 'when not given a required parameter' do
