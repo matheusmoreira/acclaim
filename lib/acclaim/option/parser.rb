@@ -6,7 +6,11 @@ module Acclaim
     # Parses arrays of strings and returns an Options instance containing data.
     class Parser
 
-      class Error < StandardError; end
+      class Error < StandardError
+        def self.raise_wrong_arg_number(actual, minimum, optional)
+          raise self, "Wrong number of arguments (%d for %d)" % [actual, minimum, optional]
+        end
+      end
 
       attr_accessor :argv, :options
 
@@ -77,9 +81,7 @@ module Acclaim
                     values << param
                   end
                   count = values.count
-                  if count < minimum
-                    raise Error, "Wrong number of arguments (%d for %d)" % [count, minimum]
-                  end
+                  Error.raise_wrong_arg_number count, option.arity if count < minimum
                   options_instance[key] = if minimum == 1 and optional.zero?
                     values.first
                   else
