@@ -77,8 +77,12 @@ module Acclaim
                   params = argv[arg_index + 1, len]
                   values = []
                   params.each do |param|
-                    break if param.nil? or param =~ /^-{1,2}/ or param =~ /^-{2,}$/
-                    values << param
+                    case param
+                      when nil, /^-{1,2}/, /^-{2,}$/ then break
+                      else
+                        break if optional >= 0 and values.count >= minimum + optional
+                        values << param
+                    end
                   end
                   count = values.count
                   Error.raise_wrong_arg_number count, option.arity if count < minimum
