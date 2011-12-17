@@ -80,7 +80,7 @@ module Acclaim
                   values = []
                   params.each do |param|
                     case param
-                      when nil, /^-{1,2}/, /^-{2,}$/ then break
+                      when nil, /^(-{1,2}|-{2,}$)/ then break
                       else
                         break if optional >= 0 and values.count >= minimum + optional
                         values << param
