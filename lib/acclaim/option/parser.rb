@@ -49,15 +49,11 @@ module Acclaim
         argv.find_all { |arg| arg =~ /^-\w{2,}/ }.each do |multiples|
           multiples_index = argv.index multiples
           argv.delete multiples
-          options, *parameters = multiples.split /\s+/
-          separated_options = options.sub!(/^-/, '').split(//).map! { |option| option.prepend '-' }
-          separated_options.each_index do |option_index|
-            argv.insert multiples_index + option_index, separated_options[option_index]
-          end
-          last_option_index = argv.index separated_options.last
-          parameters.each_index do |parameter_index|
-            argv.insert last_option_index + paramter_index + 1,
-                        parameters[parameter_index]
+          letters = multiples.sub!(/^-/, '').split(//)
+          letters.each { |letter| letter.prepend '-' }.tap do |options|
+            options.each_index do |option_index|
+              argv.insert multiples_index + option_index, options[option_index]
+            end
           end
         end
       end
