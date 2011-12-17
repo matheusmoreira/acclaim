@@ -95,8 +95,13 @@ module Acclaim
       # otherwise.
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
+        arg_separator = args.find { |arg| arg =~ Option::Parser::ARGUMENT_SEPARATOR }
+        separator_index = args.index arg_separator
         subcommands.find do |subcommand|
-          subcommand.line == args.first
+          index = args.index subcommand.line
+          # If we have the subcommand AND the separator, then we have it if the
+          # subcommand is before the separator.
+          index and not separator_index or index < separator_index
         end.tap do |subcommand|
           if subcommand
             args.delete subcommand.line
