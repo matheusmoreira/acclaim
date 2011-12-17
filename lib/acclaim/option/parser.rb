@@ -35,7 +35,7 @@ module Acclaim
 
       private
 
-      # Argument array preprocessing. Does not touch
+      # Argument array preprocessing.
       def preprocess_argv!
         split_multiple_short_options!
         # TODO: normalize parameter formats?
