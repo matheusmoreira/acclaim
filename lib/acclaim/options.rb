@@ -11,6 +11,10 @@ module Acclaim
       data[key] = value
     end
 
+    def merge!(other, &block)
+      data.merge! other.data, &block
+    end
+
     # Handles the following cases:
     #
     #   options.method = value
@@ -28,7 +32,7 @@ module Acclaim
       end
     end
 
-    private
+    protected
 
     # The option values
     def data
