@@ -18,6 +18,18 @@ module Acclaim
       names.include? str.strip
     end
 
+    def required?
+      @required
+    end
+
+    def required=(value)
+      @required = value
+    end
+
+    def require
+      self.required = true
+    end
+
     def flag?
       not arity or arity.empty? or arity == [0, 0]
     end
