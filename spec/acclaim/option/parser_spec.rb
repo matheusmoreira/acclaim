@@ -6,7 +6,7 @@ describe Acclaim::Option::Parser do
   describe '#parse!' do
 
     let!(:args) do
-      %w(cmd subcmd -a -b PARAM1 -cdef PARAM2 --long --parameters PARAM3 PARAM4 PARAM5 -- FILE1 FILE2)
+      %w(cmd -a subcmd -b PARAM1 -cdef PARAM2 --long --parameters PARAM3 PARAM4 PARAM5 -- FILE1 FILE2)
     end
 
     subject { Acclaim::Option::Parser.new(args) }
@@ -34,6 +34,7 @@ describe Acclaim::Option::Parser do
           ('a'..'f').each do |c|
             hash = { key: c, names: ["-#{c}"] }
             hash[:arity] = [1, 0] if c == 'b' or c == 'f'
+            hash[:required] = true if c == 'd'
             opts << Acclaim::Option.new(hash)
           end
           opts << Acclaim::Option.new(key: 'long', names: ['--long'])
@@ -66,12 +67,24 @@ describe Acclaim::Option::Parser do
         args.should == %w(cmd subcmd PARAM5 -- FILE1 FILE2)
       end
 
-      context 'when not given a required parameter' do
+      context 'but not given a required parameter' do
 
-        let!(:args) { %w(-b) }
+        let!(:args) { %w(-db) }
 
         it 'should raise an error' do
-          expect { subject.parse! }.to raise_error
+          expect { subject.parse! }.to raise_error Acclaim::Option::Parser::Error,
+                                                   /number of arguments/
+        end
+
+      end
+
+      context 'but not passed a required option' do
+
+        let!(:args) { [] }
+
+        it 'should raise an error' do
+          expect { subject.parse! }.to raise_error Acclaim::Option::Parser::Error,
+                                                   /required/
         end
 
       end
