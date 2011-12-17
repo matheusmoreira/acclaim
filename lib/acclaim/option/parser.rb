@@ -7,9 +7,15 @@ module Acclaim
     class Parser
 
       class Error < StandardError
+
         def self.raise_wrong_arg_number(actual, minimum, optional)
-          raise self, "Wrong number of arguments (%d for %d)" % [actual, minimum, optional]
+          raise self, "Wrong number of arguments (#{actual} for #{minimum})"
         end
+
+        def self.raise_missing_arg(arg)
+          raise self, "Missing required argument (#{arg})"
+        end
+
       end
 
       attr_accessor :argv, :options
@@ -85,7 +91,7 @@ module Acclaim
                     end
                   end
                   count = values.count
-                  Error.raise_wrong_arg_number count, option.arity if count < minimum
+                  Error.raise_wrong_arg_number count, *option.arity if count < minimum
                   options_instance[key] = if minimum == 1 and optional.zero?
                     values.first
                   else
@@ -95,6 +101,8 @@ module Acclaim
                 end
               end
               args.each { |arg| argv.delete arg }
+            else
+              Error.raise_missing_arg(option.names.join ' | ') if option.required?
             end
           end
         end
