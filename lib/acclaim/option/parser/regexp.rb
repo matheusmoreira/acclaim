@@ -7,13 +7,22 @@ module Acclaim
 
         # Regular expression for any kind of option switch.
         #
-        # Matches strings that begin with 1 or 2 dashes, are followed by at
-        # least one word character or number, and may be followed by any other
-        # word character, number or dash.
+        # Matches two types of options:
         #
-        # Examples: -s, --long, -multiple, -1, --no-feature, --with_underscore,
-        #           --_private_option, etc.
-        SWITCH = /^-{1,2}[\w\d]+[\w\d-]*$/
+        # [Short option]  Begins with a single dash and contains only word
+        #                 characters or digits until the end of the string.
+        #                 Examples: <tt>-s; -mult; -5; -_</tt>
+        #
+        # [Long option]  Begins with a double dash, contains one or more word
+        #                character or digit, and can be followed by either
+        #                nothing or a single dash. The latter must be followed
+        #                by one or more word character or digit.
+        #                Examples:
+        #                <tt>
+        #                --long; --no-feature; --with_underscore;
+        #                --_private-option
+        #                </tt>
+        SWITCH = /(^-[\w\d]+$)|(^--[\w\d]+(-[\w\d]+)*$)/
 
         # Regular expression for multiple short options in a single "short"
         # switch.
