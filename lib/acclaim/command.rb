@@ -1,5 +1,6 @@
 require 'acclaim/option'
 require 'acclaim/option/parser'
+require 'acclaim/option/parser/regexp'
 require 'acclaim/option/values'
 
 module Acclaim
@@ -94,7 +95,9 @@ module Acclaim
       # otherwise.
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
-        arg_separator = args.find { |arg| arg =~ Option::Parser::ARGUMENT_SEPARATOR }
+        arg_separator = args.find do |arg|
+          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
+        end
         separator_index = args.index arg_separator
         subcommands.find do |subcommand|
           index = args.index subcommand.line

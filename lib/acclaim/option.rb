@@ -1,5 +1,5 @@
 require 'acclaim/option/arity'
-require 'acclaim/option/parser'
+require 'acclaim/option/parser/regexp'
 
 module Acclaim
 
@@ -11,8 +11,8 @@ module Acclaim
     def initialize(key, *args)
       options = args.last.is_a?(Hash) ? args.pop : {}
       self.key         = key
-      self.names       = args.find_all { |arg| arg =~ Parser::SWITCH }
-      self.description = args.find     { |arg| arg !~ Parser::SWITCH }
+      self.names       = args.find_all { |arg| arg =~ Parser::Regexp::SWITCH }
+      self.description = args.find     { |arg| arg !~ Parser::Regexp::SWITCH }
       self.type        = args.find     { |arg| arg.is_a? Class }
       self.arity       = options[:arity]
       self.default     = options[:default]
