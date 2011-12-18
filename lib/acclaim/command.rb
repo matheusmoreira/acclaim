@@ -1,6 +1,6 @@
 require 'acclaim/option'
 require 'acclaim/option/parser'
-require 'acclaim/options'
+require 'acclaim/option/values'
 
 module Acclaim
 
@@ -83,7 +83,7 @@ module Acclaim
 
       # Invokes this command with a fresh set of options.
       def run(*args)
-        invoke Options.new, args
+        invoke Option::Values.new, args
         rescue Option::Parser::Error => e
           puts e.message
       end

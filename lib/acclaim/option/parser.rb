@@ -1,4 +1,4 @@
-require 'acclaim/options'
+require 'acclaim/option/values'
 
 module Acclaim
   class Option
@@ -85,7 +85,7 @@ module Acclaim
       end
 
       def build_options_instance!
-        Options.new.tap do |options_instance|
+        Values.new.tap do |options_instance|
           options.each do |option|
             key = option.key.to_sym
             options_instance[key] = option.default
