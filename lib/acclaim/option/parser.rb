@@ -33,7 +33,7 @@ module Acclaim
 
       def parse!
         preprocess_argv!
-        instance = build_options_instance! unless options.nil?
+        parse_values! unless options.nil?
       end
 
       private
@@ -61,7 +61,7 @@ module Acclaim
         end
       end
 
-      def build_options_instance!
+      def parse_values!
         Values.new.tap do |options_instance|
           options.each do |option|
             key = option.key.to_sym
