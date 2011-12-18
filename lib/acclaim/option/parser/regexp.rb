@@ -13,7 +13,7 @@ module Acclaim
         # Examples: <tt>-s; -mult; -5; -_</tt>
         #
         # <tt>'-mult'</tt> will be split into <tt>%w(-m -u -l -t)</tt>.
-        SHORT_SWITCH = /^-[\w\d]+$/
+        SHORT_SWITCH = /\A-[\w\d]+\Z/
 
         # Regular expression for a long option switch.
         #
@@ -24,7 +24,7 @@ module Acclaim
         #
         # Examples: <tt>--long; --no-feature; --with_underscore;
         # --_private-option; --1-1</tt>
-        LONG_SWITCH = /^--[\w\d]+(-[\w\d]+)*$/
+        LONG_SWITCH = /\A--[\w\d]+(-[\w\d]+)*\Z/
 
         # Regular expression for any kind of option switch.
         #
@@ -40,7 +40,7 @@ module Acclaim
         # character.
         #
         # Examples: -xvf, -abc, -de_f
-        MULTIPLE_SHORT_SWITCHES = /^-\w{2,}$/
+        MULTIPLE_SHORT_SWITCHES = /\A-\w{2,}\Z/
 
         # Regular expression for a long switch connected to its parameters with
         # an equal sign. Multiple parameters are be separated by commas.
@@ -61,13 +61,13 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        PARAM_EQUALS_SWITCH = /^--[\w\d]+(-?[\w\d]+)*=(,{0,1}[\w\d]+)*$/
+        PARAM_EQUALS_SWITCH = /\A--[\w\d]+(-?[\w\d]+)*=(,{0,1}[\w\d]+)*\Z/
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
         #
         # Matches strings made up of 2 or more dashes.
-        ARGUMENT_SEPARATOR = /^-{2,}$/
+        ARGUMENT_SEPARATOR = /\A-{2,}\Z/
 
       end
 
