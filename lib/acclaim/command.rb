@@ -13,21 +13,21 @@ module Acclaim
   #
   # A subcommand benefits from its parent's option processing.
   #
-  #   app do something --option --option-for-something
+  #   app --global-option do something --option-for-do --option-for-something
   #
-  # A command can be instantiated in the following form:
+  # A command can be created in the following form:
   #
   #   class App::Command < Acclaim::Command
-  #     opt :verbose, names: %w(-v --verbose), description: 'Run verbosely'
+  #     option :verbose, '-v', '--verbose', 'Run verbosely'
   #   end
   #
   # A subcommand can be created by inheriting from another command:
   #
   #   class App::Command::Do < App::Command
-  #     opt :what, names: %w(-W --what), description: 'Do what?', arity: [1, 0], required: true
+  #     opt :what, '-W', '--what', 'What to do', arity: [1, 0], required: true
   #     when_called do |options, arguments|
-  #       puts "Verbose? #{options.verbose? ? 'yes' : 'no'}"
-  #       puts "Doing #{options.what} with #{arguments.inspect} now!"
+  #       puts "Verbose? #{options.verbose? ? :yes : :no}"
+  #       puts "Doing #{options.what} with #{arguments.join ' and ')}!"
   #     end
   #   end
   #
@@ -35,11 +35,11 @@ module Acclaim
   #
   #   App::Command.run *ARGV
   #
-  # Subcommands inherit their parent's option processing:
+  # See it in action:
   #
-  #   $ app --verbose -W test do arg1 arg2
+  #   $ app --verbose do --what testing acclaim safeguard
   #   Verbose? yes
-  #   Doing test with ["arg1", "arg2"] now!
+  #   Doing testing with acclaim and safeguard!
   class Command
 
     # Module containing the class methods every command class should inherit.
