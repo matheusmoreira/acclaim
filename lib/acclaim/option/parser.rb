@@ -52,12 +52,9 @@ module Acclaim
         argv.find_all { |arg| arg =~ MULTIPLE_SHORT_SWITCHES }.each do |multiples|
           multiples_index = argv.index multiples
           argv.delete multiples
-          letters = multiples.sub!(/^-/, '').split(//)
-          letters.each { |letter| letter.prepend '-' }.tap do |options|
-            options.each_index do |option_index|
-              argv.insert multiples_index + option_index, options[option_index]
-            end
-          end
+          switches = multiples.sub!(/^-/, '').split(//).each { |letter| letter.prepend '-' }
+          argv.insert multiples_index, switches
+          argv.flatten!
         end
       end
 
