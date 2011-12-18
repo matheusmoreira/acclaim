@@ -5,24 +5,32 @@ module Acclaim
       # Contains all regular expressions used by the parser.
       module Regexp
 
+        # Regular expression for a short option switch.
+        #
+        # Matches strings that begin with a single dash and contain only word
+        # characters or digits until the end of the string.
+        #
+        # Examples: <tt>-s; -mult; -5; -_</tt>
+        #
+        # <tt>'-mult'</tt> will be split into <tt>%w(-m -u -l -t)</tt>.
+        SHORT_SWITCH = /^-[\w\d]+$/
+
+        # Regular expression for a long option switch.
+        #
+        # Matches strings that begin with a double dash, contain one or more
+        # word character or digit, and can be followed by either nothing or a
+        # single dash. The latter must be followed by one or more word character
+        # or digit.
+        #
+        # Examples: <tt>--long; --no-feature; --with_underscore;
+        # --_private-option; --1-1</tt>
+        LONG_SWITCH = /^--[\w\d]+(-[\w\d]+)*$/
+
         # Regular expression for any kind of option switch.
         #
-        # Matches two types of options:
-        #
-        # [Short option]  Begins with a single dash and contains only word
-        #                 characters or digits until the end of the string.
-        #                 Examples: <tt>-s; -mult; -5; -_</tt>
-        #
-        # [Long option]  Begins with a double dash, contains one or more word
-        #                character or digit, and can be followed by either
-        #                nothing or a single dash. The latter must be followed
-        #                by one or more word character or digit.
-        #                Examples:
-        #                <tt>
-        #                --long; --no-feature; --with_underscore;
-        #                --_private-option
-        #                </tt>
-        SWITCH = /(^-[\w\d]+$)|(^--[\w\d]+(-[\w\d]+)*$)/
+        # Matches either a SHORT_SWITCH or a LONG_SWITCH. See their descriptions
+        # for details.
+        SWITCH = /(#{SHORT_SWITCH})|(#{LONG_SWITCH})/
 
         # Regular expression for multiple short options in a single "short"
         # switch.
