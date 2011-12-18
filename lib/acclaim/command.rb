@@ -101,7 +101,7 @@ module Acclaim
           index = args.index subcommand.line
           # If we have the subcommand AND the separator, then we have it if the
           # subcommand is before the separator.
-          index and not separator_index or index < separator_index
+          index and (not separator_index or index < separator_index)
         end.tap do |subcommand|
           if subcommand
             args.delete subcommand.line
