@@ -8,6 +8,10 @@ module Acclaim
       attr_accessor :minimum, :optional
       alias :required :minimum
 
+      # Initializes this arity with a number of required parameters and a number
+      # of optional parameters. If the latter is less than zero, then it means
+      # the option may take infinite parameters, as long as it takes at least
+      # +minimum+ parameters.
       def initialize(minimum = 0, optional = 0)
         @minimum, @optional = minimum, optional
       end
