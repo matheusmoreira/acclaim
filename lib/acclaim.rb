@@ -1,1 +1,11 @@
-%w(command option option/parser options version).each { |file| require file.prepend 'acclaim/' }
+%w(
+
+command
+option
+option/arity
+option/parser
+option/parser/regexp
+option/values
+version
+
+).each { |file| require file.prepend 'acclaim/' }
