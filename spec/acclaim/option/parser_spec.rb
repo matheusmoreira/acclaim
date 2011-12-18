@@ -3,13 +3,45 @@ require 'acclaim/option/parser'
 
 describe Acclaim::Option::Parser do
 
+  let!(:args)   { [] }
+  let(:options) { nil }
+  subject { Acclaim::Option::Parser.new(args, options) }
+
+  context 'when given a long switch with a parameter separated by an equals sign' do
+
+    let!(:args) { %w(--switch=PARAM) }
+
+    describe '#parse!' do
+
+      it 'should separate the switch from the single parameter' do
+        subject.parse!
+        args.should == %w(--switch PARAM)
+      end
+
+    end
+
+  end
+
+  context 'when given a long switch with multiple parameters separated by an equals sign' do
+
+    let!(:args) { %w(--files FILE1 FILE2 FILE3) }
+
+    describe '#parse!' do
+
+      it 'should separate the switch and the parameters' do
+        subject.parse!
+        args.should == %w(--files FILE1 FILE2 FILE3)
+      end
+
+    end
+
+  end
+
   describe '#parse!' do
 
     let!(:args) do
       %w(cmd -a subcmd -b PARAM1 -cdef PARAM2 --long --parameters PARAM3 PARAM4 PARAM5 -- FILE1 FILE2)
     end
-
-    subject { Acclaim::Option::Parser.new(args) }
 
     it 'should split multiple short options' do
       new_argv = args.dup.tap do |args|
