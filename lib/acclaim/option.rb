@@ -1,21 +1,41 @@
+require 'acclaim/option/arity'
+require 'acclaim/option/parser'
+
 module Acclaim
 
   # Represents a command-line option.
   class Option
 
-    attributes = %w(key names description arity default).map!(&:to_sym).freeze
+    attributes = %w().map!(&:to_sym).freeze
 
-    attr_accessor *attributes
+    attr_accessor :key, :names, :description, :type, :default
 
-    def initialize(args = {})
-      args.each do |attribute, value|
-        instance_variable_set :"@#{attribute}", value
-      end
+    def initialize(key, *args)
+      options = args.last.is_a?(Hash) ? args.pop : {}
+      self.key         = key
+      self.names       = args.find_all { |arg| arg =~ Parser::SWITCH }
+      self.description = args.find     { |arg| arg !~ Parser::SWITCH }
+      self.type        = args.find     { |arg| arg.is_a? Class }
+      self.arity       = options[:arity]
+      self.default     = options[:default]
+      self.required    = options[:required]
       yield self if block_given?
     end
 
     def =~(str)
       names.include? str.strip
+    end
+
+    def arity
+      @arity ||= Arity.new
+    end
+
+    def arity=(arity_or_array)
+      @arity = if arity.nil? or arity_or_array.is_a? Arity
+        arity_or_array
+      else
+        Arity.new *arity_or_array
+      end
     end
 
     def required?
@@ -31,7 +51,7 @@ module Acclaim
     end
 
     def flag?
-      not arity or arity.empty? or arity == [0, 0]
+      not arity or arity == [0, 0]
     end
 
     alias :bool?    :flag?
