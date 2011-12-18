@@ -94,11 +94,11 @@ module Acclaim
               if option.flag?
                 options_instance[key] = true
               else
-                minimum, optional = option.arity
+                arity = option.arity
                 args.each do |arg|
                   arg_index = argv.index arg
-                  len = if optional >= 0
-                    arg_index + minimum + optional
+                  len = if arity.bound?
+                    arg_index + arity.total
                   else
                     argv.length - 1
                   end
@@ -108,13 +108,13 @@ module Acclaim
                     case param
                       when nil, SWITCH, ARGUMENT_SEPARATOR then break
                       else
-                        break if optional >= 0 and values.count >= minimum + optional
+                        break if arity.bound? and values.count >= arity.total
                         values << param
                     end
                   end
                   count = values.count
-                  Error.raise_wrong_arg_number count, *option.arity if count < minimum
-                  options_instance[key] = if minimum == 1 and optional.zero?
+                  Error.raise_wrong_arg_number count, *option.arity if count < arity.required
+                  options_instance[key] = if arity.only? 1
                     values.first
                   else
                     values
