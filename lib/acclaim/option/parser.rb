@@ -31,6 +31,10 @@ module Acclaim
         self.options = options
       end
 
+      # Parses the meaning of the options given to this parser. If none were
+      # given, the argument array will only be preprocessed. Any parsed options
+      # and arguments will be removed from the argument array, so pass in a
+      # duplicate if you need the original.
       def parse!
         preprocess_argv!
         parse_values! unless options.nil?
