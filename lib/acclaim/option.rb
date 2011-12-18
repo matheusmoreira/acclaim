@@ -6,8 +6,6 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
-    attributes = %w().map!(&:to_sym).freeze
-
     attr_accessor :key, :names, :description, :type, :default
 
     def initialize(key, *args)
