@@ -22,12 +22,12 @@ module Acclaim
       #   options.method?
       #   options.method
       def method_missing(method, *args, &block)
-        m = method.to_s
-        case m
+        m = method.to_s.chop!.to_sym
+        case method
           when /=$/
-            self[:"#{m.chop!}"] = args.first
+            self[m] = args.first
           when /\?$/
-            self[:"#{m.chop!}"] ? true : false
+            self[m] ? true : false
           else
             self[method]
         end
