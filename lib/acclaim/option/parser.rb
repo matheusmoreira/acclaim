@@ -45,9 +45,8 @@ module Acclaim
       # Argument array preprocessing.
       def preprocess_argv!
         split_multiple_short_options!
+        normalize_parameters!
         # TODO: normalize parameter formats?
-        # --switch=PARAM1[,PARAM2,PARAM3] - split on =, then split on comma,
-        #                                   then reinsert them into argv
         # -sPARAM1[,PARAM2,PARAM3...] - possibly incompatible with split_multiple_short_options!
         argv.compact!
       end
@@ -59,6 +58,16 @@ module Acclaim
           switches = multiples.sub!(/^-/, '').split(//).each { |letter| letter.prepend '-' }
           argv.insert multiples_index, switches
           argv.flatten!
+        end
+      end
+
+      def normalize_parameters!
+        argv.find_all { |arg| arg =~ SWITCH_PARAM_EQUALS }.each do |switch|
+          switch_index = argv.index switch
+          argv.delete switch
+          switch, params = switch.split /\=/
+          params = params.split /,/
+          argv.insert switch_index, *[ switch, *params ]
         end
       end
 
