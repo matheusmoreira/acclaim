@@ -3,7 +3,7 @@ module Acclaim
 
     MAJOR = 0
     MINOR = 0
-    PATCH = 1
+    PATCH = 2
     BUILD = nil
 
     STRING = [ MAJOR, MINOR, PATCH, BUILD ].compact.join '.'
