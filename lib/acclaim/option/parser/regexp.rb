@@ -61,7 +61,7 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        PARAM_EQUALS_SWITCH = /\A--[\w\d]+(-?[\w\d]+)*=(,{0,1}[\w\d]+)*\Z/
+        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,{0,1}[\w\d]+)*\Z/
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
