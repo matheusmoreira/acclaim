@@ -61,9 +61,8 @@ module Acclaim
       end
 
       # Adds an option to this command.
-      def option(key, args = {})
-        args.merge!(key: key)
-        options << Option.new(args)
+      def option(*args)
+        options << Option.new(*args)
       end
 
       alias :opt :option
