@@ -47,8 +47,8 @@ module Acclaim
 
       # String which calls this command.
       def line(value = nil)
-        @line = value if value
-        @line
+        @line = value
+        @line ||= name.gsub(/^.*::/, '').downcase
       end
 
       # Commands which may be given to this command.
@@ -127,7 +127,6 @@ module Acclaim
     # subcommands.
     def self.inherited(sub)
       sub.extend ClassMethods
-      sub.line sub.name.gsub(/^.*::/, '').downcase
       subcommands << sub if respond_to? :subcommands
     end
 
