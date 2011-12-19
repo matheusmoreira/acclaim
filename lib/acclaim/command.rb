@@ -79,8 +79,8 @@ module Acclaim
 
       alias :when_called :action
 
-      def help
-        subcommands << Help.create(self)
+      def help(opts = {})
+        subcommands << Help.create(self, opts)
       end
 
       def version(version_string, opts = {})
