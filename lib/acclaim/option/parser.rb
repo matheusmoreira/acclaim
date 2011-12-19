@@ -101,11 +101,8 @@ module Acclaim
                   end
                   count = values.count
                   Error.raise_wrong_arg_number count, *option.arity if count < arity.required
-                  options_instance[key] = if arity.only? 1
-                    values.first
-                  else
-                    values
-                  end
+                  value = if arity.total == 1 then values.first else values end
+                  options_instance[key] = value unless values.empty?
                   values.each { |value| argv.delete value }
                 end
               end
