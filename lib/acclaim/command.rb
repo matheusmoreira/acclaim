@@ -125,6 +125,12 @@ module Acclaim
         superclass == Acclaim::Command
       end
 
+      def root
+        command = self
+        command = command.superclass until command.root?
+        command
+      end
+
     end
 
     # Add the class methods to the subclass and add it to this command's list of
