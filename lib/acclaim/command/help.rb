@@ -6,7 +6,8 @@ module Acclaim
 
       def self.add_options_to!(command, opts = {})
         switches = opts.fetch :switches, %w(-h --help)
-        command.option :acclaim_help, *switches, 'Show usage information and exit.'
+        description = opts.fetch :description, 'Show usage information and exit.'
+        command.option :acclaim_help, *switches, description
       end
 
       private_class_method :add_options_to!
