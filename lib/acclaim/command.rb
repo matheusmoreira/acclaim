@@ -1,3 +1,4 @@
+require 'acclaim/command/help'
 require 'acclaim/option'
 require 'acclaim/option/parser'
 require 'acclaim/option/parser/regexp'
@@ -77,6 +78,10 @@ module Acclaim
 
       alias :when_called :action
 
+      def add_help
+        subcommands << Help.create(self)
+      end
+
       # Parses the argument array using this command's set of options.
       def parse_options!(args)
         Option::Parser.new(args, options).parse!
@@ -95,6 +100,7 @@ module Acclaim
       # otherwise.
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
+        handle_special_options! opts, args
         arg_separator = args.find do |arg|
           arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
         end
@@ -129,6 +135,13 @@ module Acclaim
         command = self
         command = command.superclass until command.root?
         command
+      end
+
+      private
+
+      # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
+      def handle_special_options!(opts, args)
+        const_get(:Help).execute opts, args if opts.help?
       end
 
     end
