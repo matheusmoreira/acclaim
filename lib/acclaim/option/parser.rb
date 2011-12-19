@@ -66,7 +66,7 @@ module Acclaim
           switch_index = argv.index switch
           argv.delete switch
           switch, params = switch.split /\=/
-          params = params.split /,/
+          params = (params or '').split /,/
           argv.insert switch_index, *[ switch, *params ]
         end
       end
