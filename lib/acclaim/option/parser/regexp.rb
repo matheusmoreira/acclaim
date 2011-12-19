@@ -50,18 +50,21 @@ module Acclaim
         # or more word character or digit.
         #
         # After that, there must be an equals sign, which must be followed by
-        # either nothing or zero or one commands plus one or more word character
-        # or digit.
+        # either nothing, any number of commmas or any number of word characters
+        # or digits.
         #
         # Examples:
-        # <tt>--switch=PARAM; --files=f1,f2,f3; --weird=,PARAM2; --none=</tt>
+        # <tt>
+        # --switch=PARAM; --files=f1,f2,f3; --weird=,PARAM2; --empty=,,; --none=
+        # </tt>
         #
         # The reason something like <tt>'--none='</tt> is allowed is because it
-        # will become <tt>['--none', '']</tt> when it is split up.
+        # will become <tt>['--none']</tt> when it is split up.
+        # <tt>'--empty=,,'</tt> will become <tt>['--empty']</tt>
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,{0,1}[\w\d]+)*\Z/
+        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,*[\w\d]*)*\Z/
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
