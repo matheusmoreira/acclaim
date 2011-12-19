@@ -4,10 +4,16 @@ module Acclaim
     # Module which adds version query support to a command.
     module Version
 
+      def self.add_options_to!(command, opts = {})
+        switches = opts.fetch :switches, %w(-v --version)
+        command.option :acclaim_version, *switches, 'Show version and exit.'
+      end
+
+      private_class_method :add_options_to!
+
       def self.create(base, version_string, opts = {})
         if opts.fetch :options, true
-          switches = opts.fetch :switches, %w(-v --version)
-          base.option :acclaim_version, *switches, 'Show version and exit.'
+          add_options_to! base, opts
         end
         base.const_set(:Version, Class.new(base)).tap do |version_command|
           version_command.when_called do |options, args|

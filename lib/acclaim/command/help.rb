@@ -4,10 +4,16 @@ module Acclaim
     # Module which adds help support to a command.
     module Help
 
+      def self.add_options_to!(command, opts = {})
+        switches = opts.fetch :switches, %w(-h --help)
+        command.option :acclaim_help, *switches, 'Show usage information and exit.'
+      end
+
+      private_class_method :add_options_to!
+
       def self.create(base, opts = {})
         if opts.fetch :options, true
-          switches = opts.fetch :switches, %w(-h --help)
-          base.option :acclaim_help, *switches, 'Show usage information and exit.'
+          add_options_to! base, opts
         end
         base.const_set(:Help, Class.new(base)).tap do |help_command|
           help_command.when_called do |options, args|
