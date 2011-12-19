@@ -121,6 +121,10 @@ module Acclaim
 
       alias :call :execute
 
+      def root?
+        superclass == Acclaim::Command
+      end
+
     end
 
     # Add the class methods to the subclass and add it to this command's list of
