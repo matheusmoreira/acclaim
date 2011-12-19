@@ -56,8 +56,7 @@ module Acclaim
           multiples_index = argv.index multiples
           argv.delete multiples
           switches = multiples.sub!(/^-/, '').split(//).each { |letter| letter.prepend '-' }
-          argv.insert multiples_index, switches
-          argv.flatten!
+          argv.insert multiples_index, *switches
         end
       end
 
