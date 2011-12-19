@@ -24,6 +24,44 @@ describe Acclaim::Option::Parser do
         subject.parse!
         args.should == %w(--files FILE1 FILE2 FILE3)
       end
+
+      context 'but the parameter list starts with a comma' do
+        let!(:args) { %w(--files=,FILE2,FILE3) }
+
+        it 'should treat the first parameter as if it was an empty string' do
+          subject.parse!
+          args.should == ['--files', '', 'FILE2', 'FILE3']
+        end
+      end
+    end
+
+    context 'when given a long siwtch with an equals sign' do
+      context 'but no parameters' do
+        let!(:args) { %w(--none=) }
+
+        it 'should separate the switch from the empty parameter' do
+          subject.parse!
+          args.should == %w(--none)
+        end
+      end
+
+      context 'but with a parameter list that consists of three commas' do
+        let!(:args) { %w(--empty=,,,) }
+
+        it 'should treat the parameters as if they were not there' do
+          subject.parse!
+          args.should == %w(--empty)
+        end
+
+        context 'and ends with a parameter' do
+          let!(:args) { %w(--not-pretty=,,,PARAM4) }
+
+          it 'should treat the first three parameters as if they were empty strings' do
+            subject.parse!
+            args.should == ['--not-pretty', '', '', '', 'PARAM4']
+          end
+        end
+      end
     end
 
     context 'when given multiple combined short options' do
