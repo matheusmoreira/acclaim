@@ -6,7 +6,8 @@ module Acclaim
 
       def self.create(base, opts = {})
         if opts.fetch :options, true
-          base.option :help, '-h', '--help', 'Show usage information and exit.'
+          switches = opts.fetch :switches, %w(-h --help)
+          base.option :help, *switches, 'Show usage information and exit.'
         end
         base.const_set(:Help, Class.new(base)).tap do |help_command|
           help_command.when_called do |options, args|
