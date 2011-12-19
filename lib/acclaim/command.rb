@@ -146,7 +146,7 @@ module Acclaim
 
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
       def handle_special_options!(opts, args)
-        const_get(:Help).execute opts, args if opts.help?
+        const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
       end
 
