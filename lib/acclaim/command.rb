@@ -79,7 +79,7 @@ module Acclaim
 
       alias :when_called :action
 
-      def add_help
+      def help
         subcommands << Help.create(self)
       end
 
