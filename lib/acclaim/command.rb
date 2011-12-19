@@ -1,4 +1,5 @@
 require 'acclaim/command/help'
+require 'acclaim/command/version'
 require 'acclaim/option'
 require 'acclaim/option/parser'
 require 'acclaim/option/parser/regexp'
@@ -82,6 +83,10 @@ module Acclaim
         subcommands << Help.create(self)
       end
 
+      def version(version_string, opts = {})
+        subcommands << Version.create(self, version_string, opts)
+      end
+
       # Parses the argument array using this command's set of options.
       def parse_options!(args)
         Option::Parser.new(args, options).parse!
@@ -142,6 +147,7 @@ module Acclaim
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.help?
+        const_get(:Version).execute opts, args if opts.acclaim_version?
       end
 
     end
