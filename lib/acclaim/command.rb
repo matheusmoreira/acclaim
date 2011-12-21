@@ -106,22 +106,11 @@ module Acclaim
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
-        arg_separator = args.find do |arg|
-          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
-        end
-        separator_index = args.index arg_separator
-        subcommands.find do |subcommand|
-          index = args.index subcommand.line
-          # If we have the subcommand AND the separator, then we have it if the
-          # subcommand is before the separator.
-          index and (not separator_index or index < separator_index)
-        end.tap do |subcommand|
-          if subcommand
-            args.delete subcommand.line
-            subcommand.invoke(opts, args)
-          else
-            execute(opts, args)
-          end
+        if subcommand = find_subcommand_in(args)
+          args.delete subcommand.line
+          subcommand.invoke(opts, args)
+        else
+          execute(opts, args)
         end
       end
 
@@ -148,6 +137,19 @@ module Acclaim
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
+      end
+
+      def find_subcommand_in(args)
+        arg_separator = args.find do |arg|
+          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
+        end
+        separator_index = args.index arg_separator
+        subcommands.find do |subcommand|
+          index = args.index subcommand.line
+          # If we have the subcommand AND the separator, then we have it if the
+          # subcommand is before the separator.
+          index and (not separator_index or index < separator_index)
+        end
       end
 
     end
