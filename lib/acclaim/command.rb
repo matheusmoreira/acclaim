@@ -109,7 +109,7 @@ module Acclaim
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
-        if subcommand = find_subcommand_in(args)
+        if subcommand = find_subcommand_in(separated args)
           args.delete subcommand.line
           subcommand.invoke(opts, args)
         else
@@ -148,21 +148,17 @@ module Acclaim
       # Attempts to find a subcommand of this command in the given argument
       # array. If a subcommand is found, it is returned, if not, nil is
       # returned.
-      #
-      # Anything before a string that matches
-      # Option::Parser::Regexp::ARGUMENT_SEPARATOR may be treated as a command
-      # line, but everything after it will be treated literally.
       def find_subcommand_in(args)
-        arg_separator = args.find do |arg|
-          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
-        end
-        separator_index = args.index arg_separator
         subcommands.find do |subcommand|
-          index = args.index subcommand.line
-          # If we have the subcommand AND the separator, then we have it if the
-          # subcommand is before the separator.
-          index and (not separator_index or index < separator_index)
+          args.include? subcommand.line
         end
+      end
+
+      # Finds the argument separator and returns an array containing all the
+      # elements before it. If a separator is not present, the original array
+      # is returned.
+      def separated(args)
+        args.take_while { |arg| arg !~ Option::Parser::Regexp::ARGUMENT_SEPARATOR }
       end
 
     end
