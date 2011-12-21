@@ -71,18 +71,20 @@ module Acclaim
       alias :opt :option
 
       # The block which is executed when this command is called. It is given 2
-      # parameters; the first is an Options instance which can be queried for
-      # settings information; the second is the remaining command line.
+      # parameters; the first is an Option::Values instance which can be queried
+      # for settings information; the second is the remaining command line.
       def action(&block)
         @action = block
       end
 
       alias :when_called :action
 
+      # Adds help subcommand and options to this command.
       def help(opts = {})
         subcommands << Help.create(self, opts)
       end
 
+      # Adds help subcommand and options to this command.
       def version(version_string, opts = {})
         subcommands << Version.create(self, version_string, opts)
       end
@@ -92,17 +94,18 @@ module Acclaim
         Option::Parser.new(args, options).parse!
       end
 
-      # Invokes this command with a fresh set of options.
+      # Invokes this command with a fresh set of option values.
       def run(*args)
         invoke Option::Values.new, args
         rescue Option::Parser::Error => e
           puts e.message
       end
 
-      # Parses the argument array. If the first element of the argument array
-      # corresponds to a subcommand, it will be invoked with said array and
-      # with this command's parsed options. This command will be executed
-      # otherwise.
+      # Parses the argument array. The argument array will be searched for
+      # subcommands; if one is found, it will be invoked, if not, this command
+      # will be executed. A subcommand may be anywhere in the array as long as
+      # it is before an argument separator, which is tipically a double dash
+      # (<tt>--<\tt>) and may be omitted.
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
@@ -114,17 +117,20 @@ module Acclaim
         end
       end
 
-      # Calls this command's action block with the given options and arguments.
+      # Calls this command's action block with the given option values and
+      # arguments.
       def execute(opts, args)
         @action.call opts, args
       end
 
       alias :call :execute
 
+      # True if this is a top-level command.
       def root?
         superclass == Acclaim::Command
       end
 
+      # Finds the root of the command hierarchy.
       def root
         command = self
         command = command.superclass until command.root?
@@ -139,6 +145,13 @@ module Acclaim
         const_get(:Version).execute opts, args if opts.acclaim_version?
       end
 
+      # Attempts to find a subcommand of this command in the given argument
+      # array. If a subcommand is found, it is returned, if not, nil is
+      # returned.
+      #
+      # Anything before a string that matches
+      # Option::Parser::Regexp::ARGUMENT_SEPARATOR may be treated as a command
+      # line, but everything after it will be treated literally.
       def find_subcommand_in(args)
         arg_separator = args.find do |arg|
           arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
