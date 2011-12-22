@@ -73,18 +73,16 @@ module Acclaim
       def parse_values!
         Values.new.tap do |options_instance|
           options.each do |option|
-            key = option.key.to_sym
-            options_instance[key] = option.default
+            options_instance[option.key] = option.default
             switches = argv.find_all { |switch| option =~ switch }
             if switches.any?
               if option.flag?
-                options_instance[key] = true
+                set_option_value option, options_instance
               else
                 switches.each do |switch|
                   params = extract_parameters_of! option, switch
                   argv.delete switch
-                  param = if option.arity.total == 1 then params.first else params end
-                  options_instance[key] = param unless params.empty?
+                  set_option_value option, options_instance, params
                 end
               end
             else
@@ -115,6 +113,16 @@ module Acclaim
         count = values.count
         Error.raise_wrong_arg_number count, *arity if count < arity.required
         values.each { |value| argv.delete value }
+      end
+
+      def set_option_value(option, values, params = [])
+        key = option.key.to_sym
+        if option.flag?
+          values[key] = true
+        else
+          value = option.arity.total == 1 ? params.first : params
+          values[key] = value unless params.empty?
+        end
       end
 
     end
