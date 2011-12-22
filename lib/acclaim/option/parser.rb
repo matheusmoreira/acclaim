@@ -75,42 +75,46 @@ module Acclaim
           options.each do |option|
             key = option.key.to_sym
             options_instance[key] = option.default
-            args = argv.find_all { |arg| option =~ arg }
-            if args.any?
+            switches = argv.find_all { |switch| option =~ switch }
+            if switches.any?
               if option.flag?
                 options_instance[key] = true
               else
-                arity = option.arity
-                args.each do |arg|
-                  arg_index = argv.index arg
-                  len = if arity.bound?
-                    arg_index + arity.total
-                  else
-                    argv.length - 1
-                  end
-                  params = argv[arg_index + 1, len]
-                  values = []
-                  params.each do |param|
-                    case param
-                      when nil, SWITCH, ARGUMENT_SEPARATOR then break
-                      else
-                        break if arity.bound? and values.count >= arity.total
-                        values << param
-                    end
-                  end
-                  count = values.count
-                  Error.raise_wrong_arg_number count, *option.arity if count < arity.required
-                  value = if arity.total == 1 then values.first else values end
-                  options_instance[key] = value unless values.empty?
-                  values.each { |value| argv.delete value }
+                switches.each do |switch|
+                  params = extract_parameters_of! option, switch
+                  argv.delete switch
+                  param = if option.arity.total == 1 then params.first else params end
+                  options_instance[key] = param unless params.empty?
                 end
               end
-              args.each { |arg| argv.delete arg }
             else
               Error.raise_missing_arg(option.names.join ' | ') if option.required?
             end
           end
         end
+      end
+
+      def extract_parameters_of!(option, switch)
+        arity = option.arity
+        switch_index = argv.index switch
+        len = if arity.bound?
+          switch_index + arity.total
+        else
+          argv.length - 1
+        end
+        params = argv[switch_index + 1, len]
+        values = []
+        params.each do |param|
+          case param
+            when nil, SWITCH, ARGUMENT_SEPARATOR then break
+            else
+              break if arity.bound? and values.count >= arity.total
+              values << param
+          end
+        end
+        count = values.count
+        Error.raise_wrong_arg_number count, *arity if count < arity.required
+        values.each { |value| argv.delete value }
       end
 
     end
