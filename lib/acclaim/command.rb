@@ -81,12 +81,12 @@ module Acclaim
 
       # Adds help subcommand and options to this command.
       def help(opts = {})
-        subcommands << Help.create(self, opts)
+        Help.create(self, opts)
       end
 
       # Adds help subcommand and options to this command.
       def version(version_string, opts = {})
-        subcommands << Version.create(self, version_string, opts)
+        Version.create(self, version_string, opts)
       end
 
       # Parses the argument array using this command's set of options.
