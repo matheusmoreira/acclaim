@@ -51,3 +51,4 @@ end
 require 'acclaim/option/type/date'
 require 'acclaim/option/type/date_time'
 require 'acclaim/option/type/string'
+require 'acclaim/option/type/time'
