@@ -28,7 +28,7 @@ module Acclaim
       # Handles the following cases:
       #
       #   options.method = value  =>  options[method] = value
-      #   options.method! value   =>  options[method] = value; options
+      #   options.method! value   =>  options[method] = value
       #   options.method?         =>  options[method] ? true : false
       #   options.method          =>  options[method]
       def method_missing(method, *args, &block)
