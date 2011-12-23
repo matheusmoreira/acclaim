@@ -73,7 +73,8 @@ module Acclaim
       def parse_values!
         Values.new.tap do |options_instance|
           options.each do |option|
-            options_instance[option.key] = option.default
+            key = option.key
+            options_instance[key] = option.default unless options_instance[key]
             switches = argv.find_all { |switch| option =~ switch }
             if switches.any?
               if option.flag?
@@ -116,12 +117,16 @@ module Acclaim
       end
 
       def set_option_value(option, values, params = [])
-        key = option.key.to_sym
-        if option.flag?
-          values[key] = true
+        if handler = option.handler
+          if option.flag? then handler.call values
+          else handler.call values, params end
         else
-          value = option.arity.total == 1 ? params.first : params
-          values[key] = value unless params.empty?
+          key = option.key.to_sym
+          if option.flag? then values[key] = true
+          else
+            value = option.arity.total == 1 ? params.first : params
+            values[key] = value unless params.empty?
+          end
         end
       end
 
