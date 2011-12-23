@@ -1,3 +1,5 @@
+require 'acclaim/command/help/template'
+
 module Acclaim
   class Command
 
@@ -27,21 +29,7 @@ module Acclaim
       # Displays a very simple help screen for the given command and all its
       # subcommands.
       def self.display_help_for(command)
-        # TODO rewrite this VERY CRUDE implementation.
-        # Look into how to code a text formatter later.
-        help_string = ''
-        command.options.tap do |options|
-          if options.any?
-            help_string << "\nCommand '#{command.line}':\n\n" unless command.root?
-            max = options.map { |option| option.names.join(', ').length }.max
-            options.each do |option|
-              switches = option.names.join ', '
-              help_string << ' ' * 4 << switches << ' ' * (4 + max - switches.length)
-              help_string << option.description << "\n"
-            end
-          end
-        end
-        puts help_string unless help_string.empty?
+        puts Template.for(command) if command.options.any?
         command.subcommands.each { |subcommand| display_help_for subcommand }
       end
 
