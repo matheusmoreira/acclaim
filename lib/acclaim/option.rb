@@ -10,13 +10,17 @@ module Acclaim
 
     def initialize(key, *args, &block)
       options = args.last.is_a?(Hash) ? args.pop : {}
+      matches = args.select { |arg| arg.is_a? String }.group_by do |arg|
+        arg =~ Parser::Regexp::SWITCH ? true : false
+      end
+      klass = args.find { |arg| arg.is_a? Class }
       self.key         = key
-      self.names       = args.find_all { |arg| arg =~ Parser::Regexp::SWITCH }
-      self.description = args.find     { |arg| arg !~ Parser::Regexp::SWITCH }
-      self.type        = args.find     { |arg| arg.is_a? Class }
+      self.names       = matches.fetch true, []
+      self.description = matches.fetch(false, []).first
       self.arity       = options[:arity]
       self.default     = options[:default]
       self.required    = options[:required]
+      self.type        = klass
       self.handler     = block
     end
 
