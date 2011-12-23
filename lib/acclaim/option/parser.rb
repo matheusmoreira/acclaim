@@ -117,6 +117,7 @@ module Acclaim
       end
 
       def set_option_value(option, values, params = [])
+        params = option.convert_parameters *params
         if handler = option.handler
           if option.flag? then handler.call values
           else handler.call values, params end
