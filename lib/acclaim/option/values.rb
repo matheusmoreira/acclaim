@@ -2,7 +2,7 @@ module Acclaim
   class Option
 
     # Represents a set of option values.
-    class Values
+    class Values < BasicObject
 
       def initialize(hash = {})
         self.data.merge! hash
@@ -48,7 +48,7 @@ module Acclaim
       # Returns the class name followed by key => value pairs.
       def to_s
         values = data.map { |k, v| "#{k.inspect} => #{v.inspect}"  }
-        "#{self.class}: #{values.any? ? values.join(', ') : 'nil'}"
+        "#{values.any? ? values.join(', ') : 'none'}"
       end
 
       # Returns the output of #to_s enclosed in angle brackets.
