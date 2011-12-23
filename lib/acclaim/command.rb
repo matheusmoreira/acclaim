@@ -120,7 +120,7 @@ module Acclaim
       # Calls this command's action block with the given option values and
       # arguments.
       def execute(opts, args)
-        @action.call opts, args
+        @action.call opts, args if @action
       end
 
       alias :call :execute
