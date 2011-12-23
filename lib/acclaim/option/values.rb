@@ -41,6 +41,16 @@ module Acclaim
         end
       end
 
+      # If the value is a hash, converts it to a Values object. If it is an
+      # array, attempts to convert any hashes which may be inside.
+      def self.convert(value)
+        case value
+          when Hash then Values.new value
+          when Array then value.map { |element| convert element }
+          else value
+        end
+      end
+
       protected
 
       # The option values
