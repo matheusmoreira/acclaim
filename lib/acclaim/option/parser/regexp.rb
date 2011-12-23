@@ -26,12 +26,6 @@ module Acclaim
         # --_private-option; --1-1</tt>
         LONG_SWITCH = /\A--[\w\d]+(-[\w\d]+)*\Z/
 
-        # Regular expression for any kind of option switch.
-        #
-        # Matches either a SHORT_SWITCH or a LONG_SWITCH. See their descriptions
-        # for details.
-        SWITCH = /(#{SHORT_SWITCH})|(#{LONG_SWITCH})/
-
         # Regular expression for multiple short options in a single "short"
         # switch.
         #
@@ -65,6 +59,12 @@ module Acclaim
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
         SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,*[\w\d]*)*\Z/
+
+        # Regular expression for any kind of option switch.
+        #
+        # Matches anything that matches any of the other switch regular
+        # expressions.
+        SWITCH = /(#{SHORT_SWITCH})|(#{LONG_SWITCH})|(#{MULTIPLE_SHORT_SWITCHES})|(#{SWITCH_PARAM_EQUALS})/
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
