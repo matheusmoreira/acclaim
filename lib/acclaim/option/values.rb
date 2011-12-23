@@ -22,14 +22,15 @@ module Acclaim
       # Handles the following cases:
       #
       #   options.method = value  =>  options[method] = value
+      #   options.method! value   =>  options[method] = value; options
       #   options.method?         =>  options[method] ? true : false
       #   options.method          =>  options[method]
       def method_missing(method, *args, &block)
         m = method.to_s.chop!.to_sym
-        case method
-          when /=$/
+        case method.to_s[-1]
+          when '=', '!'
             self[m] = args.first
-          when /\?$/
+          when '?'
             self[m] ? true : false
           else
             self[method]
