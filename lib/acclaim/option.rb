@@ -21,7 +21,7 @@ module Acclaim
       self.arity       = options[:arity]
       self.default     = options[:default]
       self.required    = options[:required]
-      self.type        = klass
+      self.type        = klass || String
       self.handler     = block
     end
 
