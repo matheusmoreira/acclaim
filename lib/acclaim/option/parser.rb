@@ -9,12 +9,19 @@ module Acclaim
 
       include Parser::Regexp
 
+      # Errors raised by the parser.
       class Error < StandardError
 
+        # Raises an Error with the following error message:
+        #
+        #   Wrong number of arguments (actual for minimum)
         def self.raise_wrong_arg_number(actual, minimum, optional)
           raise self, "Wrong number of arguments (#{actual} for #{minimum})"
         end
 
+        # Raises an Error with the following error message:
+        #
+        #   Missing required argument (arg)
         def self.raise_missing_arg(arg)
           raise self, "Missing required argument (#{arg})"
         end
@@ -32,9 +39,22 @@ module Acclaim
       end
 
       # Parses the meaning of the options given to this parser. If none were
-      # given, the argument array will only be preprocessed. Any parsed options
+      # given, the argument array will be preprocessed only. Any parsed options
       # and arguments will be removed from the argument array, so pass in a
       # duplicate if you need the original.
+      #
+      #   include Acclaim
+      #
+      #   args = %w(-F log.txt --verbose arg1 arg2)
+      #   options = []
+      #   options << Option.new(:file, '-F', arity: [1,0], required: true)
+      #   options << Option.new(:verbose, '--verbose')
+      #
+      #   Option::Parser.new(args, options).parse!
+      #   => #<Acclaim::Option::Values:0x00000002a2fee8 @options={:file=>"log.txt", :verbose=>true}>
+      #
+      #   args
+      #   => ["arg1", "arg2"]
       def parse!
         preprocess_argv!
         parse_values! unless options.nil?
@@ -42,15 +62,16 @@ module Acclaim
 
       private
 
-      # Argument array preprocessing.
+      # Preprocesses the argument array.
       def preprocess_argv!
         split_multiple_short_options!
         normalize_parameters!
-        # TODO: normalize parameter formats?
-        # -sPARAM1[,PARAM2,PARAM3...] - possibly incompatible with split_multiple_short_options!
         argv.compact!
       end
 
+      # Splits multiple short options.
+      #
+      #   %w(-abcdef PARAM1 PARAM2) => %w(-a -b -c -d -e -f PARAM1 PARAM2)
       def split_multiple_short_options!
         argv.find_all { |arg| arg =~ MULTIPLE_SHORT_SWITCHES }.each do |multiples|
           multiples_index = argv.index multiples
@@ -60,6 +81,12 @@ module Acclaim
         end
       end
 
+      # Splits switches that are connected to a comma-separated parameter list.
+      #
+      #   %w(--switch=)              => %w(--switch)
+      #   %w(--switch=PARAM1,PARAM2) => %w(--switch PARAM1 PARAM2)
+      #   %w(--switch=PARAM1,)       => %w(--switch PARAM1)
+      #   %w(--switch=,PARAM2)       =>   [ '--switch', '', 'PARAM2' ]
       def normalize_parameters!
         argv.find_all { |arg| arg =~ SWITCH_PARAM_EQUALS }.each do |switch|
           switch_index = argv.index switch
@@ -70,6 +97,8 @@ module Acclaim
         end
       end
 
+      # Parses the options and their arguments, associating that information
+      # with a Values instance.
       def parse_values!
         Values.new.tap do |values|
           options.each do |option|
@@ -92,6 +121,14 @@ module Acclaim
         end
       end
 
+      # Finds the +switch+ in #argv and scans the next +option.arity.total+
+      # elements if +option.arity.bound?+ is +true+, or all parameters
+      # otherwise. In either case, the algorithm will stop if it finds +nil+,
+      # another switch or an argument separator among the parameters.
+      #
+      # Deletes the switch and every value that was extracted from #argv. Raises
+      # an Error if the number of parameters found is less than
+      # +option.arity.required+.
       def extract_parameters_of!(option, switch)
         arity = option.arity
         switch_index = argv.index switch
@@ -116,6 +153,11 @@ module Acclaim
         values.each { |value| argv.delete value }
       end
 
+      # If the option has an custom handler associated, call it with the
+      # parameters. Otherwise, if the option is a flag, the value corresponding
+      # to the option's key will be set to +true+, if it is not, the value will
+      # be set to params.first+ if +params+ contains only one element or to
+      # +params+ if it contains more.
       def set_option_value(option, values, params = [])
         params = option.convert_parameters *params
         if handler = option.handler
