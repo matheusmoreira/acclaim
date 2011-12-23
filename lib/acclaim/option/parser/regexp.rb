@@ -7,13 +7,13 @@ module Acclaim
 
         # Regular expression for a short option switch.
         #
-        # Matches strings that begin with a single dash and contain only word
-        # characters or digits until the end of the string.
+        # Matches strings that begin with a single dash and contains only one
+        # word character or digit before the end of the string.
         #
-        # Examples: <tt>-s; -mult; -5; -_</tt>
+        # Examples: <tt>-s; -5; -_</tt>
         #
         # <tt>'-mult'</tt> will be split into <tt>%w(-m -u -l -t)</tt>.
-        SHORT_SWITCH = /\A-[\w\d]+\Z/
+        SHORT_SWITCH = /\A-[\w\d]\Z/
 
         # Regular expression for a long option switch.
         #
