@@ -6,9 +6,9 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
-    attr_accessor :key, :names, :description, :type, :default
+    attr_accessor :key, :names, :description, :type, :default, :handler
 
-    def initialize(key, *args)
+    def initialize(key, *args, &block)
       options = args.last.is_a?(Hash) ? args.pop : {}
       self.key         = key
       self.names       = args.find_all { |arg| arg =~ Parser::Regexp::SWITCH }
@@ -17,7 +17,7 @@ module Acclaim
       self.arity       = options[:arity]
       self.default     = options[:default]
       self.required    = options[:required]
-      yield self if block_given?
+      self.handler     = block
     end
 
     def =~(str)

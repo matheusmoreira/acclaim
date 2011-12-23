@@ -64,8 +64,8 @@ module Acclaim
       end
 
       # Adds an option to this command.
-      def option(*args)
-        options << Option.new(*args)
+      def option(*args, &block)
+        options << Option.new(*args, &block)
       end
 
       alias :opt :option
