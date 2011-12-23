@@ -1,0 +1,8 @@
+<% unless root? or options.empty? %>
+  Command '<%= line %>':
+<% end %>
+
+<% options.each do |option| %>
+      <%= option.names.join ', ' %>    <%= option.description %>
+<% end %>
+
