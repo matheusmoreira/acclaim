@@ -8,6 +8,7 @@ module Acclaim
       # Handles times given as arguments in the command line.
       module Time
 
+        # Parses a +Time+ from the string.
         def self.handle(str)
           ::Time.parse str
         end

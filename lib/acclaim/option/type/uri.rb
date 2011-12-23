@@ -8,6 +8,7 @@ module Acclaim
       # Handles URIs given as arguments in the command line.
       module URI
 
+        # Parses an +URI+ from the string.
         def self.handle(str)
           ::URI.parse str
         end

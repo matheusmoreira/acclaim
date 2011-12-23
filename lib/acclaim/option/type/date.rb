@@ -8,6 +8,7 @@ module Acclaim
       # Handles dates given as arguments in the command line.
       module Date
 
+        # Parses a +Date+ from the string.
         def self.handle(str)
           ::Date.parse str
         end

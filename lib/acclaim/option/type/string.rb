@@ -8,6 +8,7 @@ module Acclaim
       # Handles strings given as arguments in the command line.
       module String
 
+        # Simply returns +str.to_s+.
         def self.handle(str)
           str.to_s
         end
