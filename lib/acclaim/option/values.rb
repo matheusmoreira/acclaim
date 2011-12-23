@@ -62,8 +62,8 @@ module Acclaim
       # array, attempts to convert any hashes which may be inside.
       def self.convert(value)
         case value
-          when Hash then Values.new value
-          when Array then value.map { |element| convert element }
+          when ::Hash then Values.new value
+          when ::Array then value.map { |element| convert element }
           else value
         end
       end
