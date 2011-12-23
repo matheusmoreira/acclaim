@@ -48,4 +48,5 @@ module Acclaim
   end
 end
 
+require 'acclaim/option/type/date'
 require 'acclaim/option/type/string'
