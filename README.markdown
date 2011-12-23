@@ -82,10 +82,10 @@ from an existing command:
       end
     end
 
-    $ app do x, y, z
-    Doing something with x, y, z
+    $ app do x y, z
+    Doing something with x y, z
 
-    $ app do --what x, y, z
+    $ app do --what x y, z
     Doing x with y, z
 
 Options may also take an Hash as the last parameter. Among the things that can
