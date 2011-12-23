@@ -45,6 +45,17 @@ module Acclaim
         end
       end
 
+      # Returns the class name followed by key => value pairs.
+      def to_s
+        values = data.map { |k, v| "#{k.inspect} => #{v.inspect}"  }
+        "#{self.class}: #{values.any? ? values.join(', ') : 'nil'}"
+      end
+
+      # Returns the output of #to_s enclosed in angle brackets.
+      def inspect
+        "<#{to_s}>"
+      end
+
       # If the value is a hash, converts it to a Values object. If it is an
       # array, attempts to convert any hashes which may be inside.
       def self.convert(value)
