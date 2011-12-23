@@ -108,6 +108,7 @@ module Acclaim
             if switches.any?
               if option.flag?
                 set_option_value option, values
+                argv.delete *switches
               else
                 switches.each do |switch|
                   params = extract_parameters_of! option, switch
