@@ -100,26 +100,26 @@ module Acclaim
       # Parses the options and their arguments, associating that information
       # with a Values instance.
       def parse_values!
-        Values.new.tap do |values|
-          options.each do |option|
-            key = option.key
-            values[key] = option.default unless values[key]
-            switches = argv.find_all { |switch| option =~ switch }
-            if switches.any?
-              if option.flag?
-                set_option_value option, values
-                argv.delete *switches
-              else
-                switches.each do |switch|
-                  params = extract_parameters_of! option, switch
-                  set_option_value option, values, params
-                end
-              end
+        values = Values.new
+        options.each do |option|
+          key = option.key
+          values[key] = option.default unless values[key]
+          switches = argv.find_all { |switch| option =~ switch }
+          if switches.any?
+            if option.flag?
+              set_option_value option, values
+              argv.delete *switches
             else
-              Error.raise_missing_arg(option.names.join ' | ') if option.required?
+              switches.each do |switch|
+                params = extract_parameters_of! option, switch
+                set_option_value option, values, params
+              end
             end
+          else
+            Error.raise_missing_arg(option.names.join ' | ') if option.required?
           end
         end
+        values
       end
 
       # Finds the +switch+ in #argv and scans the next +option.arity.total+
