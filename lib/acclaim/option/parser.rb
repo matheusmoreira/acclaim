@@ -71,19 +71,19 @@ module Acclaim
       end
 
       def parse_values!
-        Values.new.tap do |options_instance|
+        Values.new.tap do |values|
           options.each do |option|
             key = option.key
-            options_instance[key] = option.default unless options_instance[key]
+            values[key] = option.default unless values[key]
             switches = argv.find_all { |switch| option =~ switch }
             if switches.any?
               if option.flag?
-                set_option_value option, options_instance
+                set_option_value option, values
               else
                 switches.each do |switch|
                   params = extract_parameters_of! option, switch
                   argv.delete switch
-                  set_option_value option, options_instance, params
+                  set_option_value option, values, params
                 end
               end
             else
