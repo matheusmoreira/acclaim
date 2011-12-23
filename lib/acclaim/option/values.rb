@@ -4,6 +4,8 @@ module Acclaim
     # Represents a set of option values.
     class Values < BasicObject
 
+      # Initializes a values instance, merging the values of the given hash with
+      # the internal data.
       def initialize(hash = {})
         self.data.merge! hash
       end
@@ -68,7 +70,7 @@ module Acclaim
 
       protected
 
-      # The option values
+      # The option values.
       def data
         @options ||= {}
       end
