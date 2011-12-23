@@ -37,7 +37,11 @@ module Acclaim
           when '?'
             self[m] ? true : false
           else
-            self[method]
+            self[method] = if data.has_key? method
+              Values.convert self[method]
+            else
+              Values.new
+            end
         end
       end
 
