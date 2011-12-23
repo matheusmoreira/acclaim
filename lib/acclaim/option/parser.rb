@@ -82,7 +82,6 @@ module Acclaim
               else
                 switches.each do |switch|
                   params = extract_parameters_of! option, switch
-                  argv.delete switch
                   set_option_value option, values, params
                 end
               end
@@ -113,6 +112,7 @@ module Acclaim
         end
         count = values.count
         Error.raise_wrong_arg_number count, *arity if count < arity.required
+        argv.delete switch
         values.each { |value| argv.delete value }
       end
 
