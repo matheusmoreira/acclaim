@@ -6,6 +6,12 @@ module Acclaim
     # Module which adds help support to a command.
     module Help
 
+      # Adds a special help option to the given +command+.
+      #
+      # The last argument is an option +Hash+, which accepts the following
+      # options:
+      #
+      # [:switches]  The switches used when creating the help option.
       def self.add_options_to!(command, opts = {})
         switches = opts.fetch :switches, %w(-h --help)
         description = opts.fetch :description, 'Show usage information and exit.'
@@ -14,6 +20,16 @@ module Acclaim
 
       private_class_method :add_options_to!
 
+      # Creates a help subcommand that inherits from the given +base+ command
+      # and stores the class in the +Help+ constant of +base+. When called, the
+      # command displays a help screen including information for all commands
+      # and then exits.
+      #
+      # The last argument is an option +Hash+, which accepts the following
+      # options:
+      #
+      # [:options]   If +true+, will add a help option to the +base+ command.
+      # [:switches]  The switches used when creating the help option.
       def self.create(base, opts = {})
         if opts.fetch :options, true
           add_options_to! base, opts
