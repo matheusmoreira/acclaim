@@ -39,6 +39,8 @@ module Acclaim
         bound? ? minimum + optional : nil
       end
 
+      # Converts this arity to an array in the form of
+      # <tt>[ required, optional ]</tt>.
       def to_a
         [ minimum, optional ]
       end
@@ -46,10 +48,16 @@ module Acclaim
       alias :to_ary   :to_a
       alias :to_array :to_a
 
+      # Equivalent to <tt>to_a.hash</tt>.
       def hash
         to_a.hash
       end
 
+      # Converts both +self+ and +arity+ to an array and compares them. This is
+      # so that comparing directly with an array is possible:
+      #
+      #   Arity.new(1, 3) == [1, 3]
+      #   => true
       def ==(arity)
         to_a == arity.to_a
       end
@@ -57,11 +65,21 @@ module Acclaim
       alias :eql? :==
       alias :===  :==
 
+      # Returns a string in the following format:
+      #
+      #   Arity: minimum +optional
+      #
+      # The value of +optional+ will be <tt>'infinite'</tt> if #unlimited? is
+      # +true+.
       def to_s
         "Arity: #{minimum} +#{unlimited? ? 'infinite' : optional}"
       end
 
-      alias :inspect :to_s
+      # Returns the output of #to_s, enclosed in angle brackets (<tt>'<'</tt>
+      # and <tt>'>'</tt>).
+      def inspect
+        "<#{to_s}>"
+      end
 
     end
 
