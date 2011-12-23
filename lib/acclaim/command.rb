@@ -113,6 +113,7 @@ module Acclaim
           args.delete subcommand.line
           subcommand.invoke(opts, args)
         else
+          args.delete_if { |arg| arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR }
           execute(opts, args)
         end
       end
