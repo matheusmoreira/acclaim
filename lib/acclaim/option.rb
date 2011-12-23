@@ -1,5 +1,6 @@
 require 'acclaim/option/arity'
 require 'acclaim/option/parser/regexp'
+require 'acclaim/option/type'
 
 module Acclaim
 
@@ -22,6 +23,10 @@ module Acclaim
       self.required    = options[:required]
       self.type        = klass
       self.handler     = block
+    end
+
+    def convert_parameters(*args)
+      args.map { |arg| Type[type].call arg }
     end
 
     def =~(str)
