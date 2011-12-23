@@ -4,6 +4,10 @@ module Acclaim
     # Represents a set of option values.
     class Values
 
+      def initialize(hash = {})
+        self.data.merge! hash
+      end
+
       # Gets a value by key.
       def [](key)
         data[key]
