@@ -41,7 +41,7 @@ module Acclaim
       matches = args.select { |arg| arg.is_a? String }.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? true : false
       end
-      klass = args.find { |arg| arg.is_a? Class }
+      klass = args.find { |arg| arg.is_a? Module }
       self.key         = key
       self.names       = matches.fetch true, []
       self.description = matches.fetch(false, []).first
