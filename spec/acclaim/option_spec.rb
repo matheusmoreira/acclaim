@@ -264,4 +264,40 @@ describe Acclaim::Option do
     end
   end
 
+  describe '#arity=' do
+    before(:each) { begin subject.arity = arg; rescue; end }
+
+    context 'when passed nil' do
+      let(:arg) { nil }
+
+      it "the option's arity should not be set to nil" do
+        subject.arity.should_not be_nil
+      end
+    end
+
+    context 'when passed an arity' do
+      let(:arg) { Acclaim::Option::Arity.new 5, -1 }
+
+      it "should set the option's arity" do
+        subject.arity.should == arg
+      end
+    end
+
+    context 'when passed an array' do
+      let(:arg) { [ 5, -1 ] }
+
+      it "should use the array to create the option's arity" do
+        subject.arity.should == Acclaim::Option::Arity.new(5, -1)
+      end
+    end
+
+    context 'when passed an invalid array' do
+      let(:arg) { [ 5, -1, 99 ] }
+
+      it 'should raise an argument error' do
+        expect { subject.arity = arg }.to raise_error ArgumentError
+      end
+    end
+  end
+
 end
