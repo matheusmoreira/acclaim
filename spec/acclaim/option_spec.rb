@@ -126,7 +126,7 @@ describe Acclaim::Option do
       let(:block) { proc { |*args| p args } }
 
       it 'should have a custom handler' do
-        subject.handler.should satisfy { |handler| Proc === handler }
+        subject.handler.should be_a(Proc)
       end
     end
   end
