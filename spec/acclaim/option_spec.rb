@@ -256,4 +256,12 @@ describe Acclaim::Option do
     end
   end
 
+  describe '#arity' do
+    context 'when the option was not explicitly initialized with an arity' do
+      it 'should not return nil' do
+        subject.arity.should_not be_nil
+      end
+    end
+  end
+
 end
