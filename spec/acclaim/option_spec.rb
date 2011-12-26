@@ -1,4 +1,7 @@
 require 'acclaim/option'
+require 'date'
+require 'time'
+require 'uri'
 
 describe Acclaim::Option do
 
@@ -124,6 +127,78 @@ describe Acclaim::Option do
 
       it 'should have a custom handler' do
         subject.handler.should satisfy { |handler| Proc === handler }
+      end
+    end
+  end
+
+  describe '#convert_parameters' do
+    let(:args) { [type].compact }
+    let!(:converted) { subject.convert_parameters *params }
+
+    context 'when the option was not explicitly initialized with a type' do
+      let(:type) { nil }
+      let!(:params) { %w(a b c d) }
+
+      it 'should convert the parameters to strings' do
+        converted.should == params.map(&:to_s)
+      end
+    end
+
+    context 'when the option was initialized with String as its type' do
+      let(:type) { String }
+      let(:params) { %w(a b c d) }
+
+      it 'should convert the parameters to strings' do
+        converted.should == params.map(&:to_s)
+      end
+    end
+
+    context 'when the option was initialized with Symbol as its type' do
+      let(:type) { Symbol }
+      let(:params) { %w(a b c d) }
+
+      it 'should convert the parameters to strings' do
+        converted.should == params.map(&:to_sym)
+      end
+    end
+
+    context 'when the option was initialized with Date as its type' do
+      let(:type) { Date }
+      let(:date) { Date.today }
+      let(:params) { [date.to_s] }
+
+      it 'should convert the parameters to dates' do
+        converted.should == [date]
+      end
+    end
+
+    context 'when the option was initialized with DateTime as its type' do
+      let(:type) { DateTime }
+      let(:date_time) { DateTime.now }
+      let(:params) { [date_time.to_s] }
+
+      it 'should convert the parameters to dates/times' do
+        converted.should == [date_time]
+      end
+    end
+
+    context 'when the option was initialized with Time as its type' do
+      let(:type) { Time }
+      let(:time) { Time.now }
+      let(:params) { [time.to_s] }
+
+      it 'should convert the parameters to times' do
+        converted.should == [time]
+      end
+    end
+
+    context 'when the option was initialized with URI as its type' do
+      let(:type) { URI }
+      let(:uri) { URI.parse 'https://github.com/matheusmoreira/acclaim' }
+      let(:params) { [uri.to_s] }
+
+      it 'should convert the parameters to URIs' do
+        converted.should == [uri]
       end
     end
   end
