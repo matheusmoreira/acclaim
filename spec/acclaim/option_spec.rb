@@ -300,4 +300,12 @@ describe Acclaim::Option do
     end
   end
 
+  describe '#require' do
+    before(:each) { subject.require }
+
+    it 'should make the option mandatory' do
+      subject.should be_required
+    end
+  end
+
 end
