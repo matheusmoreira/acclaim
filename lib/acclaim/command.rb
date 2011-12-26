@@ -1,4 +1,5 @@
 require 'acclaim/command/help'
+require 'acclaim/command/parser'
 require 'acclaim/command/version'
 require 'acclaim/option'
 require 'acclaim/option/parser'
@@ -94,6 +95,11 @@ module Acclaim
         Option::Parser.new(args, options).parse!
       end
 
+      # Looks for this command's subcommands in the argument array.
+      def parse_subcommands!(args)
+        Command::Parser.new(args, subcommands).parse!
+      end
+
       # Invokes this command with a fresh set of option values.
       def run(*args)
         invoke Option::Values.new, args
@@ -109,8 +115,7 @@ module Acclaim
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
-        if subcommand = find_subcommand_in(separated args)
-          args.delete subcommand.line
+        if subcommand = parse_subcommands!(args)
           subcommand.invoke(opts, args)
         else
           args.delete_if { |arg| arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR }
@@ -144,22 +149,6 @@ module Acclaim
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
-      end
-
-      # Attempts to find a subcommand of this command in the given argument
-      # array. If a subcommand is found, it is returned, if not, nil is
-      # returned.
-      def find_subcommand_in(args)
-        subcommands.find do |subcommand|
-          args.include? subcommand.line
-        end
-      end
-
-      # Finds the argument separator and returns an array containing all the
-      # elements before it. If a separator is not present, the original array
-      # is returned.
-      def separated(args)
-        args.take_while { |arg| arg !~ Option::Parser::Regexp::ARGUMENT_SEPARATOR }
       end
 
     end
