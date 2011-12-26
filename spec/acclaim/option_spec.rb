@@ -203,4 +203,57 @@ describe Acclaim::Option do
     end
   end
 
+  describe '#=~' do
+    let(:names) { %w(-o -a --option --alternative) }
+    let(:args) { names }
+
+    context "when passed the option's short switch" do
+      let(:str) { '-o' }
+
+      it 'should match' do
+        (subject =~ str).should be_true
+      end
+    end
+
+    context "when passed the option's alternative short switch" do
+      let(:str) { '-a' }
+
+      it 'should match' do
+        (subject =~ str).should be_true
+      end
+    end
+
+    context "when passed a different short switch" do
+      let(:str) { '-d' }
+
+      it 'should not match' do
+        (subject =~ str).should be_false
+      end
+    end
+
+    context "when passed the option's long switch" do
+      let(:str) { '--option' }
+
+      it 'should match' do
+        (subject =~ str).should be_true
+      end
+    end
+
+    context "when passed the option's alternative long switch" do
+      let(:str) { '--alternative' }
+
+      it 'should match' do
+        (subject =~ str).should be_true
+      end
+    end
+
+    context "when passed a different long switch" do
+      let(:str) { '--different' }
+
+      it 'should not match' do
+        (subject =~ str).should be_false
+      end
+    end
+  end
+
 end
