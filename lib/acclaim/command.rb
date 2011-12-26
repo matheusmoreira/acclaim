@@ -112,13 +112,16 @@ module Acclaim
       # will be executed. A subcommand may be anywhere in the array as long as
       # it is before an argument separator, which is tipically a double dash
       # (<tt>--<\tt>) and may be omitted.
+      #
+      # All argument separators will be deleted from the argument array before a
+      # command is executed.
       def invoke(opts, args = [])
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
         if subcommand = parse_subcommands!(args)
           subcommand.invoke(opts, args)
         else
-          args.delete_if { |arg| arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR }
+          delete_argument_separators_in! args
           execute(opts, args)
         end
       end
@@ -149,6 +152,12 @@ module Acclaim
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
+      end
+
+      def delete_argument_separators_in!(args)
+        args.delete_if do |arg|
+          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
+        end
       end
 
     end
