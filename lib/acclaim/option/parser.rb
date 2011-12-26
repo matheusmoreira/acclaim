@@ -107,12 +107,12 @@ module Acclaim
           switches = argv.find_all { |switch| option =~ switch }
           if switches.any?
             if option.flag?
-              set_option_value option, values
+              found_boolean option, values
               argv.delete *switches
             else
               switches.each do |switch|
                 params = extract_parameters_of! option, switch
-                set_option_value option, values, params
+                found_params_for option, values, params
               end
             end
           else
@@ -154,24 +154,28 @@ module Acclaim
         values.each { |value| argv.delete value }
       end
 
-      # If the option has an custom handler associated, call it with the
-      # parameters. Otherwise, if the option is a flag, the value corresponding
-      # to the option's key will be set to +true+, if it is not, the value will
-      # be set to params.first+ if +params+ contains only one element or to
-      # +params+ if it contains more.
-      def set_option_value(option, values, params = [])
+      # If the option has an custom handler associated, it will be called with
+      # the option values as the first argument and the array of parameters
+      # found as the second argument. Otherwise, the value will be set to
+      # <tt>params.first</tt>, if the option takes only one argument, or to
+      # +params+ if it takes more.
+      #
+      # The parameters will be converted according to the option's type.
+      def found_params_for(option, values, params = [])
         params = option.convert_parameters *params
-        if handler = option.handler
-          if option.flag? then handler.call values
-          else handler.call values, params end
+        if handler = option.handler then handler.call values, params
         else
-          key = option.key.to_sym
-          if option.flag? then values[key] = true
-          else
-            value = option.arity.total == 1 ? params.first : params
-            values[key] = value unless params.empty?
-          end
+          value = option.arity.total == 1 ? params.first : params
+          values[option.key.to_sym] = value unless params.empty?
         end
+      end
+
+      # If the option has an custom handler associated, it will be called with
+      # only the option values as the first argument. Otherwise, the value will
+      # be set to <tt>true</tt>.
+      def found_boolean(option, values)
+        if handler = option.handler then handler.call values
+        else values[option.key.to_sym] = true end
       end
 
     end
