@@ -1,5 +1,4 @@
 require 'acclaim/option/type'
-require 'time'
 
 module Acclaim
   class Option
