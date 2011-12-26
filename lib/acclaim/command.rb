@@ -51,7 +51,7 @@ module Acclaim
       # String which calls this command.
       def line(value = nil)
         @line = value
-        @line ||= name.gsub(/^.*::/, '').downcase
+        @line ||= (name.gsub(/^.*::/, '').downcase rescue nil)
       end
 
       # Commands which may be given to this command.
