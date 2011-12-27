@@ -32,7 +32,7 @@ module Acclaim
     #              line.
     #
     # Additionally, if a block is given, it will be called when the option is
-    # parsed with a Values instance and the parameters given to the option. The
+    # parsed with a ribbon instance and the parameters given to the option. The
     # parameters will already be converted to this option's specified type; if
     # this is not desirable consider not specifying a class to the option or
     # registering a custom type handler.
