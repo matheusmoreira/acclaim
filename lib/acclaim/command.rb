@@ -49,8 +49,8 @@ module Acclaim
     module ClassMethods
 
       # String which calls this command.
-      def line(value = nil)
-        @line = value
+      def line(*args)
+        @line = args.first unless args.empty?
         @line ||= (name.gsub(/^.*::/, '').downcase rescue nil)
       end
 
