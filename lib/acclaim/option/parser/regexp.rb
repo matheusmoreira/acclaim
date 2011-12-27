@@ -60,7 +60,7 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,*[\w\d]*)*\Z/
+        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/
 
         # Regular expression for any kind of option switch.
         #
