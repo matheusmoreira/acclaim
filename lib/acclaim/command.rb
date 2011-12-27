@@ -116,7 +116,7 @@ module Acclaim
       # All argument separators will be deleted from the argument array before a
       # command is executed.
       def invoke(opts, args = [])
-        opts.merge! parse_options!(args)
+        Ribbon::Object.merge! opts, parse_options!(args)
         handle_special_options! opts, args
         if subcommand = parse_subcommands!(args)
           subcommand.invoke(opts, args)
