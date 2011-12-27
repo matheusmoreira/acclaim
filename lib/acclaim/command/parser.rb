@@ -19,7 +19,6 @@ module Acclaim
       # Parses the argument array and returns one of the given commands, if one
       # is found, or +nil+ otherwise.
       def parse!
-        slice_argv_on_separator
         find_command
       end
 
@@ -27,17 +26,20 @@ module Acclaim
 
       # Discards all elements in the argument array after and including the
       # argument separator, if one exists.
-      def slice_argv_on_separator
-        self.argv = argv.take_while do |arg|
+      #
+      # Does not modify +argv+; returns a new array.
+      def arguments_up_to_separator
+        argv.take_while do |arg|
           arg !~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
         end
       end
 
       # Searches for one of the given commands in the argument array, and
-      # returns it. If no commands were found, +nil+ is returned.
+      # returns it. Removes the string that matched the command name from
+      # +argv+. Returns +nil if no command was found.
       def find_command
         commands.find do |command|
-          argv.include? command.line
+          arguments_up_to_separator.include? command.line
         end.tap do |command|
           argv.delete command.line if command
         end
