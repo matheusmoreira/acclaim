@@ -1,5 +1,5 @@
 require 'acclaim/option/parser/regexp'
-require 'acclaim/option/values'
+require 'ribbon'
 
 module Acclaim
   class Option
@@ -51,7 +51,7 @@ module Acclaim
       #   options << Option.new(:verbose, '--verbose')
       #
       #   Option::Parser.new(args, options).parse!
-      #   => #<Acclaim::Option::Values:0x00000002a2fee8 @options={:file=>"log.txt", :verbose=>true}>
+      #   => { Ribbon file:log.txt, verbose:true }
       #
       #   args
       #   => ["arg1", "arg2"]
@@ -98,28 +98,28 @@ module Acclaim
       end
 
       # Parses the options and their arguments, associating that information
-      # with a Values instance.
+      # with a Ribbon::Object instance.
       def parse_values!
-        values = Values.new
+        ribbon = Ribbon::Object.new
         options.each do |option|
           key = option.key
-          values[key] = option.default unless values[key]
+          ribbon[key] = option.default unless ribbon[key]
           switches = argv.find_all { |switch| option =~ switch }
           if switches.any?
             if option.flag?
-              found_boolean option, values
+              found_boolean option, ribbon
               argv.delete *switches
             else
               switches.each do |switch|
                 params = extract_parameters_of! option, switch
-                found_params_for option, values, params
+                found_params_for option, ribbon, params
               end
             end
           else
             Error.raise_missing_arg(option.names.join ' | ') if option.required?
           end
         end
-        values
+        ribbon
       end
 
       # Finds the +switch+ in #argv and scans the next +option.arity.total+

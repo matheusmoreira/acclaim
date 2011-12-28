@@ -4,7 +4,7 @@ require 'acclaim/command/version'
 require 'acclaim/option'
 require 'acclaim/option/parser'
 require 'acclaim/option/parser/regexp'
-require 'acclaim/option/values'
+require 'ribbon'
 
 module Acclaim
 
@@ -72,7 +72,7 @@ module Acclaim
       alias :opt :option
 
       # The block which is executed when this command is called. It is given 2
-      # parameters; the first is an Option::Values instance which can be queried
+      # parameters; the first is an Ribbon::Object instance which can be queried
       # for settings information; the second is the remaining command line.
       def action(&block)
         @action = block
@@ -102,7 +102,7 @@ module Acclaim
 
       # Invokes this command with a fresh set of option values.
       def run(*args)
-        invoke Option::Values.new, args
+        invoke Ribbon::Object.new, args
         rescue Option::Parser::Error => e
           puts e.message
       end
@@ -116,7 +116,7 @@ module Acclaim
       # All argument separators will be deleted from the argument array before a
       # command is executed.
       def invoke(opts, args = [])
-        opts.merge! parse_options!(args)
+        Ribbon::Object.merge! opts, parse_options!(args)
         handle_special_options! opts, args
         if subcommand = parse_subcommands!(args)
           subcommand.invoke(opts, args)

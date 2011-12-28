@@ -8,12 +8,14 @@ module Acclaim
         # Regular expression for a short option switch.
         #
         # Matches strings that begin with a single dash and contains only one
-        # word character or digit before the end of the string.
+        # word character before the end of the string.
         #
-        # Examples: <tt>-s; -5; -_</tt>
+        # Examples: <tt>-s; -_</tt>
         #
-        # <tt>'-mult'</tt> will be split into <tt>%w(-m -u -l -t)</tt>.
-        SHORT_SWITCH = /\A-[\w\d]\Z/
+        # <tt>'-mult'</tt> should match MULTIPLE_SHORT_SWITCHES, and will be
+        # split into <tt>%w(-m -u -l -t)</tt>, which in turn should match this
+        # regular expression.
+        SHORT_SWITCH = /\A-\w\Z/
 
         # Regular expression for a long option switch.
         #
@@ -58,7 +60,7 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-?[\w\d]+)*=(,*[\w\d]*)*\Z/
+        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/
 
         # Regular expression for any kind of option switch.
         #
