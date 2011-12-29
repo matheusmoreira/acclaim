@@ -51,7 +51,7 @@ module Acclaim
       #   options << Option.new(:verbose, '--verbose')
       #
       #   Option::Parser.new(args, options).parse!
-      #   => { Ribbon file:log.txt, verbose:true }
+      #   => {Ribbon file: "log.txt", verbose: true}
       #
       #   args
       #   => ["arg1", "arg2"]
@@ -98,9 +98,9 @@ module Acclaim
       end
 
       # Parses the options and their arguments, associating that information
-      # with a Ribbon::Object instance.
+      # with a Ribbon instance.
       def parse_values!
-        ribbon = Ribbon::Object.new
+        ribbon = Ribbon.new
         options.each do |option|
           key = option.key
           ribbon[key] = option.default unless ribbon[key]
