@@ -23,7 +23,7 @@ module Acclaim
         # Regular expression for multiple short options in a single "short"
         # switch.
         #
-        # Examples: -xvf, -abc, -de_f
+        # Examples: <tt>-xvf; -abc; -de_f</tt>
         MULTIPLE_SHORT_SWITCHES = /\A-\w{2,}\Z/
 
         # Regular expression for a long switch connected to its parameters with
