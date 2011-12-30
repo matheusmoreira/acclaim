@@ -103,7 +103,7 @@ module Acclaim
         ribbon = Ribbon.new
         options.each do |option|
           key = option.key
-          ribbon[key] = option.default unless ribbon[key]
+          ribbon[key] = option.default unless Ribbon[ribbon].has_key? key
           switches = argv.find_all { |switch| option =~ switch }
           if switches.any?
             if option.flag?
