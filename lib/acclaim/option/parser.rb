@@ -14,7 +14,7 @@ module Acclaim
 
         # Raises an Error with the following error message:
         #
-        #   Wrong number of arguments (actual for minimum)
+        #   Wrong number of arguments (#{actual} for #{minimum})
         def self.raise_wrong_arg_number(actual, minimum, optional)
           raise self, "Wrong number of arguments (#{actual} for #{minimum})"
         end
@@ -24,6 +24,14 @@ module Acclaim
         #   Missing required argument (arg)
         def self.raise_missing_arg(arg)
           raise self, "Missing required argument (#{arg})"
+        end
+
+        # Raises an error with the following error message:
+        #
+        #   Multiple instances of #{options.names.join ''} encountered
+        def self.raise_multiple(option)
+          names = option.names.join '|'
+          raise self, "Multiple instances of [#{names}] encountered"
         end
 
       end
@@ -105,18 +113,16 @@ module Acclaim
           key = option.key
           ribbon[key] = option.default unless Ribbon[ribbon].has_key? key
           switches = argv.find_all { |switch| option =~ switch }
-          if switches.any?
+          Error.raise_missing_arg option.names.join('|') if option.required? and switches.empty?
+          Error.raise_multiple option if option.on_multiple == :raise and switches.count > 1
+          switches.each do |switch|
             if option.flag?
               found_boolean option, ribbon
-              argv.delete *switches
+              argv.delete_at argv.index(switch)
             else
-              switches.each do |switch|
-                params = extract_parameters_of! option, switch
-                found_params_for option, ribbon, params
-              end
+              params = extract_parameters_of! option, switch
+              found_params_for option, params, ribbon
             end
-          else
-            Error.raise_missing_arg(option.names.join ' | ') if option.required?
           end
         end
         ribbon
@@ -150,8 +156,8 @@ module Acclaim
         end
         count = values.count
         Error.raise_wrong_arg_number count, *arity if count < arity.required
-        argv.delete switch
-        values.each { |value| argv.delete value }
+        argv.slice! switch_index..(switch_index + count)
+        values
       end
 
       # If the option has an custom handler associated, it will be called with
@@ -160,22 +166,27 @@ module Acclaim
       # <tt>params.first</tt>, if the option takes only one argument, or to
       # +params+ if it takes more.
       #
+      # Appends +params+ to the current values of the option if the it specifies
+      # so. In this case, the value of the option will always be an array.
+      #
       # The parameters will be converted according to the option's type.
-      def found_params_for(option, values, params = [])
+      def found_params_for(option, params = [], ribbon = Ribbon.new)
         params = option.convert_parameters *params
-        if handler = option.handler then handler.call values, params
+        if handler = option.handler then handler.call ribbon, params
         else
+          key = option.key.to_sym
           value = option.arity.total == 1 ? params.first : params
-          values[option.key.to_sym] = value unless params.empty?
+          value = [*ribbon[key], *value] if option.on_multiple == :append
+          ribbon[option.key.to_sym] = value unless params.empty?
         end
       end
 
       # If the option has an custom handler associated, it will be called with
       # only the option values as the first argument. Otherwise, the value will
       # be set to <tt>true</tt>.
-      def found_boolean(option, values)
-        if handler = option.handler then handler.call values
-        else values[option.key.to_sym] = true end
+      def found_boolean(option, ribbon = Ribbon.new)
+        if handler = option.handler then handler.call ribbon
+        else ribbon[option.key.to_sym] = true end
       end
 
     end
