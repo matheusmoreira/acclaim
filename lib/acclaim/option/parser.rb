@@ -34,8 +34,8 @@ module Acclaim
       # options. If no option array is given, the argument array will be
       # preprocessed only.
       def initialize(argv, options = nil)
-        self.argv = argv
-        self.options = options
+        self.argv = argv || []
+        self.options = options || []
       end
 
       # Parses the meaning of the options given to this parser. If none were
@@ -57,7 +57,7 @@ module Acclaim
       #   => ["arg1", "arg2"]
       def parse!
         preprocess_argv!
-        parse_values! unless options.nil?
+        parse_values!
       end
 
       private
