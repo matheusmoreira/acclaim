@@ -74,8 +74,8 @@ describe Acclaim::Option::Parser do
     end
 
     context 'when not given an array of options' do
-      it 'should not return any option values' do
-        subject.parse!.should be_nil
+      it 'should return an empty ribbon' do
+        subject.parse!.should_not be_nil
       end
     end
 
