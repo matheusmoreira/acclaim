@@ -7,7 +7,7 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
-    attr_accessor :key, :names, :description, :type, :default, :handler
+    attr_accessor :key, :names, :description, :type, :default, :handler, :on_multiple
 
     # Initializes a command line option. The +key+ is the object used to
     # associate this option with a value. The other arguments may be:
@@ -45,6 +45,7 @@ module Acclaim
       self.key         = key
       self.names       = matches.fetch true, []
       self.description = matches.fetch(false, []).first
+      self.on_multiple = options.fetch :on_multiple, :replace
       self.arity       = options[:arity]
       self.default     = options[:default]
       self.required    = options[:required]
