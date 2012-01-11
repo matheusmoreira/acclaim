@@ -200,6 +200,49 @@ describe Acclaim::Option::Parser do
           end
         end
       end
+
+      context 'containing an option which' do
+        let!(:options) { [ Acclaim::Option.new(:files, '-f', arity: [1,0], on_multiple: on_multiple, &block) ] }
+        let!(:args) { %w(-f f1 -f f2 -f f3) }
+        let(:block) { nil }
+
+        context 'replaces the previously found value' do
+          let(:on_multiple) { :replace }
+
+          it 'should replace the value with the last argument found' do
+            subject.parse!.files.should == 'f3'
+          end
+        end
+
+        context 'appends to the previously found values' do
+          let(:on_multiple) { :append }
+
+          it 'should return all arguments' do
+            subject.parse!.files.should == %w(f1 f2 f3)
+          end
+
+          context 'but that was passed a handler block' do
+            let(:block) { proc { |values| values.files = :block } }
+
+            it 'should parse all options and arguments' do
+              subject.parse!
+              args.should be_empty
+            end
+
+            it "should use the handler to obtain the option's value" do
+              subject.parse!.files.should == :block
+            end
+          end
+        end
+
+        context 'raises an error if encountered multiple times' do
+          let(:on_multiple) { :raise }
+
+          it 'should raise a parser error' do
+            expect { subject.parse! }.to raise_error Acclaim::Option::Parser::Error, /multiple/i
+          end
+        end
+      end
     end
   end
 
