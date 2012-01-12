@@ -16,7 +16,7 @@ module Acclaim
     # Patch version.
     #
     # Increments denote changes in implementation.
-    PATCH = 6
+    PATCH = 7
 
     # Build version.
     #
