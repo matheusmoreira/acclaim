@@ -21,9 +21,10 @@ module Acclaim
 
         # Raises an Error with the following error message:
         #
-        #   Missing required argument (arg)
-        def self.raise_missing_arg(arg)
-          raise self, "Missing required argument (#{arg})"
+        #   Missing required argument (#{option.names.join '|'})
+        def self.raise_missing_required(option)
+          names = option.names.join '|'
+          raise self, "Missing required argument (#{names})"
         end
 
         # Raises an error with the following error message:
@@ -113,7 +114,7 @@ module Acclaim
           key = option.key
           ribbon[key] = option.default unless Ribbon[ribbon].has_key? key
           switches = argv.find_all { |switch| option =~ switch }
-          Error.raise_missing_arg option.names.join('|') if option.required? and switches.empty?
+          Error.raise_missing_required option if option.required? and switches.empty?
           Error.raise_multiple option if option.on_multiple == :raise and switches.count > 1
           switches.each do |switch|
             if option.flag?
