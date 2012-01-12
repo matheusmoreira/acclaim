@@ -28,7 +28,7 @@ module Acclaim
 
         # Raises an error with the following error message:
         #
-        #   Multiple instances of #{options.names.join ''} encountered
+        #   Multiple instances of [#{options.names.join ''}] encountered
         def self.raise_multiple(option)
           names = option.names.join '|'
           raise self, "Multiple instances of [#{names}] encountered"
