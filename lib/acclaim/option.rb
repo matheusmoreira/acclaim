@@ -9,6 +9,7 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
+    # The key used to store the value of the option.
     attr_accessor :key
 
     attr_accessor :names
