@@ -69,6 +69,7 @@ module Acclaim
         options << Option.new(*args, &block)
       end
 
+      # Same as #option.
       alias :opt :option
 
       # The block which is executed when this command is called. It is given 2
@@ -78,6 +79,7 @@ module Acclaim
         @action = block
       end
 
+      # Same as #action.
       alias :when_called :action
 
       # Adds help subcommand and options to this command.
@@ -132,6 +134,7 @@ module Acclaim
         @action.call opts, args if @action
       end
 
+      # Same as #execute.
       alias :call :execute
 
       # True if this is a top-level command.
