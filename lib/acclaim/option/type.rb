@@ -33,6 +33,8 @@ module Acclaim
 
         # Same as #all.
         alias registered all
+
+        # Same as #register.
         alias add_handler_for register
         alias accept register
         alias [] handler_for
