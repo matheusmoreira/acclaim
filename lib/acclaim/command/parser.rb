@@ -7,6 +7,7 @@ module Acclaim
     # the elements of the array.
     class Parser
 
+      # The argument array to be searched.
       attr_accessor :argv
 
       attr_accessor :commands
