@@ -46,6 +46,9 @@ module Acclaim
     # [class]           The <tt>Class</tt> which will be used in parameter
     #                   conversion. The default is <tt>String</tt>.
     #
+    # If no switches were specified, the +key+ will be used to derive one. See
+    # Option::name_from for details.
+    #
     # The last argument can be a hash of options, which may specify:
     #
     # [:arity]        The number of required and optional arguments. See Arity
