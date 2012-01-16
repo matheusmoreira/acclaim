@@ -32,6 +32,10 @@ module Acclaim
     # [:default]   The default value for this option. Defaults to +nil+.
     # [:required]  Whether or not the option must be present on the command
     #              line. Default is +false+.
+    # [:on_multiple]  What to do if the option is encountered multiple times.
+    #                 Supported modes are <tt>:replace</tt>, <tt>:append</tt>
+    #                 and <tt>:raise</tt>. New values will replace old ones by
+    #                 default.
     #
     # Additionally, if a block is given, it will be called when the option is
     # parsed with a ribbon instance and the parameters given to the option. The
