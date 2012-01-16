@@ -128,9 +128,14 @@ module Acclaim
       not arity or arity == [0, 0]
     end
 
-    alias :bool?    :flag?
+    # Same as <tt>flag?</tt>
+    alias :bool? :flag?
+
+    # Same as <tt>flag?</tt>
     alias :boolean? :flag?
-    alias :switch?  :flag?
+
+    # Same as <tt>flag?</tt>
+    alias :switch? :flag?
 
   end
 end
