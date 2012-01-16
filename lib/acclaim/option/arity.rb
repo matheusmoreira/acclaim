@@ -5,6 +5,7 @@ module Acclaim
     # and optional.
     class Arity
 
+      # The minimum number of arguments.
       attr_accessor :minimum
 
       attr_accessor :optional
