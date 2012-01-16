@@ -27,6 +27,9 @@ module Acclaim
     # This option's custom handler.
     attr_accessor :handler
 
+    # How the parser should react when multiple instances of this option are
+    # found in the command line. It will, by default, replace the old value with
+    # the new one, but it can also collect all values or raise an error.
     attr_accessor :on_multiple
 
     # Initializes a command line option. The +key+ is the object used to
