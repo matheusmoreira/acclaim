@@ -68,7 +68,10 @@ module Acclaim
         to_a == arity.to_a
       end
 
+      # Same as <tt>==</tt>
       alias :eql? :==
+
+      # Same as <tt>==</tt>
       alias :===  :==
 
       # Returns a string in the following format:
