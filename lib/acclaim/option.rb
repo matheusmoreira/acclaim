@@ -123,7 +123,7 @@ module Acclaim
       self.required = true
     end
 
-    # Returns true if this option takes no arguments.
+    # Returns +true+ if this option takes no arguments.
     def flag?
       not arity or arity == [0, 0]
     end
