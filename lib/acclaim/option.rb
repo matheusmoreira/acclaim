@@ -141,6 +141,9 @@ module Acclaim
     class << self
 
       # Derives a name from the given key's string representation.
+      #
+      # If the string is empty, an +ArgumentError+ will be raised. If the
+      # resulting name is not a valid switch, a +NameError+ will be raised.
       def name_from(key)
         name = key.to_s
         raise ArgumentError, "Can't derive name from empty string representation." if name.empty?
