@@ -21,6 +21,7 @@ module Acclaim
     # The type the option's value will be converted to. See Option::Type.
     attr_accessor :type
 
+    # The default value for the option. Default is +nil+.
     attr_accessor :default
 
     attr_accessor :handler
