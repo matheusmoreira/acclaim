@@ -145,6 +145,7 @@ module Acclaim
         name = key.to_s
         raise ArgumentError, "Can't derive name from empty string representation." if name.empty?
         name = (name.length == 1 ? '-' : '--') + name
+        name.gsub! '_', '-'
         raise NameError, "Derived name is invalid: #{name}" unless name =~ Parser::Regexp::SWITCH
         name
       end
