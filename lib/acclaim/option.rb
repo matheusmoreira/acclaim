@@ -12,6 +12,7 @@ module Acclaim
     # The key used to store the value of the option.
     attr_accessor :key
 
+    # The strings that refer to this option in the command line.
     attr_accessor :names
 
     attr_accessor :description
