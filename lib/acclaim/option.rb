@@ -28,7 +28,7 @@ module Acclaim
     # The last argument can be a hash of options, which may specify:
     #
     # [:arity]     The number of required and optional arguments. See Arity for
-    #              defails.
+    #              defails. Defaults to no arguments.
     # [:default]   The default value for this option.
     # [:required]  Whether or not the option must be present on the command
     #              line.
