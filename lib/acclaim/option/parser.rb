@@ -37,6 +37,7 @@ module Acclaim
 
       end
 
+      # The argument array to parse.
       attr_accessor :argv
 
       attr_accessor :options
