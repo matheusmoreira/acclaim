@@ -1,6 +1,8 @@
 require 'acclaim/option/arity'
 require 'acclaim/option/parser/regexp'
 require 'acclaim/option/type'
+require 'ribbon'
+require 'ribbon/core_ext/array'
 
 module Acclaim
 
@@ -37,18 +39,20 @@ module Acclaim
     # this is not desirable consider not specifying a class to the option or
     # registering a custom type handler.
     def initialize(key, *args, &block)
-      options = args.last.is_a?(Hash) ? args.pop : {}
-      matches = args.select { |arg| arg.is_a? String }.group_by do |arg|
+      options = args.extract_ribbon!
+      matches = args.select do |arg|
+        arg.is_a? String
+      end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? true : false
       end
       klass = args.find { |arg| arg.is_a? Module }
       self.key         = key
       self.names       = matches.fetch true, []
       self.description = matches.fetch(false, []).first
-      self.on_multiple = options.fetch :on_multiple, :replace
-      self.arity       = options[:arity]
-      self.default     = options[:default]
-      self.required    = options[:required]
+      self.on_multiple = options.on_multiple? :replace
+      self.arity       = options.arity?
+      self.default     = options.default?
+      self.required    = options.required?
       self.type        = klass || String
       self.handler     = block
     end
