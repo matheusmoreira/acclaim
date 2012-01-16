@@ -40,6 +40,7 @@ module Acclaim
       # The argument array to parse.
       attr_accessor :argv
 
+      # The options to be parsed.
       attr_accessor :options
 
       # Initializes a new parser, with the given argument array and set of
