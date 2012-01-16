@@ -5,7 +5,10 @@ module Acclaim
     # and optional.
     class Arity
 
-      attr_accessor :minimum, :optional
+      attr_accessor :minimum
+
+      attr_accessor :optional
+
       alias :required :minimum
 
       # Initializes this arity with a number of required parameters and a number
