@@ -39,6 +39,8 @@ module Acclaim
 
         # Same as #register.
         alias accept register
+
+        # Same as #handler_for.
         alias [] handler_for
 
         private
