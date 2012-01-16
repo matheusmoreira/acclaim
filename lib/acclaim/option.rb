@@ -15,6 +15,7 @@ module Acclaim
     # The strings that refer to this option in the command line.
     attr_accessor :names
 
+    # The description of this option.
     attr_accessor :description
 
     attr_accessor :type
