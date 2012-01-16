@@ -31,7 +31,7 @@ module Acclaim
     #              defails. Defaults to no arguments.
     # [:default]   The default value for this option. Defaults to +nil+.
     # [:required]  Whether or not the option must be present on the command
-    #              line.
+    #              line. Default is +false+.
     #
     # Additionally, if a block is given, it will be called when the option is
     # parsed with a ribbon instance and the parameters given to the option. The
