@@ -13,6 +13,9 @@ module Acclaim
           table.each &block
         end
 
+        # Take advantage of #each implementation.
+        include Enumerable
+
         # Returns all registered classes.
         def all
           table.keys
