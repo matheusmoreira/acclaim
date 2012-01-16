@@ -13,7 +13,7 @@ module Acclaim
           table.each &block
         end
 
-        # Take advantage of #each implementation.
+        # Take advantage of each method.
         include Enumerable
 
         # Returns all registered classes.
@@ -31,16 +31,16 @@ module Acclaim
           table[klass]
         end
 
-        # Same as #all.
+        # Same as <tt>all</tt>.
         alias registered all
 
-        # Same as #register.
+        # Same as <tt>register</tt>.
         alias add_handler_for register
 
-        # Same as #register.
+        # Same as <tt>register</tt>.
         alias accept register
 
-        # Same as #handler_for.
+        # Same as <tt>handler_for</tt>.
         alias [] handler_for
 
         private
