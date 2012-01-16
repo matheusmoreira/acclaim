@@ -157,6 +157,7 @@ module Acclaim
         const_get(:Version).execute opts, args if opts.acclaim_version?
       end
 
+      # Deletes all argument separators in the given argument array.
       def delete_argument_separators_in!(args)
         args.delete_if do |arg|
           arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
