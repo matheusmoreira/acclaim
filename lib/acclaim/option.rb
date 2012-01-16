@@ -9,7 +9,19 @@ module Acclaim
   # Represents a command-line option.
   class Option
 
-    attr_accessor :key, :names, :description, :type, :default, :handler, :on_multiple
+    attr_accessor :key
+
+    attr_accessor :names
+
+    attr_accessor :description
+
+    attr_accessor :type
+
+    attr_accessor :default
+
+    attr_accessor :handler
+
+    attr_accessor :on_multiple
 
     # Initializes a command line option. The +key+ is the object used to
     # associate this option with a value. The other arguments may be:
