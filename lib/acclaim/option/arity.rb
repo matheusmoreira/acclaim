@@ -8,6 +8,7 @@ module Acclaim
       # The minimum number of arguments.
       attr_accessor :minimum
 
+      # The number of optional arguments.
       attr_accessor :optional
 
       # Same as +minimum+.
