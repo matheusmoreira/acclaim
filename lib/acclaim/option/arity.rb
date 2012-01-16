@@ -51,7 +51,10 @@ module Acclaim
         [ minimum, optional ]
       end
 
+      # Same as +to_a+.
       alias :to_ary   :to_a
+
+      # Same as +to_a+.
       alias :to_array :to_a
 
       # Equivalent to <tt>to_a.hash</tt>.
