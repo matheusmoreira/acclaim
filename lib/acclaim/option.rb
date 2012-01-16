@@ -29,7 +29,7 @@ module Acclaim
     #
     # [:arity]     The number of required and optional arguments. See Arity for
     #              defails. Defaults to no arguments.
-    # [:default]   The default value for this option.
+    # [:default]   The default value for this option. Defaults to +nil+.
     # [:required]  Whether or not the option must be present on the command
     #              line.
     #
