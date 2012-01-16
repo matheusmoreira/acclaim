@@ -18,6 +18,7 @@ module Acclaim
     # The description of this option.
     attr_accessor :description
 
+    # The type the option's value will be converted to. See Option::Type.
     attr_accessor :type
 
     attr_accessor :default
