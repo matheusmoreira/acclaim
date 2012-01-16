@@ -7,7 +7,9 @@ module Acclaim
     # the elements of the array.
     class Parser
 
-      attr_accessor :argv, :commands
+      attr_accessor :argv
+
+      attr_accessor :commands
 
       # Initializes a new command parser, with the given argument array and set
       # of commands to search for.
