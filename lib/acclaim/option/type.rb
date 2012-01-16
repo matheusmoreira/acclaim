@@ -4,40 +4,43 @@ module Acclaim
     # Associates a class with a handler block.
     module Type
 
-      # Yields class, proc pairs if a block was given. Returns an enumerator
-      # otherwise.
-      def self.each(&block)
-        table.each &block
-      end
-
-      # Returns all registered classes.
-      def self.all
-        table.keys
-      end
-
-      # Registers a handler for a class.
-      def self.register(klass, &block)
-        table[klass] = block
-      end
-
-      # Returns the handler for the given class.
-      def self.handler_for(klass)
-        table[klass]
-      end
-
+      # The class methods.
       class << self
+
+        # Yields class, proc pairs if a block was given. Returns an enumerator
+        # otherwise.
+        def each(&block)
+          table.each &block
+        end
+
+        # Returns all registered classes.
+        def all
+          table.keys
+        end
+
+        # Registers a handler for a class.
+        def register(klass, &block)
+          table[klass] = block
+        end
+
+        # Returns the handler for the given class.
+        def handler_for(klass)
+          table[klass]
+        end
+
         alias registered all
         alias add_handler_for register
         alias accept register
         alias [] handler_for
-      end
 
-      # The hash used to associate classes with their handlers.
-      def self.table
-        @table ||= {}
-      end
+        private
 
-      private_class_method :table
+        # The hash used to associate classes with their handlers.
+        def table
+          @table ||= {}
+        end
+
+      end
 
     end
 
