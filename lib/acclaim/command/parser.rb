@@ -36,7 +36,7 @@ module Acclaim
 
       # Searches for one of the given commands in the argument array, and
       # returns it. Removes the string that matched the command name from
-      # +argv+. Returns +nil if no command was found.
+      # +argv+. Returns +nil+ if no command was found.
       def find_command
         commands.find do |command|
           arguments_up_to_separator.include? command.line
