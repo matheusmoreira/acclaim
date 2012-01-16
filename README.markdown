@@ -12,7 +12,7 @@ application in a structured manner. Commands are classes that inherit from
 
     module App
       class Command < Acclaim::Command
-        option :verbose, '-v', '--verbose'
+        option :verbose, '-V', '--verbose'
 
         when_called do |options, args|
           puts 'Hello World!'
@@ -21,17 +21,19 @@ application in a structured manner. Commands are classes that inherit from
       end
     end
 
+    App::Command.run *ARGV
+
     $ app --verbose a b c
     Hello World!
     a, b, c
 
-Every command has a set of options and block that is executed when it is called.
-The options are parsed into an object and passed to the command's block along
-with the remaining command line arguments. The first argument of the `option`
-method is the key used to store the value of the option, the other strings are
-either switches or a description:
+Every command has a set of options and block. When the application runs, the
+options are parsed into an object and passed to the command's block along with
+the remaining command line arguments. The first argument of the `option` method
+is the key used to store the value of the option, the other strings are either
+switches or a description:
 
-    option :verbose, '-v', '--verbose', '--run-verbosely', 'Run verbosely.'
+    option :verbose, '-V', '--verbose', '--run-verbosely', 'Run verbosely.'
 
 Acclaim provides especial `help` and `version` commands that may be added to
 your program. The help command will automatically generate and print a help page
@@ -56,10 +58,9 @@ version and exit. To use them:
     $ app version
     1.2.3
 
-Both methods can take a hash as the last parameter, which accepts the same
-configurations. If you don't want the options, or if you want to specify a
-different set of switches or a different description, you can write something
-like:
+Both methods can take a hash as the last parameter. If you don't want the
+options, or if you want to specify a different set of switches or a different
+description, you can write:
 
     help options: false
     version '1.2.3', switches: %w(--version),
@@ -82,21 +83,19 @@ from an existing command:
       end
     end
 
-    $ app do x y, z
-    Doing something with x y, z
+    $ app do x y z
+    Doing something with x, y, z
 
-    $ app do --what x y, z
+    $ app do --what x y z
     Doing x with y, z
 
-Options may also take an Hash as the last parameter. Among the things that can
+Options may also take an hash as the last parameter. Among the things that can
 be configured is the default value for the option and its arity. The default
 value is `nil` by default and is used if the option is not given. The arity of
 the option represents the minimum number of arguments it __must__ take and the
-number of optional arguments it __may__ take. It is specified as an array in the
-form `[minimum, optional]`. Options that take zero arguments, which is the
-default, are flags.
-
-So, options can take from zero to an unlimited number of arguments, right?
+number of optional arguments it __may__ take. It can be specified as an array in
+the form `[minimum, optional]`. Options that take zero arguments, which is the
+default, are called switches.
 
     class App::Command::Do < App::Command
 
@@ -107,6 +106,7 @@ So, options can take from zero to an unlimited number of arguments, right?
         what = (options.what.join ', ' rescue options.what)
         subjects = args.join ', '
         puts "Doing #{what} with #{subjects}"
+      end
     end
 
     $ app do --what x y z
@@ -132,9 +132,8 @@ will not work:
     $ app do --what w x --verbose y z
     Doing w, x, y, z with
 
-This happens because `--verbose` is an option of the main command. Since it will
-be parsed and deleted from the argument array, when `do` gets its turn it will
-be parsing the `%w(--what w x y z)` array.
+This happens because `--verbose` is an option of the main command. When `do`
+gets its turn it will be parsing the `%w(--what w x y z)` array.
 
 ### Option Type Handlers
 
@@ -142,8 +141,7 @@ Arguments given to options are by default strings. To make life easier, you may
 specify the type of the arguments by passing a class among the arguments:
 
     class App::Command::Do
-      opt :when, '--when', 'When to do it.', Date,
-                 default: Date.today, arity: [1,0]
+      opt :when, '--when', 'When to do it.', Date, default: Date.today, arity: [1,0]
 
       action do |options, args|
         what = (options.what.join ', ' rescue options.what)
@@ -159,23 +157,33 @@ specify the type of the arguments by passing a class among the arguments:
     Merry Christmas!
     Doing w, x with y, z on 12/25/2011
 
-There are type handlers included for `Date`s, `Time`s, `DateTime`s, `URI`s and
-`String`s, but if you need more you can always write your own:
+There are type handlers included for `Date`s, `Time`s, `DateTime`s, `URI`s,
+`Symbol`s and `String`s, but if you need more you can always write your own:
 
-    Acclaim::Option::Type.add_handler_for(Symbol) { |str| str.to_sym }
+    class Person
+      attr_accessor :first_name, :middle_names, :last_name
 
-    class App::Command::Handle < App::Command
-      opt :syms, '--symbol', '--symbols', Symbol, arity: [1,-1], required: true
-
-      when_called do |options, args|
-        options.syms.each { |sym| puts "#{sym.class} => #{sym.inspect}" }
+      def initialize(first, *others)
+        @first_name, @last_name, @middle_names = first, others.pop, others
       end
     end
 
-    $ app handle --symbols a s d
-    Symbol => :a
-    Symbol => :s
-    Symbol => :d
+    Acclaim::Option::Type.add_handler_for Person do |argument|
+      Person.new *argument.split
+    end
+
+    class App::Command::Show < App::Command
+
+      # If no switches are specified, one will be derived from the key
+      opt :person, Person, arity: [1,0], required: true
+
+      when_called do |options, args|
+        puts "#{options.person.last_name}, #{options.person.first_name}"
+      end
+    end
+
+    $ app show --person 'Matheus Afonso Martins Moreira'
+    Moreira, Matheus
 
 `add_handler_for` takes a class and a block, which will be called for every
 argument of that class that must be parsed.
