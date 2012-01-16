@@ -28,7 +28,9 @@ module Acclaim
 
         # Returns the handler for the given class.
         def handler_for(klass)
-          table[klass]
+          table.fetch klass do
+            raise "#{klass} does not have an associated handler"
+          end
         end
 
         # Same as <tt>all</tt>.
