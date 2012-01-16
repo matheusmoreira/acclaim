@@ -37,7 +37,9 @@ module Acclaim
 
       end
 
-      attr_accessor :argv, :options
+      attr_accessor :argv
+
+      attr_accessor :options
 
       # Initializes a new parser, with the given argument array and set of
       # options. If no option array is given, the argument array will be
