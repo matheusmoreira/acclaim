@@ -31,6 +31,7 @@ module Acclaim
           table[klass]
         end
 
+        # Same as #all.
         alias registered all
         alias add_handler_for register
         alias accept register
