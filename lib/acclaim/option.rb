@@ -24,6 +24,7 @@ module Acclaim
     # The default value for the option. Default is +nil+.
     attr_accessor :default
 
+    # This option's custom handler.
     attr_accessor :handler
 
     attr_accessor :on_multiple
