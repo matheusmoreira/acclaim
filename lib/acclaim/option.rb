@@ -72,7 +72,7 @@ module Acclaim
       end
       klass = args.find { |arg| arg.is_a? Module }
       self.key         = key
-      self.names       = matches.fetch true, []
+      self.names       = matches.fetch(true) { [ Option.name_from(key) ] }
       self.description = matches.fetch(false, []).first
       self.on_multiple = options.on_multiple? :replace
       self.arity       = options.arity?
