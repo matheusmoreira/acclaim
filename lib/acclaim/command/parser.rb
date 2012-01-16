@@ -10,6 +10,7 @@ module Acclaim
       # The argument array to be searched.
       attr_accessor :argv
 
+      # The commands to search for.
       attr_accessor :commands
 
       # Initializes a new command parser, with the given argument array and set
