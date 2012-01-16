@@ -137,5 +137,17 @@ module Acclaim
     # Same as <tt>flag?</tt>
     alias :switch? :flag?
 
+    # The class methods.
+    class << self
+
+      # Derives a name from the given key's string representation.
+      def name_from(key)
+        name = key.to_s
+        raise ArgumentError, "Can't derive name from empty string representation." if name.empty?
+        name = (name.length == 1 ? '-' : '--') + name
+      end
+
+    end
+
   end
 end
