@@ -140,7 +140,8 @@ module Acclaim
     # The class methods.
     class << self
 
-      # Derives a name from the given key's string representation.
+      # Derives a name from the given key's string representation. All
+      # underscores will be replaced with dashes.
       #
       # If the string is empty, an +ArgumentError+ will be raised. If the
       # resulting name is not a valid switch, a +NameError+ will be raised.
