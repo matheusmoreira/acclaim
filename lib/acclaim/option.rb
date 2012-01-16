@@ -27,11 +27,11 @@ module Acclaim
     #
     # The last argument can be a hash of options, which may specify:
     #
-    # [:arity]     The number of required and optional arguments. See Arity for
-    #              defails. Defaults to no arguments.
-    # [:default]   The default value for this option. Defaults to +nil+.
-    # [:required]  Whether or not the option must be present on the command
-    #              line. Default is +false+.
+    # [:arity]        The number of required and optional arguments. See Arity
+    #                 for defails. Defaults to no arguments.
+    # [:default]      The default value for this option. Defaults to +nil+.
+    # [:required]     Whether or not the option must be present on the command
+    #                 line. Default is +false+.
     # [:on_multiple]  What to do if the option is encountered multiple times.
     #                 Supported modes are <tt>:replace</tt>, <tt>:append</tt>
     #                 and <tt>:raise</tt>. New values will replace old ones by
