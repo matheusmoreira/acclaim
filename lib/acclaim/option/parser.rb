@@ -61,13 +61,13 @@ module Acclaim
       #   args = %w(-F log.txt --verbose arg1 arg2)
       #   options = []
       #   options << Option.new(:file, '-F', arity: [1,0], required: true)
-      #   options << Option.new(:verbose, '--verbose')
+      #   options << Option.new(:verbose)
       #
       #   Option::Parser.new(args, options).parse!
-      #   => {Ribbon file: "log.txt", verbose: true}
+      #    => {file: "log.txt", verbose: true}
       #
       #   args
-      #   => ["arg1", "arg2"]
+      #    => ["arg1", "arg2"]
       def parse!
         preprocess_argv!
         parse_values!
