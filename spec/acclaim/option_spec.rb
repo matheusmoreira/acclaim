@@ -164,7 +164,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with Date as its type' do
       let(:type) { Date }
-      let(:date) { Date.today }
+      let(:date) { type.today }
       let(:params) { [date.to_s] }
 
       it 'should convert the parameters to dates' do
@@ -174,7 +174,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with DateTime as its type' do
       let(:type) { DateTime }
-      let(:date_time) { DateTime.parse DateTime.now.to_s }
+      let(:date_time) { type.parse type.now.to_s }
       let(:params) { [date_time.to_s] }
 
       it 'should convert the parameters to dates/times' do
@@ -184,7 +184,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with Time as its type' do
       let(:type) { Time }
-      let(:time) { Time.parse Time.now.to_s }
+      let(:time) { type.parse type.now.to_s }
       let(:params) { [time.to_s] }
 
       it 'should convert the parameters to times' do
@@ -194,7 +194,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with URI as its type' do
       let(:type) { URI }
-      let(:uri) { URI.parse 'https://github.com/matheusmoreira/acclaim' }
+      let(:uri) { type.parse 'https://github.com/matheusmoreira/acclaim' }
       let(:params) { [uri.to_s] }
 
       it 'should convert the parameters to URIs' do
