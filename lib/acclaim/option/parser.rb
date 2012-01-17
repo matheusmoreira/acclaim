@@ -113,24 +113,24 @@ module Acclaim
       # Parses the options and their arguments, associating that information
       # with a Ribbon instance.
       def parse_values!
-        ribbon = Ribbon.new
+        values = Ribbon.wrap
         options.each do |option|
           key = option.key
-          ribbon[key] = option.default unless Ribbon[ribbon].has_key? key
+          values[key] = option.default unless values.has_key? key
           switches = argv.find_all { |switch| option =~ switch }
           Error.raise_missing_required option if option.required? and switches.empty?
           Error.raise_multiple option if option.on_multiple == :raise and switches.count > 1
           switches.each do |switch|
             if option.flag?
-              found_boolean option, ribbon
+              found_boolean option, values.ribbon
               argv.delete_at argv.index(switch)
             else
               params = extract_parameters_of! option, switch
-              found_params_for option, params, ribbon
+              found_params_for option, params, values.ribbon
             end
           end
         end
-        ribbon
+        values.ribbon
       end
 
       # Finds the +switch+ in #argv and scans the next +option.arity.total+
