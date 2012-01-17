@@ -12,19 +12,19 @@ module Acclaim
         # <tt>'-mult'</tt> should match MULTIPLE_SHORT_SWITCHES, and will be
         # split into <tt>%w(-m -u -l -t)</tt>, which in turn should match this
         # regular expression.
-        SHORT_SWITCH = /\A-\w\Z/
+        SHORT_SWITCH = /\A-\w\Z/.freeze
 
         # Regular expression for a long option switch.
         #
         # Examples: <tt>--long; --no-feature; --with_underscore;
         # --_private-option; --1-1</tt>
-        LONG_SWITCH = /\A--[\w\d]+(-[\w\d]+)*\Z/
+        LONG_SWITCH = /\A--[\w\d]+(-[\w\d]+)*\Z/.freeze
 
         # Regular expression for multiple short options in a single "short"
         # switch.
         #
         # Examples: <tt>-xvf; -abc; -de_f</tt>
-        MULTIPLE_SHORT_SWITCHES = /\A-\w{2,}\Z/
+        MULTIPLE_SHORT_SWITCHES = /\A-\w{2,}\Z/.freeze
 
         # Regular expression for a long switch connected to its parameters with
         # an equal sign. Multiple parameters are be separated by commas.
@@ -40,17 +40,17 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/
+        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/.freeze
 
         # Regular expression for any kind of option switch.
         SWITCH = ::Regexp.union(SHORT_SWITCH, LONG_SWITCH,
-                                MULTIPLE_SHORT_SWITCHES, SWITCH_PARAM_EQUALS)
+                                MULTIPLE_SHORT_SWITCHES, SWITCH_PARAM_EQUALS).freeze
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
         #
         # Examples: <tt>--; ---</tt>
-        ARGUMENT_SEPARATOR = /\A-{2,}\Z/
+        ARGUMENT_SEPARATOR = /\A-{2,}\Z/.freeze
 
       end
 
