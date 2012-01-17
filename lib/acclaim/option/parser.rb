@@ -89,7 +89,7 @@ module Acclaim
         argv.find_all { |arg| arg =~ MULTIPLE_SHORT_SWITCHES }.each do |multiples|
           multiples_index = argv.index multiples
           argv.delete_at multiples_index
-          switches = multiples.sub!(/^-/, '').split(//).each { |letter| letter.prepend '-' }
+          switches = multiples.sub(/^-/, '').split(//).each { |letter| letter.prepend '-' }
           argv.insert multiples_index, *switches
         end
       end
