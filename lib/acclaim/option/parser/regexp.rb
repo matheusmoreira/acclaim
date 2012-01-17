@@ -18,7 +18,7 @@ module Acclaim
         #
         # Examples: <tt>--long; --no-feature; --with_underscore;
         # --_private-option; --1-1</tt>
-        LONG_SWITCH = /\A--[\w\d]+(-[\w\d]+)*\Z/.freeze
+        LONG_SWITCH = /\A--\w+(-\w+)*\Z/.freeze
 
         # Regular expression for multiple short options in a single "short"
         # switch.
@@ -40,7 +40,7 @@ module Acclaim
         # <tt>'--weird=,PARAM2'</tt> will become
         # <tt>['--weird', '', 'PARAM2']</tt> when it is split up. What to make
         # of those isn't a decision for a preprocessor.
-        SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/.freeze
+        SWITCH_PARAM_EQUALS = /\A--\w+(-\w+)*=(,*\w*)*\Z/.freeze
 
         # Regular expression for any kind of option switch.
         SWITCH = ::Regexp.union(SHORT_SWITCH, LONG_SWITCH,
