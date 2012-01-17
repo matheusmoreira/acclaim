@@ -179,7 +179,7 @@ module Acclaim
         params = option.convert_parameters *params
         if handler = option.handler then handler.call ribbon, params
         else
-          key = option.key.to_sym
+          key = option.key
           value = option.arity.total == 1 ? params.first : params
           value = [*ribbon[key], *value] if option.on_multiple == :append
           ribbon[option.key.to_sym] = value unless params.empty?
@@ -191,7 +191,7 @@ module Acclaim
       # be set to <tt>true</tt>.
       def found_boolean(option, ribbon = Ribbon.new)
         if handler = option.handler then handler.call ribbon
-        else ribbon[option.key.to_sym] = true end
+        else ribbon[option.key] = true end
       end
 
     end
