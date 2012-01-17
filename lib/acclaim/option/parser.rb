@@ -182,7 +182,7 @@ module Acclaim
           key = option.key
           value = option.arity.total == 1 ? params.first : params
           value = [*ribbon[key], *value] if option.on_multiple == :append
-          ribbon[option.key.to_sym] = value unless params.empty?
+          ribbon[key] = value unless params.empty?
         end
       end
 
