@@ -35,7 +35,7 @@ describe Acclaim::Option::Parser do
       end
     end
 
-    context 'when given a long siwtch with an equals sign' do
+    context 'when given a long switch with an equals sign' do
       context 'but no parameters' do
         let!(:args) { %w(--none=) }
 
