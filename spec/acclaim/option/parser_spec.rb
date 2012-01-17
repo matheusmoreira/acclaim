@@ -25,7 +25,7 @@ describe Acclaim::Option::Parser do
         args.should == %w(--files FILE1 FILE2 FILE3)
       end
 
-      context 'but the parameter list starts with a comma' do
+      context 'but without a first parameter' do
         let!(:args) { %w(--files=,FILE2,FILE3) }
 
         it 'should treat the first parameter as if it was an empty string' do
