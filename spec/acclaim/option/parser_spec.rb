@@ -18,7 +18,7 @@ describe Acclaim::Option::Parser do
     end
 
     context 'when given a long switch with multiple parameters separated by an equals sign' do
-      let!(:args) { %w(--files FILE1 FILE2 FILE3) }
+      let!(:args) { %w(--files=FILE1,FILE2,FILE3) }
 
       it 'should separate the switch and the parameters' do
         subject.parse!
