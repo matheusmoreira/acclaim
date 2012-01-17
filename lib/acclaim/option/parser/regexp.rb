@@ -43,7 +43,8 @@ module Acclaim
         SWITCH_PARAM_EQUALS = /\A--[\w\d]+(-[\w\d]+)*=(,*[\w\d]*)*\Z/
 
         # Regular expression for any kind of option switch.
-        SWITCH = /(#{SHORT_SWITCH})|(#{LONG_SWITCH})|(#{MULTIPLE_SHORT_SWITCHES})|(#{SWITCH_PARAM_EQUALS})/
+        SWITCH = ::Regexp.union(SHORT_SWITCH, LONG_SWITCH,
+                                MULTIPLE_SHORT_SWITCHES, SWITCH_PARAM_EQUALS)
 
         # Regular expression for the string that separates options and their
         # parameters from arguments like filenames.
