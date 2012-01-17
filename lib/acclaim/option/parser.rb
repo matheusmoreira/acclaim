@@ -88,7 +88,7 @@ module Acclaim
       def split_multiple_short_options!
         argv.find_all { |arg| arg =~ MULTIPLE_SHORT_SWITCHES }.each do |multiples|
           multiples_index = argv.index multiples
-          argv.delete multiples
+          argv.delete_at multiples_index
           switches = multiples.sub!(/^-/, '').split(//).each { |letter| letter.prepend '-' }
           argv.insert multiples_index, *switches
         end
@@ -103,7 +103,7 @@ module Acclaim
       def normalize_parameters!
         argv.find_all { |arg| arg =~ SWITCH_PARAM_EQUALS }.each do |switch|
           switch_index = argv.index switch
-          argv.delete switch
+          argv.delete_at switch_index
           switch, params = switch.split /\=/
           params = (params or '').split /,/
           argv.insert switch_index, *[ switch, *params ]
