@@ -174,7 +174,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with DateTime as its type' do
       let(:type) { DateTime }
-      let(:date_time) { DateTime.now }
+      let(:date_time) { DateTime.parse DateTime.now.to_s }
       let(:params) { [date_time.to_s] }
 
       it 'should convert the parameters to dates/times' do
@@ -184,7 +184,7 @@ describe Acclaim::Option do
 
     context 'when the option was initialized with Time as its type' do
       let(:type) { Time }
-      let(:time) { Time.now }
+      let(:time) { Time.parse Time.now.to_s }
       let(:params) { [time.to_s] }
 
       it 'should convert the parameters to times' do
