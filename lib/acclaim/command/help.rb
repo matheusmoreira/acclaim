@@ -25,7 +25,7 @@ module Acclaim
           add_options_to! base, opts if opts.options? true
           base.const_set(:Help, Class.new(base)).tap do |help_command|
             help_command.when_called do |options, args|
-              display_help_for base.root
+              display_for base.root
               exit
             end
           end
@@ -33,9 +33,9 @@ module Acclaim
 
         # Displays a very simple help screen for the given command and all its
         # subcommands.
-        def display_help_for(command)
+        def display_for(command)
           puts Template.for(command) if command.options.any?
-          command.subcommands.each { |subcommand| display_help_for subcommand }
+          command.subcommands.each { |subcommand| display_for subcommand }
         end
 
         private
