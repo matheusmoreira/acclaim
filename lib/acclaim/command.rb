@@ -83,13 +83,13 @@ module Acclaim
       alias :when_called :action
 
       # Adds help subcommand and options to this command.
-      def help(opts = {})
-        Help.create(self, opts)
+      def help(*args)
+        Help.create(self, *args)
       end
 
       # Adds help subcommand and options to this command.
-      def version(version_string, opts = {})
-        Version.create(self, version_string, opts)
+      def version(*args)
+        Version.create(self, *args)
       end
 
       # Parses the argument array using this command's set of options.
