@@ -24,7 +24,7 @@ module Acclaim
         # [:include_root]  Includes the root command when displaying a command's
         #                  usage.
         def create(*args)
-          opts, base = args.extract_ribbon!, args.first
+          opts, base = args.extract_ribbon!, args.shift
           add_options_to! base, opts if opts.options? true
           base.const_set(:Help, Class.new(base)).tap do |help_command|
             help_command.when_called do |options, args|
@@ -57,7 +57,7 @@ module Acclaim
         #
         # [:switches]  The switches used when creating the help option.
         def add_options_to!(*args)
-          opts, command = args.extract_ribbon!, args.first
+          opts, command = args.extract_ribbon!, args.shift
           switches = opts.switches? %w(-h --help)
           description = opts.description? 'Show usage information and exit.'
           command.option :acclaim_help, *switches, description
