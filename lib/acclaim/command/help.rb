@@ -21,6 +21,8 @@ module Acclaim
         # [:options]       If +true+, will add a help option to the +base+
         #                  command.
         # [:switches]      The switches used when creating the help option.
+        # [:exit]          If +true+, +exit+ will be called when the command is
+        #                  done.
         # [:include_root]  Includes the root command when displaying a command's
         #                  usage.
         def create(*args)
@@ -29,7 +31,7 @@ module Acclaim
           base.const_set(:Help, Class.new(base)).tap do |help_command|
             help_command.when_called do |options, args|
               display_for base.root, opts
-              exit
+              exit if opts.exit?
             end
           end
         end

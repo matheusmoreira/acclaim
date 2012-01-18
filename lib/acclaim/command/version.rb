@@ -20,13 +20,15 @@ module Acclaim
         # [:options]   If +true+, will add a version option to the +base+
         #              command.
         # [:switches]  The switches used when creating the version option.
+        # [:exit]      If +true+, +exit+ will be called when the command is
+        #              done.
         def create(*args)
           opts, base, version_string = args.extract_ribbon!, args.shift, args.shift
           add_options_to! base, opts if opts.options? true
           base.const_set(:Version, Class.new(base)).tap do |version_command|
             version_command.when_called do |options, args|
               puts version_string
-              exit
+              exit if opts.exit?
             end
           end
         end
