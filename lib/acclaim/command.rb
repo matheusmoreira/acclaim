@@ -145,7 +145,11 @@ module Acclaim
       # Finds the root of the command hierarchy.
       def root
         command = self
-        command = command.superclass until command.root?
+        until command.root?
+          yield command if block_given?
+          command = command.superclass
+        end
+        yield command if block_given?
         command
       end
 
