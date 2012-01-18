@@ -11,21 +11,24 @@ module Acclaim
       class << self
 
         # Creates a help subcommand that inherits from the given +base+ command
-        # and stores the class in the +Help+ constant of +base+. When called, the
-        # command displays a help screen including information for all commands
-        # and then exits.
+        # and stores the class in the +Help+ constant of +base+. When called,
+        # the command displays a help screen including information for all
+        # commands and then exits.
         #
         # The last argument can be a configuration hash, which accepts the
         # following options:
         #
-        # [:options]   If +true+, will add a help option to the +base+ command.
-        # [:switches]  The switches used when creating the help option.
+        # [:options]       If +true+, will add a help option to the +base+
+        #                  command.
+        # [:switches]      The switches used when creating the help option.
+        # [:include_root]  Includes the root command when displaying a command's
+        #                  usage.
         def create(*args)
           opts, base = args.extract_ribbon!, args.first
           add_options_to! base, opts if opts.options? true
           base.const_set(:Help, Class.new(base)).tap do |help_command|
             help_command.when_called do |options, args|
-              display_for base.root
+              display_for base.root, opts
               exit
             end
           end
@@ -33,9 +36,16 @@ module Acclaim
 
         # Displays a very simple help screen for the given command and all its
         # subcommands.
-        def display_for(command)
-          puts Template.for(command) if command.options.any?
-          command.subcommands.each { |subcommand| display_for subcommand }
+        #
+        # The last argument can be a configuration hash, which accepts the
+        # following options:
+        #
+        # [:include_root]  Includes the root command when displaying a command's
+        #                  usage.
+        def display_for(*args)
+          options, command = args.extract_ribbon!, args.shift
+          puts Template.for(command, options) if command.options.any?
+          command.subcommands.each { |subcommand| display_for(subcommand, options) }
         end
 
         private
