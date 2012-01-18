@@ -6,8 +6,8 @@ module Acclaim
 
       # Adds a special version option to the given +command+.
       #
-      # The last argument is an option +Hash+, which accepts the following
-      # options:
+      # The last argument can be a configuration hash, which accepts the
+      # following options:
       #
       # [:switches]  The switches used when creating the version option.
       def self.add_options_to!(command, opts = {})
@@ -23,8 +23,8 @@ module Acclaim
       # When called, the command displays the +version_string+ of the program
       # and then exits.
       #
-      # The last argument is an option +Hash+, which accepts the following
-      # options:
+      # The last argument can be a configuration hash, which accepts the
+      # following options:
       #
       # [:options]   If +true+, will add a version option to the +base+ command.
       # [:switches]  The switches used when creating the version option.

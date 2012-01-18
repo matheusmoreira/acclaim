@@ -8,8 +8,8 @@ module Acclaim
 
       # Adds a special help option to the given +command+.
       #
-      # The last argument is an option +Hash+, which accepts the following
-      # options:
+      # The last argument can be a configuration hash, which accepts the
+      # following options:
       #
       # [:switches]  The switches used when creating the help option.
       def self.add_options_to!(command, opts = {})
@@ -25,8 +25,8 @@ module Acclaim
       # command displays a help screen including information for all commands
       # and then exits.
       #
-      # The last argument is an option +Hash+, which accepts the following
-      # options:
+      # The last argument can be a configuration hash, which accepts the
+      # following options:
       #
       # [:options]   If +true+, will add a help option to the +base+ command.
       # [:switches]  The switches used when creating the help option.
