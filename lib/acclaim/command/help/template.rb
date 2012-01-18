@@ -1,4 +1,5 @@
 require 'erb'
+require 'ribbon/core_ext/array'
 
 module Acclaim
   class Command
@@ -27,8 +28,9 @@ module Acclaim
 
           # Computes the result of the template +file+ using the +command+'s
           # binding.
-          def for(command, file = 'command.erb')
-            template = create_from file
+          def for(*args)
+            template_options, command = args.extract_ribbon!, args.shift
+            template = create_from template_options.file?('command.erb')
             b = command.instance_eval { binding }
             template.result b
           end
