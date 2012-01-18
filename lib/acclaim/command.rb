@@ -155,6 +155,7 @@ module Acclaim
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
+      # TODO: possibly rescue a NameError and warn user
       end
 
       # Deletes all argument separators in the given argument array.
