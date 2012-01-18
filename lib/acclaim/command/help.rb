@@ -34,7 +34,7 @@ module Acclaim
               # and command.
               #   display_for options.command || args.pop
               display_for base.root, opts
-              exit if opts.exit?
+              exit if opts.exit? true
             end
           end
         end

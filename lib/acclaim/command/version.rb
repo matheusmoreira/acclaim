@@ -28,7 +28,7 @@ module Acclaim
           base.const_set(:Version, Class.new(base)).tap do |version_command|
             version_command.when_called do |options, args|
               puts version_string
-              exit if opts.exit?
+              exit if opts.exit? true
             end
           end
         end
