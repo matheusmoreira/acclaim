@@ -1,5 +1,5 @@
 <% unless root? or options.empty? %>
-  Command '<%= line %>':
+  Command '<%= full_line include_root: template_options.include_root? %>':
 <% end %>
 
 <% options.each do |option| %>
