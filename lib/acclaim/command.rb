@@ -166,6 +166,28 @@ module Acclaim
         end
       end
 
+      # Computes the full command line of this command, which takes parent
+      # commands into account.
+      #
+      #   class Command < Acclaim::Command
+      #     class Subcommand < Command
+      #       class Subcommand2 < Subcommand
+      #       end
+      #     end
+      #   end
+      #
+      #   Command::Subcommand::Subcommand2.full_line
+      #    => "subcommand subcommand2"
+      #
+      #   Command::Subcommand::Subcommand2.full_line include_root: true
+      #    => "command subcommand subcommand2"
+      def full_line(*args)
+        options = args.extract_ribbon!
+        parents.tap do |parents|
+          parents.pop unless options.include_root?
+        end.reverse.map(&:line).join ' '
+      end
+
       private
 
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
