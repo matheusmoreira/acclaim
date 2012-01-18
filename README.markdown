@@ -2,7 +2,17 @@
 
 Command-line option parsing and command interface.
 
-## Introduction
+# Installation
+
+Latest version:
+
+    gem install acclaim
+
+From source:
+
+    git clone git://github.com/matheusmoreira/acclaim.git
+
+# Introduction
 
 Acclaim makes it easy to describe commands and options for a command-line
 application in a structured manner. Commands are classes that inherit from
