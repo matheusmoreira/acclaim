@@ -10,6 +10,11 @@ module Acclaim
         # The class methods.
         class << self
 
+          # Returns the +template+ folder relative to this directory.
+          def folder
+            File.join File.dirname(__FILE__), 'template'
+          end
+
           # Loads an ERB template file from the
           # +lib/acclaim/command/help/template+ folder and instantiates a new
           # ERB instance with its contents.
