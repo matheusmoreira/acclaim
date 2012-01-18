@@ -157,6 +157,15 @@ module Acclaim
       # until the root command.
       alias until_root root
 
+      # Return this command's parent commands.
+      def parents
+        Array.new.tap do |parents|
+          until_root do |command|
+            parents << command
+          end
+        end
+      end
+
       private
 
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
