@@ -15,18 +15,20 @@ module Acclaim
             File.join File.dirname(__FILE__), 'template'
           end
 
-          # Loads an ERB template file from the
-          # +lib/acclaim/command/help/template+ folder and instantiates a new
-          # ERB instance with its contents.
-          def load(template)
-            filename = File.join File.dirname(__FILE__), 'template', template
-            ERB.new File.read(filename), nil, '%<>'
+          # Loads the contents of a template file from the template #folder.
+          def load(template_file)
+            File.read File.join(folder, template_file)
+          end
+
+          # Creates a new ERB instance with the contents of +template+.
+          def create_from(template_file)
+            ERB.new load(template_file), nil, '%<>'
           end
 
           # Computes the result of the template +file+ using the +command+'s
           # binding.
           def for(command, file = 'command.erb')
-            template = self.load file
+            template = create_from file
             b = command.instance_eval { binding }
             template.result b
           end
