@@ -10,14 +10,15 @@ module Acclaim
       class << self
 
         # Creates a <tt>version</tt> subcommand that inherits from the given
-        # +base+ command and stores the class in the +Version+ constant of +base+.
-        # When called, the command displays the +version_string+ of the program
-        # and then exits.
+        # +base+ command and stores the class in the +Version+ constant of
+        # +base+. When called, the command displays the +version_string+ of the
+        # program and then exits.
         #
         # The last argument can be a configuration hash, which accepts the
         # following options:
         #
-        # [:options]   If +true+, will add a version option to the +base+ command.
+        # [:options]   If +true+, will add a version option to the +base+
+        #              command.
         # [:switches]  The switches used when creating the version option.
         def create(*args)
           opts, base, version_string = args.extract_ribbon!, args.shift, args.shift
