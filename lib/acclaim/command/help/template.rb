@@ -32,6 +32,11 @@ module Acclaim
             template_options, command = args.extract_ribbon!, args.shift
             template = create_from template_options.file?('command.erb')
             b = command.instance_eval { binding }
+            # Since blocks are closures, the binding has access to the
+            # template_options ribbon:
+            #
+            # p b.eval 'template_options'
+            #  => {}
             template.result b
           end
 
