@@ -153,6 +153,10 @@ module Acclaim
         command
       end
 
+      # Walks the command inheritance tree, yielding each command successively
+      # until the root command.
+      alias until_root root
+
       private
 
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
