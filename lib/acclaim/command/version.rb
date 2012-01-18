@@ -1,3 +1,5 @@
+require 'ribbon/core_ext/array'
+
 module Acclaim
   class Command
 
@@ -10,9 +12,10 @@ module Acclaim
       # following options:
       #
       # [:switches]  The switches used when creating the version option.
-      def self.add_options_to!(command, opts = {})
-        switches = opts.fetch :switches, %w(-v --version)
-        description = opts.fetch :description, 'Show version and exit.'
+      def self.add_options_to!(*args)
+        opts, command = args.extract_ribbon!, args.first
+        switches = opts.switches? %w(-v --version)
+        description = opts.description? 'Show version and exit.'
         command.option :acclaim_version, *switches, description
       end
 
@@ -28,10 +31,9 @@ module Acclaim
       #
       # [:options]   If +true+, will add a version option to the +base+ command.
       # [:switches]  The switches used when creating the version option.
-      def self.create(base, version_string, opts = {})
-        if opts.fetch :options, true
-          add_options_to! base, opts
-        end
+      def self.create(*args)
+        opts, base, version_string = args.extract_ribbon!, args.first, args.last
+        add_options_to! base, opts if opts.options? true
         base.const_set(:Version, Class.new(base)).tap do |version_command|
           version_command.when_called do |options, args|
             puts version_string

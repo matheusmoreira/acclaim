@@ -1,4 +1,5 @@
 require 'acclaim/command/help/template'
+require 'ribbon/core_ext/array'
 
 module Acclaim
   class Command
@@ -12,9 +13,10 @@ module Acclaim
       # following options:
       #
       # [:switches]  The switches used when creating the help option.
-      def self.add_options_to!(command, opts = {})
-        switches = opts.fetch :switches, %w(-h --help)
-        description = opts.fetch :description, 'Show usage information and exit.'
+      def self.add_options_to!(*args)
+        opts, command = args.extract_ribbon!, args.first
+        switches = opts.switches? %w(-h --help)
+        description = opts.description? 'Show usage information and exit.'
         command.option :acclaim_help, *switches, description
       end
 
@@ -30,10 +32,9 @@ module Acclaim
       #
       # [:options]   If +true+, will add a help option to the +base+ command.
       # [:switches]  The switches used when creating the help option.
-      def self.create(base, opts = {})
-        if opts.fetch :options, true
-          add_options_to! base, opts
-        end
+      def self.create(*args)
+        opts, base = args.extract_ribbon!, args.first
+        add_options_to! base, opts if opts.options? true
         base.const_set(:Help, Class.new(base)).tap do |help_command|
           help_command.when_called do |options, args|
             display_help_for base.root
