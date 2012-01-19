@@ -113,7 +113,7 @@ module Acclaim
       # subcommands; if one is found, it will be invoked, if not, this command
       # will be executed. A subcommand may be anywhere in the array as long as
       # it is before an argument separator, which is tipically a double dash
-      # (<tt>--<\tt>) and may be omitted.
+      # (<tt>--</tt>) and may be omitted.
       #
       # All argument separators will be deleted from the argument array before a
       # command is executed.
