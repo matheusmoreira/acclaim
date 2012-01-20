@@ -176,17 +176,17 @@ module Acclaim
       # commands into account.
       #
       #   class Command < Acclaim::Command
-      #     class Subcommand < Command
-      #       class Subcommand2 < Subcommand
+      #     class Do < Command
+      #       class Something < Do
       #       end
       #     end
       #   end
       #
-      #   Command::Subcommand::Subcommand2.full_line
-      #    => "subcommand subcommand2"
+      #   Command::Do::Something.full_line
+      #    => "do something"
       #
-      #   Command::Subcommand::Subcommand2.full_line include_root: true
-      #    => "command subcommand subcommand2"
+      #   Command::Do::Something.full_line include_root: true
+      #    => "command do something"
       def full_line(*args)
         options = args.extract_ribbon!
         parents.tap do |parents|
