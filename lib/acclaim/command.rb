@@ -142,34 +142,24 @@ module Acclaim
         superclass == Acclaim::Command
       end
 
-      # Finds the root of the command hierarchy.
-      def root
-        command = self
-        until command.root?
-          yield command if block_given?
-          command = command.superclass
-        end
-        yield command if block_given?
-        command
+      # Returns all command ancestors of this command.
+      def command_ancestors
+        ancestors - Acclaim::Command.ancestors
       end
 
-      # Walks the command inheritance tree, yielding each command successively
-      # until the root command.
-      alias until_root root
+      # Progresively yields each command ancestor to the given block.
+      def each_command_ancestor(&block)
+        command_ancestors.each &block
+      end
+
+      # Returns the root of the command hierarchy.
+      def root
+        command_ancestors.last
+      end
 
       # Returns the sequence of commands from #root that leads to this command.
-      def path
-        Array.new.tap do |path|
-          until_root do |command|
-            path << command
-          end
-          path.reverse!
-        end
-      end
-
-      # Return this command's parent commands.
-      def parents
-        path.tap { |path| path.pop; path.reverse! }
+      def command_path
+        command_ancestors.reverse
       end
 
       # Computes the full command line of this command, which takes parent
@@ -189,7 +179,7 @@ module Acclaim
       #    => "command do something"
       def full_line(*args)
         options = args.extract_ribbon!
-        path.tap do |path|
+        command_path.tap do |path|
           path.shift unless options.include_root?
         end.map(&:line).join ' '
       end

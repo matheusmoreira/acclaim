@@ -64,15 +64,15 @@ describe Acclaim::Command do
       end
     end
 
-    describe '::path' do
+    describe '::command_path' do
       it 'should return an array containing only the root command itself' do
-        subject.path.should == [ root_command ]
+        subject.command_path.should == [ root_command ]
       end
     end
 
-    describe '::parents' do
-      it 'should return an empty array' do
-        subject.parents.should == []
+    describe '::command_ancestors' do
+      it 'should return an array containing only the command itself' do
+        subject.command_ancestors.should == [ root_command ]
       end
     end
 
@@ -142,15 +142,15 @@ describe Acclaim::Command do
       end
     end
 
-    describe '::path' do
+    describe '::command_path' do
       it 'should return an array containing the root command and the subcommand, in order' do
-        subject.path.should == [ root_command, subcommand ]
+        subject.command_path.should == [ root_command, subcommand ]
       end
     end
 
-    describe '::parents' do
-      it 'should return the root command' do
-        subject.parents.should == [ root_command ]
+    describe '::command_ancestors' do
+      it 'should return an array containing the command itself and the root command, in order' do
+        subject.command_ancestors.should == [ subcommand, root_command ]
       end
     end
 
