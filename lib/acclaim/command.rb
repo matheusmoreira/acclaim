@@ -189,9 +189,9 @@ module Acclaim
       #    => "command do something"
       def full_line(*args)
         options = args.extract_ribbon!
-        parents.tap do |parents|
-          parents.pop unless options.include_root?
-        end.reverse.map(&:line).join ' '
+        path.tap do |path|
+          path.shift unless options.include_root?
+        end.map(&:line).join ' '
       end
 
       private
