@@ -157,12 +157,13 @@ module Acclaim
       # until the root command.
       alias until_root root
 
-      # Return this command's parent commands.
-      def parents
+      # Returns the sequence of commands from #root that leads to this command.
+      def path
         Array.new.tap do |parents|
           until_root do |command|
             parents << command
           end
+          parents.reverse!
         end
       end
 
