@@ -167,6 +167,11 @@ module Acclaim
         end
       end
 
+      # Return this command's parent commands.
+      def parents
+        path.tap { |path| path.pop; path.reverse! }
+      end
+
       # Computes the full command line of this command, which takes parent
       # commands into account.
       #
