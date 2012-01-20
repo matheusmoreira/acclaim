@@ -159,11 +159,11 @@ module Acclaim
 
       # Returns the sequence of commands from #root that leads to this command.
       def path
-        Array.new.tap do |parents|
+        Array.new.tap do |path|
           until_root do |command|
-            parents << command
+            path << command
           end
-          parents.reverse!
+          path.reverse!
         end
       end
 
