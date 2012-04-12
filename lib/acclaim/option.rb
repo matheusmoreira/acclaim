@@ -140,7 +140,6 @@ module Acclaim
     # Same as <tt>flag?</tt>
     alias :switch? :flag?
 
-    # The class methods.
     class << self
 
       # Derives a name from the given key's string representation. All
