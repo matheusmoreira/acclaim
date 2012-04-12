@@ -63,8 +63,8 @@ module Acclaim
         # [:switches]  The switches used when creating the help option.
         def add_options_to!(*args)
           opts, command = args.extract_ribbon!, args.shift
-          switches = opts.switches? %w(-h --help)
-          description = opts.description? 'Show usage information and exit.'
+          switches = opts.switches? { %w(-h --help) }
+          description = opts.description? { 'Show usage information and exit.' }
           command.option :acclaim_help, *switches, description
         end
 

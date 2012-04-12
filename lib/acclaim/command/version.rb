@@ -43,8 +43,8 @@ module Acclaim
         # [:switches]  The switches used when creating the version option.
         def add_options_to!(*args)
           opts, command = args.extract_ribbon!, args.shift
-          switches = opts.switches? %w(-v --version)
-          description = opts.description? 'Show version and exit.'
+          switches = opts.switches? { %w(-v --version) }
+          description = opts.description? { 'Show version and exit.' }
           command.option :acclaim_version, *switches, description
         end
 
