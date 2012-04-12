@@ -59,9 +59,6 @@ module Acclaim
   end
 end
 
-require 'acclaim/option/type/date'
-require 'acclaim/option/type/date_time'
-require 'acclaim/option/type/string'
-require 'acclaim/option/type/symbol'
-require 'acclaim/option/type/time'
-require 'acclaim/option/type/uri'
+%w(date date_time string symbol time uri).each do |type|
+  require type.prepend 'acclaim/option/type/'
+end
