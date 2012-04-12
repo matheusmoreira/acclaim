@@ -150,7 +150,7 @@ module Acclaim
       # resulting name is not a valid switch, a +NameError+ will be raised.
       def name_from(key)
         name = key.to_s
-        raise ArgumentError, "Can't derive name from empty string representation." if name.empty?
+        raise ArgumentError, "Can't derive name from empty key." if name.empty?
         name = (name.length == 1 ? '-' : '--') + name
         name.gsub! '_', '-'
         raise NameError, "Derived name is invalid: #{name}" unless name =~ Parser::Regexp::SWITCH
