@@ -14,7 +14,7 @@ Gem::Specification.new('acclaim') do |gem|
   gem.author = 'Matheus Afonso Martins Moreira'
   gem.email  = 'matheus.a.m.moreira@gmail.com'
 
-  gem.files       = `git ls-files`.split "\n"
+  gem.files = `git ls-files`.split "\n"
 
   gem.add_runtime_dependency 'ribbon'
 
