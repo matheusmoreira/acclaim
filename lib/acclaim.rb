@@ -2,10 +2,6 @@
 module Acclaim
 end
 
-%w(
-
-command
-option
-version
-
-).each { |file| require file.prepend 'acclaim/' }
+%w(command option version).each do |file|
+  require file.prepend 'acclaim/'
+end
