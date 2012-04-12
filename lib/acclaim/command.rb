@@ -70,7 +70,7 @@ module Acclaim
       end
 
       # Same as #option.
-      alias :opt :option
+      alias opt option
 
       # The block which is executed when this command is called. It is given 2
       # parameters; the first is an Ribbon instance which can be queried for
@@ -80,7 +80,7 @@ module Acclaim
       end
 
       # Same as #action.
-      alias :when_called :action
+      alias when_called action
 
       # Adds help subcommand and options to this command.
       def help(*args)
@@ -135,7 +135,7 @@ module Acclaim
       end
 
       # Same as #execute.
-      alias :call :execute
+      alias call execute
 
       # True if this is a top-level command.
       def root?

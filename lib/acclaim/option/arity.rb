@@ -12,7 +12,7 @@ module Acclaim
       attr_accessor :optional
 
       # Same as +minimum+.
-      alias :required :minimum
+      alias required minimum
 
       # Initializes this arity with a number of required parameters and a number
       # of optional parameters. If the latter is less than zero, then it means
@@ -57,10 +57,10 @@ module Acclaim
       end
 
       # Same as +to_a+.
-      alias :to_ary   :to_a
+      alias to_ary   to_a
 
       # Same as +to_a+.
-      alias :to_array :to_a
+      alias to_array to_a
 
       # Equivalent to <tt>to_a.hash</tt>.
       def hash
@@ -77,10 +77,10 @@ module Acclaim
       end
 
       # Same as <tt>==</tt>
-      alias :eql? :==
+      alias eql? ==
 
       # Same as <tt>==</tt>
-      alias :===  :==
+      alias ===  ==
 
       # Returns a string in the following format:
       #

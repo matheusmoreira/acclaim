@@ -132,13 +132,13 @@ module Acclaim
     end
 
     # Same as <tt>flag?</tt>
-    alias :bool? :flag?
+    alias bool? flag?
 
     # Same as <tt>flag?</tt>
-    alias :boolean? :flag?
+    alias boolean? flag?
 
     # Same as <tt>flag?</tt>
-    alias :switch? :flag?
+    alias switch? flag?
 
     class << self
 
