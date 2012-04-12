@@ -27,6 +27,11 @@ module Acclaim
         optional.zero? and minimum == n
       end
 
+      # Returns +true+ if the option takes no parameters.
+      def none?
+        only? 0
+      end
+
       # Returns +true+ if the option can take an infinite number of arguments.
       def unlimited?
         optional < 0
