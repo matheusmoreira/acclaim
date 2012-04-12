@@ -24,6 +24,12 @@ describe Acclaim::Option::Arity do
       end
     end
 
+    describe '#none?' do
+      it 'should return true' do
+        subject.none?.should be_true
+      end
+    end
+
     describe '#unlimited?' do
       it 'should return false' do
         subject.unlimited?.should be_false
@@ -58,6 +64,12 @@ describe Acclaim::Option::Arity do
           it 'should return false' do
             subject.only?(number).should be_false
           end
+        end
+      end
+
+      describe '#none?' do
+        it 'should return false' do
+          subject.none?.should be_false
         end
       end
 
@@ -96,6 +108,12 @@ describe Acclaim::Option::Arity do
           it 'should return false' do
             subject.only?(number).should be_false
           end
+        end
+      end
+
+      describe '#none?' do
+        it 'should return false' do
+          subject.none?.should be_false
         end
       end
 
@@ -138,6 +156,12 @@ describe Acclaim::Option::Arity do
       end
     end
 
+    describe '#none?' do
+      it 'should return false' do
+        subject.none?.should be_false
+      end
+    end
+
     describe '#unlimited?' do
       it 'should return false' do
         subject.unlimited?.should be_false
@@ -172,6 +196,12 @@ describe Acclaim::Option::Arity do
           it 'should return false' do
             subject.only?(number).should be_false
           end
+        end
+      end
+
+      describe '#none?' do
+        it 'should return false' do
+          subject.none?.should be_false
         end
       end
 
@@ -210,6 +240,12 @@ describe Acclaim::Option::Arity do
           it 'should return false' do
             subject.only?(number).should be_false
           end
+        end
+      end
+
+      describe '#none?' do
+        it 'should return false' do
+          subject.none?.should be_false
         end
       end
 
