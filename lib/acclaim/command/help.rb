@@ -7,7 +7,6 @@ module Acclaim
     # Module which adds help support to a command.
     module Help
 
-      # The class methods.
       class << self
 
         # Creates a help subcommand that inherits from the given +base+ command

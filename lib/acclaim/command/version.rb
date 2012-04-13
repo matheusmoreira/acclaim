@@ -6,7 +6,6 @@ module Acclaim
     # Module which adds version query support to a command.
     module Version
 
-      # The class methods.
       class << self
 
         # Creates a <tt>version</tt> subcommand that inherits from the given

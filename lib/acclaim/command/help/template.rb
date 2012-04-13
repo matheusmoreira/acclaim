@@ -8,7 +8,6 @@ module Acclaim
       # Manages help templates.
       module Template
 
-        # The class methods.
         class << self
 
           # Returns the +template+ folder relative to this directory.
