@@ -12,6 +12,8 @@ module Acclaim
         # <tt>'-mult'</tt> should match MULTIPLE_SHORT_SWITCHES, and will be
         # split into <tt>%w(-m -u -l -t)</tt>, which in turn should match this
         # regular expression.
+        #
+        # \w is not used because it matches digits.
         SHORT_SWITCH = /\A-[a-zA-Z_]\Z/.freeze
 
         # Regular expression for a long option switch.
@@ -24,6 +26,8 @@ module Acclaim
         # switch.
         #
         # Examples: <tt>-xvf; -abc; -de_f</tt>
+        #
+        # \w is not used because it matches digits.
         MULTIPLE_SHORT_SWITCHES = /\A-[a-zA-Z_]{2,}\Z/.freeze
 
         # Regular expression for a long switch connected to its parameters with
