@@ -18,7 +18,7 @@ describe Acclaim::Option do
     context 'when given multiple strings' do
       let(:switches) { %w(-s --switch) }
       let(:description) { 'Description' }
-      let(:args) { [switches, description].flatten! }
+      let(:args) { [*switches, description] }
 
       it 'should find the switches' do
         subject.names.should == switches
@@ -126,7 +126,7 @@ describe Acclaim::Option do
       let(:block) { proc { |*args| p args } }
 
       it 'should have a custom handler' do
-        subject.handler.should be_a(Proc)
+        subject.handler.should respond_to(:call)
       end
     end
   end
@@ -140,7 +140,7 @@ describe Acclaim::Option do
       let!(:params) { %w(a b c d) }
 
       it 'should convert the parameters to strings' do
-        converted.should == params.map(&:to_s)
+        converted.should == params
       end
     end
 
@@ -149,7 +149,7 @@ describe Acclaim::Option do
       let(:params) { %w(a b c d) }
 
       it 'should convert the parameters to strings' do
-        converted.should == params.map(&:to_s)
+        converted.should == params
       end
     end
 
@@ -157,7 +157,7 @@ describe Acclaim::Option do
       let(:type) { Symbol }
       let(:params) { %w(a b c d) }
 
-      it 'should convert the parameters to strings' do
+      it 'should convert the parameters to symbols' do
         converted.should == params.map(&:to_sym)
       end
     end
