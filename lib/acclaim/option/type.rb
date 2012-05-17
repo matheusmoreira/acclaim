@@ -23,8 +23,8 @@ module Acclaim
       end
 
       # Registers a handler for a class.
-      def register(klass, &block)
-        table[klass] = block
+      def register(*klasses, &block)
+        klasses.each { |klass| table[klass] = block }
       end
 
       # Returns the handler for the given class.
