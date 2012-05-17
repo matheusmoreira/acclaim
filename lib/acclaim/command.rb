@@ -147,11 +147,6 @@ module Acclaim
         ancestors - Acclaim::Command.ancestors
       end
 
-      # Progresively yields each command ancestor to the given block.
-      def each_command_ancestor(&block)
-        command_ancestors.each &block
-      end
-
       # Returns the root of the command hierarchy.
       def root
         command_ancestors.last
