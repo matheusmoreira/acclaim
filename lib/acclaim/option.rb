@@ -17,7 +17,7 @@ module Acclaim
     attr_accessor :names
 
     # The description of this option.
-    attr_accessor :description
+    attr_writer :description
 
     # The type the option's value will be converted to. See Option::Type.
     attr_accessor :type
@@ -55,6 +55,8 @@ module Acclaim
     # [:arity]        The number of required and optional arguments. See Arity
     #                 for defails. Defaults to no arguments.
     # [:default]      The default value for this option. Defaults to +nil+.
+    # [:description]  The description. Overrides the one given among the other
+    #                 arguments.
     # [:required]     Whether or not the option must be present on the command
     #                 line. Default is +false+.
     # [:on_multiple]  What to do if the option is encountered multiple times.
@@ -77,7 +79,7 @@ module Acclaim
       end.to_ribbon
       self.key = key
       self.names = strings.switches? { [ Option.name_from(key) ] }
-      self.description = strings.description?([]).first
+      self.description = options.description? strings.description?([]).first
       self.on_multiple = options.on_multiple? :replace
       self.arity = options.arity?
       self.default = options.default?
@@ -110,6 +112,12 @@ module Acclaim
       else
         Arity.new *arity_or_array
       end
+    end
+
+    # The description of this option. If it responds to +call+, it will be
+    # called to determine the description at runtime.
+    def description
+      (@description.respond_to?(:call) ? @description.call : @description).to_s
     end
 
     # Whether or not this option is required on the command line.
