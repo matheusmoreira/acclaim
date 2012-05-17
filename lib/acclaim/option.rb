@@ -74,15 +74,15 @@ module Acclaim
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? :switches : :description
       end
-      self.key         = key
-      self.names       = strings.fetch(:switches) { [ Option.name_from(key) ] }
+      self.key = key
+      self.names = strings.fetch(:switches) { [ Option.name_from(key) ] }
       self.description = strings.fetch(:description, []).first
       self.on_multiple = options.on_multiple? :replace
-      self.arity       = options.arity?
-      self.default     = options.default?
-      self.required    = options.required?
-      self.type        = type || String
-      self.handler     = block
+      self.arity = options.arity?
+      self.default = options.default?
+      self.required = options.required?
+      self.type = type || String
+      self.handler = block
     end
 
     # Converts all given arguments using the type handler for this option's
