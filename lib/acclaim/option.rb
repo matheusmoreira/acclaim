@@ -89,7 +89,7 @@ module Acclaim
     # Converts all given arguments using the type handler for this option's
     # type.
     def convert_parameters(*args)
-      args.map { |arg| Type[type].call arg }
+      args.map { |arg| Type.handler_for(type).call arg }
     end
 
     # Returns true if the given string is equal to any of this option's names.
