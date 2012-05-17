@@ -68,12 +68,12 @@ module Acclaim
     # registering a custom type handler.
     def initialize(key, *args, &block)
       options = args.extract_ribbon!
+      type = args.find { |arg| arg.is_a? Module }
       matches = args.select do |arg|
         arg.is_a? String
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? true : false
       end
-      klass = args.find { |arg| arg.is_a? Module }
       self.key         = key
       self.names       = matches.fetch(true) { [ Option.name_from(key) ] }
       self.description = matches.fetch(false, []).first
@@ -81,7 +81,7 @@ module Acclaim
       self.arity       = options.arity?
       self.default     = options.default?
       self.required    = options.required?
-      self.type        = klass || String
+      self.type        = type || String
       self.handler     = block
     end
 
