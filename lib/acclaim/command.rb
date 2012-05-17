@@ -105,8 +105,8 @@ module Acclaim
       # Invokes this command with a fresh set of option values.
       def run(*args)
         invoke args
-      rescue Option::Parser::Error => e
-        puts e.message
+      rescue Option::Parser::Error => error
+        $stderr.puts error.message
       end
 
       # Parses the argument array. The argument array will be searched for
