@@ -119,7 +119,7 @@ module Acclaim
 
     # Sets whether or not this option is required.
     def required=(value)
-      @required = (value ? true : false)
+      @required = value ? true : false
     end
 
     # Require that this option be given on the command line.
