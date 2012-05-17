@@ -3,6 +3,7 @@ require 'acclaim/option/parser/regexp'
 require 'acclaim/option/type'
 require 'ribbon'
 require 'ribbon/core_ext/array'
+require 'ribbon/core_ext/hash'
 
 module Acclaim
 
@@ -73,10 +74,10 @@ module Acclaim
         arg.is_a? String
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? :switches : :description
-      end
+      end.to_ribbon
       self.key = key
-      self.names = strings.fetch(:switches) { [ Option.name_from(key) ] }
-      self.description = strings.fetch(:description, []).first
+      self.names = strings.switches? { [ Option.name_from(key) ] }
+      self.description = strings.description?([]).first
       self.on_multiple = options.on_multiple? :replace
       self.arity = options.arity?
       self.default = options.default?
