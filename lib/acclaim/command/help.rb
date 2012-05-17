@@ -49,7 +49,7 @@ module Acclaim
       #                  usage.
       def display_for(*args)
         options, command = args.extract_ribbon!, args.shift
-        puts Template.for(command, options) if command.options.any?
+        puts Help::Template.for(command, options) if command.options.any?
         command.subcommands.each { |subcommand| display_for(subcommand, options) }
       end
 
