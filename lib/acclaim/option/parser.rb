@@ -103,7 +103,7 @@ module Acclaim
             end
           end
         end
-        values.ribbon
+        values
       end
 
       # Finds the +switch+ in #argv and scans the next +option.arity.total+

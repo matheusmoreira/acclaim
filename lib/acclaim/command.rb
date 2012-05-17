@@ -104,9 +104,9 @@ module Acclaim
 
       # Invokes this command with a fresh set of option values.
       def run(*args)
-        invoke Ribbon.new, args
-        rescue Option::Parser::Error => e
-          puts e.message
+        invoke args
+      rescue Option::Parser::Error => e
+        puts e.message
       end
 
       # Parses the argument array. The argument array will be searched for
@@ -117,14 +117,15 @@ module Acclaim
       #
       # All argument separators will be deleted from the argument array before a
       # command is executed.
-      def invoke(opts, args = [])
-        Ribbon.merge! opts, parse_options!(args)
+      def invoke(args, opts = {})
+        opts = Ribbon.wrap opts
+        opts.merge! parse_options!(args)
         handle_special_options! opts, args
         if subcommand = parse_subcommands!(args)
-          subcommand.invoke(opts, args)
+          subcommand.invoke args, opts
         else
           delete_argument_separators_in! args
-          execute(opts, args)
+          execute opts, args
         end
       end
 
