@@ -69,14 +69,14 @@ module Acclaim
     def initialize(key, *args, &block)
       options = args.extract_ribbon!
       type = args.find { |arg| arg.is_a? Module }
-      matches = args.flatten.select do |arg|
+      strings = args.flatten.select do |arg|
         arg.is_a? String
       end.group_by do |arg|
-        arg =~ Parser::Regexp::SWITCH ? true : false
+        arg =~ Parser::Regexp::SWITCH ? :switches : :description
       end
       self.key         = key
-      self.names       = matches.fetch(true) { [ Option.name_from(key) ] }
-      self.description = matches.fetch(false, []).first
+      self.names       = strings.fetch(:switches) { [ Option.name_from(key) ] }
+      self.description = strings.fetch(:description, []).first
       self.on_multiple = options.on_multiple? :replace
       self.arity       = options.arity?
       self.default     = options.default?
