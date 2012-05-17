@@ -69,7 +69,7 @@ module Acclaim
     def initialize(key, *args, &block)
       options = args.extract_ribbon!
       type = args.find { |arg| arg.is_a? Module }
-      matches = args.select do |arg|
+      matches = args.flatten.select do |arg|
         arg.is_a? String
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? true : false
