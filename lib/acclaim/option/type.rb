@@ -58,6 +58,6 @@ module Acclaim
   end
 end
 
-%w(date date_time string symbol time uri).each do |type|
+%w(date date_time integer string symbol time uri).each do |type|
   require type.prepend 'acclaim/option/type/'
 end
