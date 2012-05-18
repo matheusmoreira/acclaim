@@ -72,11 +72,13 @@ module Acclaim
     def initialize(key, *args, &block)
       options = args.extract_ribbon!
       type = args.find { |arg| arg.is_a? Module }
+
       strings = args.flatten.select do |arg|
         arg.is_a? String
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? :switches : :description
       end.to_ribbon
+
       self.key = key
       self.names = strings.switches? { [ Option.name_from(key) ] }
       self.description = options.description? strings.description?([]).first
