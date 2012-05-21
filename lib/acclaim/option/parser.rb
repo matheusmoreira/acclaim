@@ -154,7 +154,7 @@ module Acclaim
         else
           key = option.key
           value = option.arity.total == 1 ? params.first : params
-          value = [*ribbon[key], *value] if option.on_multiple == :append
+          value = [*ribbon[key], *value] if [:append, :collect].include? option.on_multiple
           ribbon[key] = value unless params.empty?
         end
       end

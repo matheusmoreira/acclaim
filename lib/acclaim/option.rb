@@ -60,9 +60,9 @@ module Acclaim
     # [:required]     Whether or not the option must be present on the command
     #                 line. Default is +false+.
     # [:on_multiple]  What to do if the option is encountered multiple times.
-    #                 Supported modes are <tt>:replace</tt>, <tt>:append</tt>
-    #                 and <tt>:raise</tt>. New values will replace old ones by
-    #                 default.
+    #                 Supported modes are <tt>:replace</tt>, <tt>:raise</tt> and
+    #                 <tt>:append</tt> (or <tt>:collect</tt>). New values will
+    #                 replace old ones by default.
     #
     # Additionally, if a block is given, it will be called when the option is
     # parsed with a ribbon instance and the parameters given to the option. The
