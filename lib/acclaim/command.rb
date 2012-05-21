@@ -115,7 +115,7 @@ module Acclaim
       #
       # All argument separators will be deleted from the argument array before a
       # command is executed.
-      def invoke(args, opts = {})
+      def invoke(args = [], opts = {})
         opts = Ribbon.wrap opts
         opts.merge! parse_options!(args)
         handle_special_options! opts, args
