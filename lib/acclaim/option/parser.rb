@@ -1,5 +1,5 @@
-require 'acclaim/option/parser/error'
-require 'acclaim/option/parser/regexp'
+%w(error regexp).each { |file| require file.prepend 'acclaim/option/parser/' }
+
 require 'ribbon'
 
 module Acclaim

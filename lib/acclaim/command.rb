@@ -1,10 +1,8 @@
-require 'acclaim/command/help'
-require 'acclaim/command/parser'
-require 'acclaim/command/version'
-require 'acclaim/option'
-require 'acclaim/option/parser'
-require 'acclaim/option/parser/regexp'
-require 'ribbon'
+%w(option option/parser option/parser/regexp).each do |file|
+  require file.prepend 'acclaim/'
+end
+
+%w(ribbon ribbon/core_extensions/object).each { |file| require file }
 
 module Acclaim
 
@@ -207,4 +205,8 @@ module Acclaim
 
   end
 
+end
+
+%w(help parser version).each do |command|
+  require command.prepend 'acclaim/command/'
 end
