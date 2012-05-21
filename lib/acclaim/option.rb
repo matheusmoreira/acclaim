@@ -2,8 +2,8 @@ require 'acclaim/option/arity'
 require 'acclaim/option/parser/regexp'
 require 'acclaim/option/type'
 require 'ribbon'
-require 'ribbon/core_ext/array'
-require 'ribbon/core_ext/hash'
+require 'ribbon/core_extensions/array'
+require 'ribbon/core_extensions/hash'
 
 module Acclaim
 
