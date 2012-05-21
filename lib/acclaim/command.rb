@@ -184,7 +184,13 @@ module Acclaim
       def handle_special_options!(opts, args)
         const_get(:Help).execute opts, args if opts.acclaim_help?
         const_get(:Version).execute opts, args if opts.acclaim_version?
-      # TODO: possibly rescue a NameError and warn user
+      # TODO:
+      #   possibly rescue a NameError and warn user
+      #   fix bug:
+      #     calling this method causes a subcommand to be executed even if it
+      #     wasn't given on the command line. This may result up to **three**
+      #     commands (help, version and the actual command) running in one
+      #     invocation.
       end
 
       # Deletes all argument separators in the given argument array.
