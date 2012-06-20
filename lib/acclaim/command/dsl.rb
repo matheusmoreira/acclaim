@@ -10,7 +10,18 @@ module Acclaim
     # @since 0.4.0
     module DSL
 
-      # String which calls this command.
+      # The string used to invoke this command from the command line.
+      #
+      # @overload line
+      #   If not set, will try to figure out the name from the command's class.
+      #
+      #   @return [String] the name used to invoke this command
+      #
+      # @overload line(string)
+      #   Uses the given string to invoke this command.
+      #
+      #   @param [String, nil] string the new command name
+      #   @return [String] the name used to invoke this command
       def line(*arguments)
         @line = arguments.first unless arguments.empty?
         @line ||= (name.gsub(/^.*::/, '').downcase if respond_to? :name)
