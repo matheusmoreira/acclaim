@@ -1,10 +1,12 @@
+require 'jewel'
+
 module Acclaim
 
   # Acclaim gem information and metadata.
   #
   # @author Matheus Afonso Martins Moreira
   # @since 0.4.0
-  class Gem
+  class Gem < Jewel::Gem
 
     root '../..'
 

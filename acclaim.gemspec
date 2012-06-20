@@ -12,6 +12,7 @@ Gem::Specification.new 'acclaim' do |gem|
 
   gem.files = `git ls-files`.split "\n"
 
+  gem.add_runtime_dependency 'jewel'
   gem.add_runtime_dependency 'ribbon'
 
   gem.add_development_dependency 'rspec'
