@@ -33,7 +33,6 @@ module Acclaim
         options << Option.new(*arguments, &block)
       end
 
-      # Same as #option.
       alias opt option
 
       # The block which is executed when this command is called.
@@ -48,7 +47,6 @@ module Acclaim
         @action
       end
 
-      # Same as #action.
       alias when_called action
 
       # Parses the argument array using this command's set of options.
@@ -94,7 +92,6 @@ module Acclaim
         @action.call options, arguments if @action.respond_to? :call
       end
 
-      # Same as #execute.
       alias call execute
 
       # True if this is a top-level command.
