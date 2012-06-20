@@ -13,7 +13,7 @@ module Acclaim
       # String which calls this command.
       def line(*arguments)
         @line = arguments.first unless arguments.empty?
-        @line ||= (name.gsub(/^.*::/, '').downcase rescue nil)
+        @line ||= (name.gsub(/^.*::/, '').downcase if respond_to? :name)
       end
 
       # Commands which may be given to this command.
