@@ -35,6 +35,8 @@ module Acclaim
       end
 
       # The options this command can take.
+      #
+      # @return [Array] the options this command takes
       def options
         @options ||= []
       end
