@@ -2,6 +2,6 @@
 module Acclaim
 end
 
-%w(command option version).each do |file|
+%w(command gem option version).each do |file|
   require file.prepend 'acclaim/'
 end
