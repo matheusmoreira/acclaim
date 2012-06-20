@@ -38,7 +38,7 @@ module Acclaim
       # parameters; the first is an Ribbon instance which can be queried for
       # settings information; the second is the remaining command line.
       def action(&block)
-        @action = block
+        @action = block if block.respond_to? :call
       end
 
       # Same as #action.
