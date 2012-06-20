@@ -1,12 +1,13 @@
 #!/usr/bin/env gem build
 # encoding: utf-8
 
-current_directory = File.dirname __FILE__
-version_file = File.expand_path './acclaim.version', current_directory
-
 Gem::Specification.new 'acclaim' do |gem|
 
+  current_directory = File.dirname __FILE__
+  version_file = File.expand_path "#{gem.name}.version", current_directory
+
   gem.version = File.read(version_file).chomp
+
   gem.summary = 'Command-line option parser and command interface.'
   gem.homepage = 'https://github.com/matheusmoreira/acclaim'
 
