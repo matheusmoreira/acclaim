@@ -11,8 +11,8 @@ module Acclaim
     module DSL
 
       # String which calls this command.
-      def line(*args)
-        @line = args.first unless args.empty?
+      def line(*arguments)
+        @line = arguments.first unless arguments.empty?
         @line ||= (name.gsub(/^.*::/, '').downcase rescue nil)
       end
 
@@ -27,8 +27,8 @@ module Acclaim
       end
 
       # Adds an option to this command.
-      def option(*args, &block)
-        options << Option.new(*args, &block)
+      def option(*arguments, &block)
+        options << Option.new(*arguments, &block)
       end
 
       # Same as #option.
@@ -45,18 +45,18 @@ module Acclaim
       alias when_called action
 
       # Parses the argument array using this command's set of options.
-      def parse_options!(args)
-        Option::Parser.new(args, options).parse!
+      def parse_options!(arguments)
+        Option::Parser.new(arguments, options).parse!
       end
 
       # Looks for this command's subcommands in the argument array.
-      def parse_subcommands!(args)
-        Command::Parser.new(args, subcommands).parse!
+      def parse_subcommands!(arguments)
+        Command::Parser.new(arguments, subcommands).parse!
       end
 
       # Invokes this command with a fresh set of option values.
-      def run(*args)
-        invoke args
+      def run(*arguments)
+        invoke arguments
       rescue Option::Parser::Error => error
         $stderr.puts error.message
       end
@@ -69,22 +69,22 @@ module Acclaim
       #
       # All argument separators will be deleted from the argument array before a
       # command is executed.
-      def invoke(args = [], opts = {})
-        opts = Ribbon.wrap opts
-        opts.merge! parse_options!(args)
-        handle_special_options! opts, args
-        if subcommand = parse_subcommands!(args)
-          subcommand.invoke args, opts
+      def invoke(arguments = [], options = {})
+        options = Ribbon.wrap options
+        options.merge! parse_options!(arguments)
+        handle_special_options! options, arguments
+        if subcommand = parse_subcommands!(arguments)
+          subcommand.invoke arguments, options
         else
-          delete_argument_separators_in! args
-          execute opts, args
+          delete_argument_separators_in! arguments
+          execute options, arguments
         end
       end
 
       # Calls this command's action block with the given option values and
       # arguments.
-      def execute(opts, args)
-        @action.call opts, args if @action
+      def execute(options, arguments)
+        @action.call options, arguments if @action
       end
 
       # Same as #execute.
@@ -125,8 +125,8 @@ module Acclaim
       #
       #   Command::Do::Something.full_line include_root: true
       #    => "command do something"
-      def full_line(*args)
-        options = args.extract_ribbon!
+      def full_line(*arguments)
+        options = arguments.extract_ribbon!
         command_path.tap do |path|
           path.shift unless options.include_root?
         end.map(&:line).join ' '
@@ -135,9 +135,9 @@ module Acclaim
       private
 
       # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
-      def handle_special_options!(opts, args)
-        const_get(:Help).execute opts, args if opts.acclaim_help?
-        const_get(:Version).execute opts, args if opts.acclaim_version?
+      def handle_special_options!(options, arguments)
+        const_get(:Help).execute options, arguments if options.acclaim_help?
+        const_get(:Version).execute options, arguments if options.acclaim_version?
       # TODO:
       #   possibly rescue a NameError and warn user
       #   fix bug:
@@ -148,8 +148,8 @@ module Acclaim
       end
 
       # Deletes all argument separators in the given argument array.
-      def delete_argument_separators_in!(args)
-        args.delete_if do |arg|
+      def delete_argument_separators_in!(arguments)
+        arguments.delete_if do |arg|
           arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
         end
       end
