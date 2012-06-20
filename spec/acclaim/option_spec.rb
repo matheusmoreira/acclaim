@@ -114,6 +114,27 @@ describe Acclaim::Option do
           end
         end
       end
+
+      context 'that specifies a description' do
+        let(:hash) { { description: description } }
+
+        context 'as a regular string' do
+          let(:description) { 'Description' }
+
+          it 'should use the string as the description' do
+            subject.description.should == description
+          end
+        end
+
+        context 'as a block' do
+          let(:description) { -> { 'Description' } }
+
+          it 'should call the block and use return value as the description' do
+            value = description.call
+            subject.description.should == value
+          end
+        end
+      end
     end
 
     context 'when not given a block' do
