@@ -39,6 +39,7 @@ module Acclaim
       # settings information; the second is the remaining command line.
       def action(&block)
         @action = block if block.respond_to? :call
+        @action
       end
 
       # Same as #action.
