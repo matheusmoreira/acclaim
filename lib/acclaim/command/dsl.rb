@@ -27,6 +27,8 @@ module Acclaim
       end
 
       # Adds an option to this command.
+      #
+      # @see Acclaim::Option#initialize
       def option(*arguments, &block)
         options << Option.new(*arguments, &block)
       end
