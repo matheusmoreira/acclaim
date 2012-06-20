@@ -3,7 +3,11 @@ require 'acclaim/command/dsl/root'
 module Acclaim
   class Command
 
-    # Module containing the class methods every command class should inherit.
+    # Module containing the methods that make up the domain-specific language
+    # used to create commands.
+    #
+    # @author Matheus Afonso Martins Moreira
+    # @since 0.4.0
     module DSL
 
       # String which calls this command.
