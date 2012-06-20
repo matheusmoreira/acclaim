@@ -15,17 +15,45 @@ describe Acclaim::Option do
       subject.key.should == key
     end
 
-    context 'when given multiple strings' do
+    context 'when given multiple switches' do
       let(:switches) { %w(-s --switch) }
-      let(:description) { 'Description' }
-      let(:args) { [*switches, description] }
 
-      it 'should find the switches' do
-        subject.names.should == switches
+      context 'directly' do
+        let(:args) { [*switches] }
+
+        it 'should find the switches' do
+          subject.names.should == switches
+        end
       end
 
-      it 'should find the description' do
-        subject.description.should == description
+      context 'as an array' do
+        let(:args) { [switches] }
+
+        it 'should find the switches' do
+          subject.names.should == switches
+        end
+      end
+    end
+
+    context 'when given a description string' do
+      let(:description) { 'Description' }
+
+      context 'by itself' do
+        let(:args) { [description] }
+
+        it 'should find the description' do
+          subject.description.should == description
+        end
+      end
+
+      context 'with another description specified in the options hash' do
+        let(:description_from_options_hash) { 'Description from options hash' }
+        let(:options_hash) { { description: description_from_options_hash } }
+        let(:args) { [description, options_hash] }
+
+        it 'should use the description from the options hash' do
+          subject.description.should == description_from_options_hash
+        end
       end
     end
 
