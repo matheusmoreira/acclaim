@@ -28,6 +28,8 @@ module Acclaim
       end
 
       # Commands which may be given to this command.
+      #
+      # @return [Array] this command's subcommands
       def subcommands
         @subcommands ||= []
       end
