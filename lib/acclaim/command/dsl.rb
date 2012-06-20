@@ -34,9 +34,13 @@ module Acclaim
       # Same as #option.
       alias opt option
 
-      # The block which is executed when this command is called. It is given 2
-      # parameters; the first is an Ribbon instance which can be queried for
-      # settings information; the second is the remaining command line.
+      # The block which is executed when this command is called.
+      #
+      # @yieldparam [Ribbon] options a Ribbon instance which associates options
+      #   with their corresponding values
+      # @yieldparam [Array] arguments the arguments that remained in the command
+      #   line
+      # @return [Proc, nil] the given block
       def action(&block)
         @action = block if block.respond_to? :call
         @action
