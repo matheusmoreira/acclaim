@@ -19,7 +19,9 @@ Gem::Specification.new 'acclaim' do |gem|
   gem.add_runtime_dependency 'jewel'
   gem.add_runtime_dependency 'ribbon'
 
-  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rookie'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'yard'
 
 end
