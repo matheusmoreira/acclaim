@@ -8,6 +8,7 @@ describe Acclaim::Option::Parser do
   subject { Acclaim::Option::Parser.new(args, options) }
 
   describe '#parse!' do
+
     context 'when given a long switch with a parameter separated by an equals sign' do
       let!(:args) { %w(--switch=PARAM) }
 
@@ -196,6 +197,31 @@ describe Acclaim::Option::Parser do
             it 'should ignore the other arguments and leave them where they are' do
               subject.parse!
               args.should == %w(cmd subcmd -- ARG1 ARG2)
+            end
+          end
+        end
+      end
+
+      context 'which contains one option with unbound aritiy and one boolean option' do
+        let(:options) { [ Acclaim::Option.new(:boolean), Acclaim::Option.new(:parameters, arity: [1, -1]) ] }
+
+        context 'and the arguments are such that the boolean option is between the parameters' do
+          let!(:args) { %w(--parameters a b c d --boolean e f g) }
+
+          it 'should parse from left to right, stopping at the boolean option' do
+            subject.parse!
+            args.should == %w(e f g)
+          end
+
+          context 'the parsed ribbon' do
+            let(:ribbon) { subject.parse! }
+
+            it 'should cointain the correct value for boolean' do
+              ribbon.parameters.should == %w(a b c d)
+            end
+
+            it 'should cointain the correct value for parameters' do
+              ribbon.boolean.should be_true
             end
           end
         end
