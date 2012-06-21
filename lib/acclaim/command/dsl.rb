@@ -70,7 +70,7 @@ module Acclaim
       end
 
       # Looks for this command's subcommands in the argument array.
-      def parse_subcommands!(arguments)
+      def parse_subcommands_in!(arguments)
         Command::Parser.new(arguments, subcommands).parse!
       end
 
