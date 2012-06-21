@@ -49,9 +49,6 @@ module Acclaim
   #   Verbose? yes
   #   Doing testing with acclaim and safeguard!
   class Command
-
-    extend DSL
-
   end
 
   class << Command
