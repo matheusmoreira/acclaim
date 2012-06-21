@@ -9,7 +9,7 @@ module Acclaim
   class Command
     module DSL
 
-      # Methods available to root commands only.
+      # Methods that only work with root commands.
       #
       # @author Matheus Afonso Martins Moreira
       # @since 0.4.0
@@ -19,14 +19,14 @@ module Acclaim
         #
         # @see Acclaim::Command::Help.create
         def help(*arguments, &block)
-          Help.create self, *arguments, &block
+          Help.create root, *arguments, &block
         end
 
         # Adds version subcommand and options to this command.
         #
         # @see Acclaim::Command::Help.create
         def version(*arguments, &block)
-          Version.create self, *arguments, &block
+          Version.create root, *arguments, &block
         end
 
       end
