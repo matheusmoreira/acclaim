@@ -89,15 +89,15 @@ module Acclaim
       #
       # All argument separators will be deleted from the argument array before a
       # command is executed.
-      def invoke(arguments = [], options = {})
-        options = Ribbon.wrap options
-        options.merge! parse_options!(arguments)
-        handle_special_options! options, arguments
-        if subcommand = parse_subcommands!(arguments)
-          subcommand.invoke arguments, options
-        else
+      def invoke(arguments = [], options = [])
+        options = options + self.options
+        subcommand = parse_subcommands_in! arguments
+        if subcommand.nil?
+          parsed_options = Option::Parser.new(arguments, options).parse!
           delete_argument_separators_in! arguments
-          execute options, arguments
+          execute parsed_options, arguments
+        else
+          subcommand.invoke arguments, options
         end
       end
 
