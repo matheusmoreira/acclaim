@@ -60,9 +60,9 @@ module Acclaim
     # subcommands.
     #
     # @param [Class] subcommand the class that inherited from this command
-    def inherited(subcommand)
-      subcommand.extend Command::DSL
-      subcommands << subcommand if respond_to? :subcommands
+    def inherited(command)
+      command.extend Command::DSL
+      subcommands << command if respond_to? :subcommands
     end
 
   end
