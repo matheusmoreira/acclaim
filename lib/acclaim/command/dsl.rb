@@ -65,7 +65,7 @@ module Acclaim
       alias when_called action
 
       # Parses the argument array using this command's set of options.
-      def parse_options!(arguments)
+      def parse_options_in!(arguments)
         Option::Parser.new(arguments, options).parse!
       end
 
