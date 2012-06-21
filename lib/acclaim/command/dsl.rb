@@ -173,6 +173,8 @@ module Acclaim
         end
       end
 
+      include Root
+
     end
 
   end
