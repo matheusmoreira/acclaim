@@ -218,6 +218,8 @@ module Acclaim
       # so. In this case, the value of the option will always be an array.
       #
       # The parameters will be converted according to the option's type.
+      #
+      # @since 0.0.6
       def found_params_for(option, params = [], ribbon = Ribbon.new)
         params = option.convert_parameters *params
         if handler = option.handler then handler.call ribbon, params
