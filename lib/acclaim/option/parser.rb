@@ -170,7 +170,7 @@ module Acclaim
               found_boolean option, values.ribbon
               deleted_options << index
             else
-              parameters = extract_parameters_of! option, argument, index
+              parameters = extract_parameters_of! option, index
               found_params_for option, parameters, values.ribbon
             end
           end
@@ -188,7 +188,7 @@ module Acclaim
       # @return [Array] the parameters for the given option found in argv
       # @raise [Parser::Error] if not enough arguments are found
       # @since 0.0.4
-      def extract_parameters_of!(option, argument, index)
+      def extract_parameters_of!(option, index)
         arity = option.arity
         length = if arity.bound? then index + arity.total else argv.length - 1 end
         values = []
