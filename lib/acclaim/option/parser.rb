@@ -11,6 +11,8 @@ module Acclaim
   class Option
 
     # Parses arrays of strings and returns an Options instance containing data.
+    #
+    # @author Matheus Afonso Martins Moreira
     class Parser
 
       include Parser::Regexp
