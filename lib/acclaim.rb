@@ -5,6 +5,10 @@
 module Acclaim
 end
 
-%w(command gem option).each do |file|
-  require file.prepend 'acclaim/'
-end
+%w(
+
+acclaim/command
+acclaim/gem
+acclaim/option
+
+).each { |file| require file }
