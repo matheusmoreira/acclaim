@@ -48,7 +48,9 @@ module Acclaim
       #    => ["arg1", "arg2"]
       def parse!
         preprocess_argv!
-        parse_values!
+        parse_values!.tap do
+          delete_options_from_argv!
+        end
       end
 
       private
@@ -143,19 +145,18 @@ module Acclaim
       # with a Ribbon instance.
       def parse_values!
         values = Ribbon.wrap
-        options.each do |option|
-          key = option.key
-          values[key] = option.default unless values.has_key? key
-          switches = argv.find_all { |switch| option =~ switch }
-          Error.raise_missing_required option if option.required? and switches.empty?
-          Error.raise_multiple option if option.on_multiple == :raise and switches.count > 1
-          switches.each do |switch|
+        argv.each_with_index do |argument, index|
+          options.find_all do |option|
+            option =~ argument
+          end.each do |option|
+            key = option.key
+            values[key] = option.default unless values.has_key? key
             if option.flag?
               found_boolean option, values.ribbon
-              argv.delete_at argv.index(switch)
+              deleted_options << index
             else
-              params = extract_parameters_of! option, switch
-              found_params_for option, params, values.ribbon
+              parameters = extract_parameters_of! option, argument, index
+              found_params_for option, parameters, values.ribbon
             end
           end
         end
@@ -170,17 +171,11 @@ module Acclaim
       # Deletes the switch and every value that was extracted from #argv. Raises
       # an Error if the number of parameters found is less than
       # +option.arity.required+.
-      def extract_parameters_of!(option, switch)
+      def extract_parameters_of!(option, argument, index)
         arity = option.arity
-        switch_index = argv.index switch
-        len = if arity.bound?
-          switch_index + arity.total
-        else
-          argv.length - 1
-        end
-        params = argv[switch_index + 1, len]
+        length = if arity.bound? then index + arity.total else argv.length - 1 end
         values = []
-        params.each do |param|
+        argv[index + 1, length].each do |param|
           case param
             when nil, SWITCH, ARGUMENT_SEPARATOR then break
             else
@@ -190,7 +185,9 @@ module Acclaim
         end
         count = values.count
         Error.raise_wrong_arg_number count, *arity if count < arity.required
-        argv.slice! switch_index..(switch_index + count)
+        limit = index + count
+        range = index..limit
+        deleted_options.push *range
         values
       end
 
