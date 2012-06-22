@@ -53,6 +53,15 @@ module Acclaim
 
       private
 
+      # List of arguments that are to be removed from argv, identified by their
+      # index.
+      #
+      # @return [Array] the indexes of options marked for deletion
+      # @see #delete_options_from_argv!
+      def deleted_options
+        @deleted_options ||= []
+      end
+
       # Preprocesses the argument array.
       def preprocess_argv!
         split_multiple_short_options!
