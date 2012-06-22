@@ -46,10 +46,10 @@ module Acclaim
       #   options << Option.new(:verbose)
       #
       #   Option::Parser.new(args, options).parse!
-      #    => {file: "log.txt", verbose: true}
+      #   # => {file: "log.txt", verbose: true}
       #
       #   args
-      #    => ["arg1", "arg2"]
+      #   # => ["arg1", "arg2"]
       def parse!
         preprocess_argv!
         parse_values!.tap do
