@@ -1,6 +1,11 @@
-%w(error regexp).each { |file| require file.prepend 'acclaim/option/parser/' }
+%w(
 
-require 'ribbon'
+acclaim/option/parser/error
+acclaim/option/parser/regexp
+
+ribbon
+
+).each { |file| require file }
 
 module Acclaim
   class Option
