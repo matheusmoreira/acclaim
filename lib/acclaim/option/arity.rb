@@ -91,13 +91,13 @@ module Acclaim
       # The value of +optional+ will be <tt>'infinite'</tt> if #unlimited? is
       # +true+.
       def to_s
-        "Arity: #{minimum} +#{unlimited? ? 'infinite' : optional}"
+        "#{minimum} +#{unlimited? ? '∞' : optional}"
       end
 
       # Returns the output of #to_s, enclosed in angle brackets (<tt>'<'</tt>
       # and <tt>'>'</tt>).
       def inspect
-        "<#{to_s}>"
+        "#<#{self.class} #{to_s}>"
       end
 
     end
