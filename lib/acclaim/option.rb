@@ -155,7 +155,7 @@ module Acclaim
     #
     # @return [String] string describing this option
     def inspect
-      '#<%s %s (%s) %s = %p %p (1+ => %s) %s>' % [
+      '#<%s %s (%s) %s = %p (%s) (1+ => %s) %s>' % [
         self.class,
         key,
         names.join('|'),
