@@ -155,13 +155,13 @@ module Acclaim
     #
     # @return [String] string describing this option
     def inspect
-      '#<%s %s (%s) %s = %s %s %s %s>' % [
-        self.class.name,
+      '#<%s %s (%s) %s = %p %p (1+ => %s) %s>' % [
+        self.class,
         key,
         names.join('|'),
-        type.inspect,
-        default.inspect,
-        arity.inspect,
+        type,
+        default,
+        arity,
         on_multiple,
         if required? then :required else :optional end
       ]
