@@ -86,16 +86,22 @@ module Acclaim
 
       # Returns a string in the following format:
       #
-      #   Arity: minimum +optional
+      #   minimum +optional
       #
-      # The value of +optional+ will be <tt>'infinite'</tt> if #unlimited? is
-      # +true+.
+      # The value of optional will be ∞ if this arity is not {#bound? bound}.
+      #
+      # @return [String] string representation of this arity
+      # @see #inspect
       def to_s
         "#{minimum} +#{unlimited? ? '∞' : optional}"
       end
 
-      # Returns the output of #to_s, enclosed in angle brackets (<tt>'<'</tt>
-      # and <tt>'>'</tt>).
+      # Returns a string in the following format:
+      #
+      #   #<Acclaim::Option::Arity minimum +optional>
+      #
+      # @return [String] human-readable representation of this arity object
+      # @see #to_s
       def inspect
         "#<#{self.class} #{to_s}>"
       end
