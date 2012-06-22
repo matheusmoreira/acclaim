@@ -8,7 +8,6 @@ describe Acclaim::Option::Parser do
   subject { Acclaim::Option::Parser.new(args, options) }
 
   describe '#parse!' do
-
     context 'when given a long switch with a parameter separated by an equals sign' do
       let!(:args) { %w(--switch=PARAM) }
 
