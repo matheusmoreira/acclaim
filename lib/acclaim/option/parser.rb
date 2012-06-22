@@ -186,6 +186,8 @@ module Acclaim
       # Deletes the switch and every value that was extracted from #argv. Raises
       # an Error if the number of parameters found is less than
       # +option.arity.required+.
+      #
+      # @since 0.0.4
       def extract_parameters_of!(option, argument, index)
         arity = option.arity
         length = if arity.bound? then index + arity.total else argv.length - 1 end
