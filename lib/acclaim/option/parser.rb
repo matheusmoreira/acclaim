@@ -37,6 +37,7 @@ module Acclaim
       # and arguments will be removed from the argument array, so pass in a
       # duplicate if you need the original.
       #
+      # @example
       #   include Acclaim
       #
       #   args = %w(-F log.txt --verbose arg1 arg2)
