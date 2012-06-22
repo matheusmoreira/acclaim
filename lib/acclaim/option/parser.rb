@@ -13,6 +13,7 @@ module Acclaim
     # Parses arrays of strings and returns an Options instance containing data.
     #
     # @author Matheus Afonso Martins Moreira
+    # @since 0.0.1
     class Parser
 
       include Parser::Regexp
