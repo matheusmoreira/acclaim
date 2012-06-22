@@ -139,7 +139,7 @@ module Acclaim
 
     # Returns +true+ if this option takes no arguments.
     def flag?
-      arity and arity.none?
+      arity.none?
     end
 
     # Same as <tt>flag?</tt>
