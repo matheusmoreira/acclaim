@@ -56,7 +56,7 @@ module Acclaim
     # Add the class methods to the subclass and add it to this command's list of
     # subcommands.
     #
-    # @param [Class] subcommand the class that inherited from this command
+    # @param [Class] command the class that inherited from this command
     def inherited(command)
       command.extend Command::DSL
       subcommands << command if respond_to? :subcommands
