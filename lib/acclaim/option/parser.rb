@@ -120,6 +120,18 @@ module Acclaim
         end
       end
 
+      # Raises a parser error if multiple switches were found for an option that
+      # explicitly disallowed it.
+      def raise_on_multiple_options!
+        options.find_all do |option|
+          option.on_multiple == :raise
+        end.each do |option|
+          Error.raise_multiple option if argv.find_all do |argument|
+            option =~ argument
+          end.count > 1
+        end
+      end
+
       # Parses the options and their arguments, associating that information
       # with a Ribbon instance.
       def parse_values!
