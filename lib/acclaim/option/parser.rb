@@ -156,6 +156,8 @@ module Acclaim
 
       # Parses the options and their arguments, associating that information
       # with a Ribbon instance.
+      #
+      # @since 0.0.3
       def parse_values!
         values = Ribbon.wrap
         argv.each_with_index do |argument, index|
