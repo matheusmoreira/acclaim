@@ -80,6 +80,7 @@ module Acclaim
         split_multiple_short_options!
         normalize_parameters!
         argv.compact!
+        check_for_errors!
       end
 
       # Splits multiple short options.
