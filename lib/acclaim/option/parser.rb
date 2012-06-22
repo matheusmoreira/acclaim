@@ -178,15 +178,15 @@ module Acclaim
         values
       end
 
-      # Finds the +switch+ in #argv and scans the next +option.arity.total+
-      # elements if +option.arity.bound?+ is +true+, or all parameters
-      # otherwise. In either case, the algorithm will stop if it finds +nil+,
-      # another switch or an argument separator among the parameters.
+      # Starting from the given index, extracts parameters from the following
+      # arguments. Stops if it finds nil, another switch, an argument separator,
+      # or if enough values have been found according to the option's arity.
       #
-      # Deletes the switch and every value that was extracted from #argv. Raises
-      # an Error if the number of parameters found is less than
-      # +option.arity.required+.
+      # @note All arguments scanned, in addition to the option at the given
+      #   index, will be marked for deletion.
       #
+      # @return [Array] the parameters for the given option found in argv
+      # @raise [Parser::Error] if not enough arguments are found
       # @since 0.0.4
       def extract_parameters_of!(option, argument, index)
         arity = option.arity
