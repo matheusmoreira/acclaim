@@ -32,10 +32,13 @@ module Acclaim
         self.options = options || []
       end
 
-      # Parses the meaning of the options given to this parser. If none were
-      # given, the argument array will be preprocessed only. Any parsed options
-      # and arguments will be removed from the argument array, so pass in a
-      # duplicate if you need the original.
+      # Parses the given argument array, looking for the given {Option options}
+      # and their arguments if any.
+      #
+      # If no options were given, the argument array will be preprocessed only.
+      #
+      # @note Parsed options and their parameters will be removed from the
+      #   argument array.
       #
       # @example
       #   include Acclaim
