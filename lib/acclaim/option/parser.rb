@@ -108,6 +108,8 @@ module Acclaim
       #   %w(--switch=PARAM1,PARAM2) => %w(--switch PARAM1 PARAM2)
       #   %w(--switch=PARAM1,)       => %w(--switch PARAM1)
       #   %w(--switch=,PARAM2)       =>   [ '--switch', '', 'PARAM2' ]
+      #
+      # @since 0.0.3
       def normalize_parameters!
         argv.find_all { |arg| arg =~ SWITCH_PARAM_EQUALS }.each do |switch|
           switch_index = argv.index switch
