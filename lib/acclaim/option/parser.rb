@@ -110,6 +110,16 @@ module Acclaim
         end
       end
 
+      # Ensures all options are present in the argument array; raises a parser
+      # error otherwise.
+      def ensure_required_options_are_present!
+        options.find_all(&:required?).each do |option|
+          Error.raise_missing_required option if argv.find_all do |argument|
+            option =~ argument
+          end.empty?
+        end
+      end
+
       # Parses the options and their arguments, associating that information
       # with a Ribbon instance.
       def parse_values!
