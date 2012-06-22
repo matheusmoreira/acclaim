@@ -151,6 +151,22 @@ module Acclaim
     # Same as <tt>flag?</tt>
     alias switch? flag?
 
+    # Generate human-readable string containing this option's data.
+    #
+    # @return [String] string describing this option
+    def inspect
+      '#<%s %s (%s) %s = %s %s %s %s>' % [
+        self.class.name,
+        key,
+        names.join('|'),
+        type.inspect,
+        default.inspect,
+        arity.inspect,
+        on_multiple,
+        if required? then :required else :optional end
+      ]
+    end
+
   end
 
   class << Option
