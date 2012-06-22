@@ -154,6 +154,7 @@ module Acclaim
     # Generate human-readable string containing this option's data.
     #
     # @return [String] human-readable representation of this option
+    # @since 0.4.0
     def inspect
       '#<%s %s (%s) %s = %p (%s) (1+ => %s) %s>' % [
         self.class,
