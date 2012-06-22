@@ -110,6 +110,12 @@ module Acclaim
         end
       end
 
+      # Checks to see if the arguments have any errors
+      def check_for_errors!
+        ensure_required_options_are_present!
+        raise_on_multiple_options!
+      end
+
       # Ensures all options are present in the argument array; raises a parser
       # error otherwise.
       def ensure_required_options_are_present!
