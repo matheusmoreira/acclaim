@@ -232,6 +232,8 @@ module Acclaim
       # If the option has an custom handler associated, it will be called with
       # only the option values as the first argument. Otherwise, the value will
       # be set to <tt>true</tt>.
+      #
+      # @since 0.0.6
       def found_boolean(option, ribbon = Ribbon.new)
         if handler = option.handler then handler.call ribbon
         else ribbon[option.key] = true end
