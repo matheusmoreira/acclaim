@@ -62,6 +62,19 @@ module Acclaim
         @deleted_options ||= []
       end
 
+      # Deletes all marked options from argv.
+      #
+      # @note The list of removed indexes will be discarded.
+      #
+      # @see #deleted_options
+      def delete_options_from_argv!
+        argv.delete_if.with_index do |argument, index|
+          deleted_options.include? index
+        end
+      ensure
+        deleted_options.clear
+      end
+
       # Preprocesses the argument array.
       def preprocess_argv!
         split_multiple_short_options!
