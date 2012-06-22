@@ -63,6 +63,7 @@ module Acclaim
       #
       # @return [Array] the indexes of options marked for deletion
       # @see #delete_options_from_argv!
+      # @since 0.4.0
       def deleted_options
         @deleted_options ||= []
       end
@@ -72,6 +73,7 @@ module Acclaim
       # @note The list of removed indexes will be discarded.
       #
       # @see #deleted_options
+      # @since 0.4.0
       def delete_options_from_argv!
         argv.delete_if.with_index do |argument, index|
           deleted_options.include? index
@@ -117,6 +119,8 @@ module Acclaim
       end
 
       # Checks to see if the arguments have any errors
+      #
+      # @since 0.4.0
       def check_for_errors!
         ensure_required_options_are_present!
         raise_on_multiple_options!
@@ -124,6 +128,8 @@ module Acclaim
 
       # Ensures all options are present in the argument array; raises a parser
       # error otherwise.
+      #
+      # @since 0.4.0
       def ensure_required_options_are_present!
         options.find_all(&:required?).each do |option|
           Error.raise_missing_required option if argv.find_all do |argument|
@@ -134,6 +140,8 @@ module Acclaim
 
       # Raises a parser error if multiple switches were found for an option that
       # explicitly disallowed it.
+      #
+      # @since 0.4.0
       def raise_on_multiple_options!
         options.find_all do |option|
           option.on_multiple == :raise
