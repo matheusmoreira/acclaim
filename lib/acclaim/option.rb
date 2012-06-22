@@ -153,7 +153,7 @@ module Acclaim
 
     # Generate human-readable string containing this option's data.
     #
-    # @return [String] string describing this option
+    # @return [String] human-readable representation of this option
     def inspect
       '#<%s %s (%s) %s = %p (%s) (1+ => %s) %s>' % [
         self.class,
