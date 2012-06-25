@@ -43,7 +43,7 @@ module Acclaim
 
     alias available_effects supported_effects
 
-    # Applies foreground color to the string.
+    # Applies foreground color to the given string.
     #
     # @param [String, #to_s] string the string the color will be applied to
     # @param [Symbol] color the name of the color that will be applied
@@ -54,7 +54,7 @@ module Acclaim
       apply_color_to string, color, foreground_offset
     end
 
-    # Applies background color to the string.
+    # Applies background color to the given string.
     #
     # @param [String, #to_s] string the string the color will be applied to
     # @param [Symbol] color the name of the color that will be applied
