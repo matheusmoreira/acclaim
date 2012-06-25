@@ -15,7 +15,7 @@ module Acclaim
         #
         # @param [Symbol] color the name of the color that will be applied
         # @return [String] new string with the color applied
-        # @see background
+        # @see #background
         # @see Acclaim::ANSI.supported_colors
         def foreground(color)
           Acclaim::ANSI.foreground_color self, color
@@ -25,7 +25,7 @@ module Acclaim
         #
         # @param [Symbol] color the name of the color that will be applied
         # @return [String] new string with the color applied
-        # @see foreground
+        # @see #foreground
         # @see Acclaim::ANSI.supported_colors
         def background(color)
           Acclaim::ANSI.background_color self, color
