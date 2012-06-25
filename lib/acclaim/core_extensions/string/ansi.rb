@@ -32,7 +32,7 @@ module Acclaim
 
         # Applies text effects to this string.
         #
-        # @param text_effects [Array<Symbol>] the text effects to apply
+        # @param [Array<Symbol>] effects the text effects to apply
         # @return [String] new string with the text effects applied
         # @see Acclaim::ANSI.supported_effects
         def effects(*effects)
