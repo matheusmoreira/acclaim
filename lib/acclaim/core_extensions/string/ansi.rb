@@ -30,9 +30,8 @@ module Acclaim
           Acclaim::ANSI.background_color self, color
         end
 
-        # Applies text effects to the given string.
+        # Applies text effects to this string.
         #
-        # @param [String, #to_s] string the effects will be applied to
         # @param text_effects [Array<Symbol>] the text effects to apply
         # @return [String] new string with the text effects applied
         # @see Acclaim::ANSI.supported_effects
