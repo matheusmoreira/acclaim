@@ -162,7 +162,7 @@ module Acclaim
         magenta 5
         cyan 6
         white 7
-        default 9
+        ribbon.default 9
       end.to_hash
     end
 
