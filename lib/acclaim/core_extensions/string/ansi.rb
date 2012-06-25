@@ -4,8 +4,9 @@ module Acclaim
   module CoreExtensions
     module String
 
-      # Object-oriented ANSI escape code API that uses {Acclaim::ANSI}.
+      # Object-oriented ANSI escape code API.
       #
+      # @see Acclaim::ANSI
       # @author Matheus Afonso Martins Moreira
       # @since 0.5.0
       module ANSI
