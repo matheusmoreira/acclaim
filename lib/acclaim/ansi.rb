@@ -54,8 +54,6 @@ module Acclaim
       apply_color_to string, color, foreground_offset
     end
 
-    alias apply foreground_color
-
     # Applies background color to the string.
     #
     # @param [String, #to_s] string the string the color will be applied to
