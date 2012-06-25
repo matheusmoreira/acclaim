@@ -5,6 +5,7 @@ module Acclaim
   # ANSI escape codes for colors and effects.
   #
   # @see http://en.wikipedia.org/wiki/ANSI_escape_code ANSI escape code
+  # @see Acclaim::CoreExtensions::String::ANSI
   # @author Matheus Afonso Martins Moreira
   # @since 0.5.0
   module ANSI
