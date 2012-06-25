@@ -12,6 +12,13 @@ module Acclaim
 
   class << ANSI
 
+    # Extends the String class with an object-oriented ANSI escape code API.
+    #
+    # @see Acclaim::CoreExtensions::String::ANSI
+    def extend_string!
+      require 'acclaim/core_extensions/string/ansi'
+    end
+
     # Colors from the standard color pallete.
     #
     # @return [Array<Symbol>] available colors
