@@ -6,7 +6,7 @@ module Acclaim
 
       # Object-oriented ANSI escape code API.
       #
-      # @see Acclaim::ANSI
+      # @see Acclaim::ANSI Acclaim::ANSI
       # @author Matheus Afonso Martins Moreira
       # @since 0.5.0
       module ANSI
