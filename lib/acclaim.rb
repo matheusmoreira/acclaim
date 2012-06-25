@@ -7,6 +7,7 @@ end
 
 %w(
 
+acclaim/ansi
 acclaim/command
 acclaim/gem
 acclaim/option
