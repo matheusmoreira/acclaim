@@ -7,6 +7,7 @@ module Acclaim
       # Handles symbols given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
+      # @since 0.0.6
       module Symbol
 
         # Simply returns +str.to_sym+.
