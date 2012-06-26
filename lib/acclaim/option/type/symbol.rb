@@ -13,7 +13,10 @@ module Acclaim
 
       class << Symbol
 
-        # Simply returns +str.to_sym+.
+        # Converts the given string to a symbol using +to_sym+.
+        #
+        # @param [String] string the string to convert
+        # @return [Symbol] the interned string
         def handle(string)
           string.to_sym
         end
