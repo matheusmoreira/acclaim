@@ -22,6 +22,14 @@ module Acclaim
           ::Pathname.new string
         end
 
+        # Path to the current working directory.
+        #
+        # @return [Pathname] path to the working directory
+        # @since 0.6.0
+        def default
+          ::Pathname.pwd
+        end
+
       end
 
       accept ::Pathname, &Pathname.method(:handle)
