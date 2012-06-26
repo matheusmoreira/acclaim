@@ -9,6 +9,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.0
       module Rational
+      end
+
+      class << Rational
 
         # Simply returns +str.to_r+.
         def self.handle(str)

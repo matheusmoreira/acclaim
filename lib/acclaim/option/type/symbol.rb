@@ -9,6 +9,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.0.6
       module Symbol
+      end
+
+      class << Symbol
 
         # Simply returns +str.to_sym+.
         def self.handle(str)

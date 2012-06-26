@@ -9,6 +9,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.0
       module Float
+      end
+
+      class << Float
 
         # Simply returns +str.to_f+.
         def self.handle(str)

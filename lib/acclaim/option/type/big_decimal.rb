@@ -10,6 +10,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.0
       module BigDecimal
+      end
+
+      class << BigDecimal
 
         # Returns +BigDecimal.new(str)+.
         def self.handle(str)

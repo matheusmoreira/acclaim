@@ -9,6 +9,9 @@ module Acclaim
       #
       # @author Matheus Afonso Martins Moreira
       module Date
+      end
+
+      class << Date
 
         # Parses a +Date+ from the string.
         def self.handle(str)

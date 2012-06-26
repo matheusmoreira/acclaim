@@ -8,6 +8,9 @@ module Acclaim
       #
       # @author Matheus Afonso Martins Moreira
       module String
+      end
+
+      class << String
 
         # Simply returns +str.to_s+.
         def self.handle(str)

@@ -10,6 +10,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.1
       module Pathname
+      end
+
+      class << Pathname
 
         # Parses an +URI+ from the string.
         def self.handle(str)

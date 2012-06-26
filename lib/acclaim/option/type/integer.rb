@@ -9,6 +9,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.0
       module Integer
+      end
+
+      class << Integer
 
         # Simply returns +str.to_i+.
         def self.handle(str)

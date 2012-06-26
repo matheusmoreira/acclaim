@@ -9,6 +9,9 @@ module Acclaim
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.0
       module Complex
+      end
+
+      class << Complex
 
         # Simply returns +str.to_c+.
         def self.handle(str)
