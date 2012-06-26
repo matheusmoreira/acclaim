@@ -170,6 +170,10 @@ module Acclaim
       # Computes the full command line of this command, taking parent commands
       # into account.
       #
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [true, false] :include_root (false) whether to include
+      #   the {#root root} command in the full command line
+      #
       # @example
       #   class Command < Acclaim::Command
       #     class Do < Command
