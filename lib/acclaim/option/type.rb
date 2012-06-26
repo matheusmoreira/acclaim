@@ -2,6 +2,8 @@ module Acclaim
   class Option
 
     # Associates a class with a handler block.
+    #
+    # @since 0.0.4
     module Type
     end
 
