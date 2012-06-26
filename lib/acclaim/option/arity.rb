@@ -78,10 +78,7 @@ module Acclaim
         [ minimum, optional ]
       end
 
-      # Same as +to_a+.
       alias to_ary   to_a
-
-      # Same as +to_a+.
       alias to_array to_a
 
       # Equivalent to <tt>to_a.hash</tt>.
@@ -101,7 +98,6 @@ module Acclaim
       # Same as <tt>==</tt>
       alias eql? ==
 
-      # Same as <tt>==</tt>
       alias ===  ==
 
       # Returns a string in the following format:
