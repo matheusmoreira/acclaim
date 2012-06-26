@@ -45,7 +45,9 @@ module Acclaim
 
       alias none? zero?
 
-      # Returns +true+ if the option can take an infinite number of arguments.
+      # Whether the option can take an unlimited number of arguments.
+      #
+      # @return [true, false] whether the option can take infinite parameters
       def unlimited?
         optional < 0
       end
