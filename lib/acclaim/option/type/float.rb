@@ -15,7 +15,7 @@ module Acclaim
 
         # Simply returns +str.to_f+.
         def handle(string)
-          string.to_f
+          Float(string)
         end
 
       end
