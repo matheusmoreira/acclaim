@@ -18,7 +18,7 @@ module Acclaim
         # @param [String] the string to be converted
         # @return [Integer] the number converted from the string
         def handle(string)
-          stingr.to_i
+          Integer(string)
         end
 
         # Default value of zero.
