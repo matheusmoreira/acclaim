@@ -17,10 +17,13 @@ module Acclaim
 
       alias required minimum
 
-      # Initializes this arity with a number of required parameters and a number
-      # of optional parameters. If the latter is less than zero, then it means
-      # the option may take infinite parameters, as long as it takes at least
-      # +minimum+ parameters.
+      # Initializes an arity with the given number of required and optional
+      # parameters. If the latter is less than zero, then it means the option
+      # may take infinite parameters, as long as it takes the minimum number of
+      # parameters.
+      #
+      # @param [Integer] minimum the number of mandatory parameters
+      # @param [Integer] optional the number of optional parameters
       def initialize(minimum = 0, optional = 0)
         @minimum, @optional = minimum, optional
       end
