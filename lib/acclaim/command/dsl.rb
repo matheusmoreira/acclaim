@@ -125,8 +125,11 @@ module Acclaim
         end
       end
 
-      # Calls this command's action block with the given option values and
-      # arguments.
+      # Calls this command's {#action action block} with the given option values
+      # and arguments.
+      #
+      # @param [Ribbon::Wrapper] options ribbon containing options and values
+      # @param [Array<String>] arguments additional arguments to the program
       def execute(options, arguments = [])
         @action.call options, arguments if @action.respond_to? :call
       end
