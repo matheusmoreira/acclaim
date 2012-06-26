@@ -31,7 +31,7 @@ module Acclaim
 
       end
 
-      self.accept ::URI, &URI.method(:handle)
+      accept ::URI, &URI.method(:handle)
 
     end
   end
