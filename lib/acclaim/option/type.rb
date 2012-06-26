@@ -46,6 +46,8 @@ module Acclaim
       alias accept register
 
       # Returns the handler for the given class.
+      #
+      # @param [Class, Module] klass the handler associated with the given type
       def handler_for(type)
         table.fetch type do
           raise "#{type} does not have an associated handler"
