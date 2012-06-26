@@ -33,6 +33,11 @@ module Acclaim
       alias registered all
 
       # Registers a handler for a class.
+      #
+      # @param [Class, Module] classes the types to associate with the handler
+      # @param [Proc] block how to handle the type(s)
+      # @yieldparam [String] string the command line argument
+      # @yieldreturn [Class, Module] new object of the handled type
       def register(*classes, &block)
         classes.each { |klass| table[klass] = block }
       end
