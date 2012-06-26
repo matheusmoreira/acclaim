@@ -15,7 +15,7 @@ module Acclaim
 
         # Simply returns +str.to_r+.
         def handle(string)
-          string.to_r
+          Rational(string)
         end
 
       end
