@@ -8,6 +8,7 @@ module Acclaim
       # Handles URIs given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
+      # @since 0.3.1
       module Pathname
 
         # Parses an +URI+ from the string.
