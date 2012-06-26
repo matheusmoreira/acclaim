@@ -1,4 +1,15 @@
-require 'acclaim/command/dsl/root'
+%w(
+
+acclaim/command/dsl/root
+acclaim/command/parser
+acclaim/option
+acclaim/option/parser
+acclaim/option/parser/regexp
+
+ribbon
+ribbon/core_extensions/object
+
+).each { |file| require file }
 
 module Acclaim
   class Command

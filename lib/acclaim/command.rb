@@ -1,13 +1,6 @@
 %w(
 
 acclaim/command/dsl
-acclaim/command/parser
-acclaim/option
-acclaim/option/parser
-acclaim/option/parser/regexp
-
-ribbon
-ribbon/core_extensions/object
 
 ).each { |file| require file }
 
