@@ -21,6 +21,14 @@ module Acclaim
           Float(string)
         end
 
+        # Default value of zero.
+        #
+        # @return [Float] zero
+        # @since 0.6.0
+        def default
+          0.0
+        end
+
       end
 
       accept ::Float, &Float.method(:handle)
