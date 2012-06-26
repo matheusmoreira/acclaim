@@ -21,6 +21,13 @@ module Acclaim
           ::Time.parse string
         end
 
+        # Current time.
+        #
+        # @return [Time] current local time
+        def default
+          Time.now
+        end
+
       end
 
       accept ::Time, &Time.method(:handle)
