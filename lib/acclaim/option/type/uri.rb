@@ -14,6 +14,9 @@ module Acclaim
       class << URI
 
         # Parses an +URI+ from the string.
+        #
+        # @param [String] string the string to be parsed
+        # @return [URI] URI parsed from the string
         def handle(string)
           ::URI.parse string
         end
