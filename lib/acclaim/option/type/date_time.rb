@@ -21,6 +21,14 @@ module Acclaim
           ::DateTime.parse string
         end
 
+        # Current date and time.
+        #
+        # @return [DateTime] current local date and time
+        # @since 0.6.0
+        def default
+          DateTime.now
+        end
+
       end
 
       accept ::DateTime, &DateTime.method(:handle)
