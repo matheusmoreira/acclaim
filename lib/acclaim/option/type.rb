@@ -59,6 +59,8 @@ module Acclaim
       private
 
       # The hash used to associate classes with their handlers.
+      #
+      # @return [Hash] the type handler table
       def table
         @table ||= {}
       end
