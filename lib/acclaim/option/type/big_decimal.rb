@@ -14,7 +14,10 @@ module Acclaim
 
       class << BigDecimal
 
-        # Returns +BigDecimal.new(str)+.
+        # Creates a new +BigDecimal+ using the string.
+        #
+        # @param [String] string the string representation of the decimal number
+        # @param [BigDecimal] the object representing the decimal number
         def handle(string)
           ::BigDecimal.new string
         end
