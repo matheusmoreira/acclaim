@@ -127,7 +127,7 @@ module Acclaim
 
       # Calls this command's action block with the given option values and
       # arguments.
-      def execute(options, arguments)
+      def execute(options, arguments = [])
         @action.call options, arguments if @action.respond_to? :call
       end
 
