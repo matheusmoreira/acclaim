@@ -15,7 +15,7 @@ module Acclaim
       class << Pathname
 
         # Parses an +URI+ from the string.
-        def self.handle(str)
+        def handle(str)
           ::Pathname.new str
         end
 

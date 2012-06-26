@@ -14,7 +14,7 @@ module Acclaim
       class << Integer
 
         # Simply returns +str.to_i+.
-        def self.handle(str)
+        def handle(str)
           str.to_i
         end
 

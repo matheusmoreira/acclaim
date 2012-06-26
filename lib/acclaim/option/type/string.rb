@@ -13,7 +13,7 @@ module Acclaim
       class << String
 
         # Simply returns +str.to_s+.
-        def self.handle(str)
+        def handle(str)
           str.to_s
         end
 

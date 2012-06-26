@@ -14,7 +14,7 @@ module Acclaim
       class << Rational
 
         # Simply returns +str.to_r+.
-        def self.handle(str)
+        def handle(str)
           str.to_r
         end
 

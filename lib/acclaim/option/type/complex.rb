@@ -14,7 +14,7 @@ module Acclaim
       class << Complex
 
         # Simply returns +str.to_c+.
-        def self.handle(str)
+        def handle(str)
           str.to_c
         end
 
