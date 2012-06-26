@@ -65,7 +65,7 @@ module Acclaim
       # parameters. Returns +nil+ if the option may take an infinite number of
       # parameters.
       def total
-        bound? ? minimum + optional : nil
+        if bound? then minimum + optional else nil end
       end
 
       # Converts this arity to an array in the form of
