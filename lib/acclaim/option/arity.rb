@@ -95,10 +95,15 @@ module Acclaim
         to_a == arity.to_a
       end
 
-      # Same as <tt>==</tt>
-      alias eql? ==
-
       alias ===  ==
+
+      # Same as {#== ==} but does not compare directly with arrays.
+      #
+      # @param [Arity] arity the arity to compare this instance to
+      # @return [true, false] whether this instance is equal to the given arity
+      def eql?(arity)
+        minimum == arity.minimum and optional == arity.optional
+      end
 
       # Returns a string in the following format:
       #
