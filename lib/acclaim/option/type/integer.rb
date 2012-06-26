@@ -7,6 +7,7 @@ module Acclaim
       # Handles integers given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
+      # @since 0.3.0
       module Integer
 
         # Simply returns +str.to_i+.

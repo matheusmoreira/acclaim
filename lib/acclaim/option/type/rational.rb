@@ -7,6 +7,7 @@ module Acclaim
       # Handles rational numbers given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
+      # @since 0.3.0
       module Rational
 
         # Simply returns +str.to_r+.

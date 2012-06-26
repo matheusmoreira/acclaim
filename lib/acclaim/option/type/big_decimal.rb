@@ -8,6 +8,7 @@ module Acclaim
       # Handles big decimals given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
+      # @since 0.3.0
       module BigDecimal
 
         # Returns +BigDecimal.new(str)+.
