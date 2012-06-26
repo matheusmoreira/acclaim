@@ -24,6 +24,8 @@ module Acclaim
       include Enumerable
 
       # Returns all registered classes.
+      #
+      # @return [Array<Class, Module>] registered types
       def all
         table.keys
       end
