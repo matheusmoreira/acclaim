@@ -9,9 +9,12 @@ module Acclaim
       #
       # @author Matheus Afonso Martins Moreira
       module Time
+      end
+
+      class << Time
 
         # Parses a +Time+ from the string.
-        def self.handle(str)
+        def handle(str)
           ::Time.parse str
         end
 
