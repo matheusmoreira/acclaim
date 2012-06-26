@@ -167,8 +167,8 @@ module Acclaim
         command_ancestors.reverse
       end
 
-      # Computes the full command line of this command, which takes parent
-      # commands into account.
+      # Computes the full command line of this command, taking parent commands
+      # into account.
       #
       # @example
       #   class Command < Acclaim::Command
