@@ -39,7 +39,7 @@ module Acclaim
       # @yieldparam [String] string the command line argument
       # @yieldreturn [Class, Module] new object of the handled type
       def register(*types, &block)
-        types.each { |type| table[klass] = block }
+        types.each { |type| table[type] = block }
       end
 
       alias add_handler_for register
@@ -47,7 +47,7 @@ module Acclaim
 
       # Returns the handler for the given class.
       #
-      # @param [Class, Module] klass the handler associated with the given type
+      # @param [Class, Module] type the handler associated with the given type
       def handler_for(type)
         table.fetch type do
           raise "#{type} does not have an associated handler"
