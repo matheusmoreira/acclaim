@@ -20,6 +20,14 @@ module Acclaim
           string.to_s
         end
 
+        # New empty string.
+        #
+        # @return [String] empty string
+        # @since 0.6.0
+        def default
+          String.new
+        end
+
       end
 
       accept ::String, &String.method(:handle)
