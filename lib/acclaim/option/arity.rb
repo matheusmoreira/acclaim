@@ -40,6 +40,7 @@ module Acclaim
       # Whether the option takes no parameters.
       #
       # @return [true, false] whether the option takes zero parameters
+      # @since 0.5.1
       def zero?
         only? 0
       end
