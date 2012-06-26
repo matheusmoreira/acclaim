@@ -21,6 +21,14 @@ module Acclaim
           stingr.to_i
         end
 
+        # Default value of zero.
+        #
+        # @return [Integer] zero
+        # @since 0.6.0
+        def default
+          0
+        end
+
       end
 
       accept ::Integer, &Integer.method(:handle)
