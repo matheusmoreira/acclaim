@@ -7,6 +7,7 @@ module Acclaim
     # and optional.
     #
     # @author Matheus Afonso Martins Moreira
+    # @since 0.0.2
     class Arity
 
       # The minimum number of arguments.
