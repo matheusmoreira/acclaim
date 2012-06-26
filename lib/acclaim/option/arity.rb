@@ -15,7 +15,6 @@ module Acclaim
       # The number of optional arguments.
       attr_accessor :optional
 
-      # Same as +minimum+.
       alias required minimum
 
       # Initializes this arity with a number of required parameters and a number
