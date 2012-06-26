@@ -36,7 +36,9 @@ module Acclaim
         optional.zero? and minimum == n
       end
 
-      # Returns +true+ if the option takes no parameters.
+      # Whether the option takes no parameters.
+      #
+      # @return [true, false] whether the option takes zero parameters
       def zero?
         only? 0
       end
