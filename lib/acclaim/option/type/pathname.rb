@@ -5,7 +5,7 @@ module Acclaim
   class Option
     module Type
 
-      # Handles URIs given as arguments in the command line.
+      # Handles file and directory paths given as arguments in the command line.
       #
       # @author Matheus Afonso Martins Moreira
       # @since 0.3.1
