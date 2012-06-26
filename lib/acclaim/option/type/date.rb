@@ -21,6 +21,14 @@ module Acclaim
           ::Date.parse string
         end
 
+        # Today's date.
+        #
+        # @return [Date] today's local date
+        # @since 0.6.0
+        def default
+          Date.today
+        end
+
       end
 
       accept ::Date, &Date.method(:handle)
