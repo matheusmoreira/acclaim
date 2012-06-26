@@ -52,7 +52,10 @@ module Acclaim
         optional < 0
       end
 
-      # Returns +true+ if the option must take a finite number of arguments.
+      # Whether the option must take a finite number of arguments.
+      #
+      # @return [true, false] whether the maximum number of arguments is limited
+      # @see #total
       def bound?
         not unlimited?
       end
