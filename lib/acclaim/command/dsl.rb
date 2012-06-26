@@ -104,14 +104,15 @@ module Acclaim
         $stderr.puts error.message
       end
 
-      # Parses the argument array. The argument array will be searched for
-      # subcommands; if one is found, it will be invoked, if not, this command
-      # will be executed. A subcommand may be anywhere in the array as long as
-      # it is before an argument separator, which is tipically a double dash
-      # (<tt>--</tt>) and may be omitted.
+      # Searches the given arguments for subcommands and {#invoke invokes} it.
+      # If none were found, {#execute executes} this command instead.
       #
-      # All argument separators will be deleted from the argument array before a
-      # command is executed.
+      # The arguments will be parsed using all options from {#command_ancestors
+      # this command and its parents}.
+      #
+      # @note Argument separators will be deleted prior to command execution.
+      #
+      # @param [Array<String>] arguments the argument array
       def invoke(arguments = [])
         subcommand = parse_subcommands_in! arguments
         if subcommand.nil?
