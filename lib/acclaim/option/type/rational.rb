@@ -21,6 +21,13 @@ module Acclaim
           Rational(string)
         end
 
+        # Rational representation of 0.
+        #
+        # @return [Rational] 0 as a rational object
+        def default
+          Rational(0)
+        end
+
       end
 
       accept ::Rational, &Rational.method(:handle)
