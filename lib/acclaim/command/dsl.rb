@@ -92,7 +92,12 @@ module Acclaim
         Command::Parser.new(arguments, subcommands).parse!
       end
 
-      # Invokes this command with a fresh set of option values.
+      # Invokes this command with the given arguments. Outputs
+      # {Option::Parser::Error parser error} messages to the standard error
+      # stream.
+      #
+      # @param [Array<String>] arguments the argument array
+      # @see #invoke
       def run(*arguments)
         invoke arguments
       rescue Option::Parser::Error => error
