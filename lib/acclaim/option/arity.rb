@@ -34,9 +34,11 @@ module Acclaim
       end
 
       # Returns +true+ if the option takes no parameters.
-      def none?
+      def zero?
         only? 0
       end
+
+      alias none? zero?
 
       # Returns +true+ if the option can take an infinite number of arguments.
       def unlimited?
