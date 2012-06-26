@@ -65,8 +65,8 @@ module Acclaim
       #
       # @yieldparam [Ribbon] options a Ribbon instance which associates options
       #   with their corresponding values
-      # @yieldparam [Array] arguments the arguments that remained in the command
-      #   line
+      # @yieldparam [Array<String>] arguments the arguments that remained in the
+      #   command line
       # @return [Proc, nil] the given block
       def action(&block)
         @action = block if block.respond_to? :call
