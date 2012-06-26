@@ -14,8 +14,8 @@ module Acclaim
       class << Float
 
         # Simply returns +str.to_f+.
-        def handle(str)
-          str.to_f
+        def handle(string)
+          string.to_f
         end
 
       end

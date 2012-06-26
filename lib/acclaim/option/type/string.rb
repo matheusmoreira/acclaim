@@ -13,8 +13,8 @@ module Acclaim
       class << String
 
         # Simply returns +str.to_s+.
-        def handle(str)
-          str.to_s
+        def handle(string)
+          string.to_s
         end
 
       end

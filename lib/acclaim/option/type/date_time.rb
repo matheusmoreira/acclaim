@@ -14,8 +14,8 @@ module Acclaim
       class << DateTime
 
         # Parses a +DateTime+ from the string.
-        def handle(str)
-          ::DateTime.parse str
+        def handle(string)
+          ::DateTime.parse string
         end
 
       end

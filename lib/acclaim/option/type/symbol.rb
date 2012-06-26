@@ -14,8 +14,8 @@ module Acclaim
       class << Symbol
 
         # Simply returns +str.to_sym+.
-        def handle(str)
-          str.to_sym
+        def handle(string)
+          string.to_sym
         end
 
       end

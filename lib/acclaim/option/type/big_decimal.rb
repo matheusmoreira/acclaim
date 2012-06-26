@@ -15,8 +15,8 @@ module Acclaim
       class << BigDecimal
 
         # Returns +BigDecimal.new(str)+.
-        def handle(str)
-          ::BigDecimal.new str
+        def handle(string)
+          ::BigDecimal.new string
         end
 
       end
