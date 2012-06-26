@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::DateTime, &DateTime.method(:handle)
+      accept ::DateTime, &DateTime.method(:handle)
 
     end
   end

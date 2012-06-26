@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::Float, &Float.method(:handle)
+      accept ::Float, &Float.method(:handle)
 
     end
   end

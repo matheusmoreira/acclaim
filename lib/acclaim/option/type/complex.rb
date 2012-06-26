@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::Complex, &Complex.method(:handle)
+      accept ::Complex, &Complex.method(:handle)
 
     end
   end

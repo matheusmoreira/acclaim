@@ -16,7 +16,7 @@ module Acclaim
 
       end
 
-      self.accept ::String, &String.method(:handle)
+      accept ::String, &String.method(:handle)
 
     end
   end

@@ -18,7 +18,7 @@ module Acclaim
 
       end
 
-      self.accept ::Pathname, &Pathname.method(:handle)
+      accept ::Pathname, &Pathname.method(:handle)
 
     end
   end

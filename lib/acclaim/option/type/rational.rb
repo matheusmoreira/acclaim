@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::Rational, &Rational.method(:handle)
+      accept ::Rational, &Rational.method(:handle)
 
     end
   end

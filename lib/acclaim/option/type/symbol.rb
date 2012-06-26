@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::Symbol, &Symbol.method(:handle)
+      accept ::Symbol, &Symbol.method(:handle)
 
     end
   end

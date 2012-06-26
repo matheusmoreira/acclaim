@@ -18,7 +18,7 @@ module Acclaim
 
       end
 
-      self.accept ::BigDecimal, &BigDecimal.method(:handle)
+      accept ::BigDecimal, &BigDecimal.method(:handle)
 
     end
   end

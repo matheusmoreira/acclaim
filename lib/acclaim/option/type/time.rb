@@ -20,7 +20,7 @@ module Acclaim
 
       end
 
-      self.accept ::Time, &Time.method(:handle)
+      accept ::Time, &Time.method(:handle)
 
     end
   end

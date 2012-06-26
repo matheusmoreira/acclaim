@@ -17,7 +17,7 @@ module Acclaim
 
       end
 
-      self.accept ::Integer, &Integer.method(:handle)
+      accept ::Integer, &Integer.method(:handle)
 
     end
   end
