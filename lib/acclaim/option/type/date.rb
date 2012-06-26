@@ -26,7 +26,7 @@ module Acclaim
         # @return [Date] today's local date
         # @since 0.6.0
         def default
-          Date.today
+          ::Date.today
         end
 
       end

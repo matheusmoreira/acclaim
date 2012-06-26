@@ -25,7 +25,7 @@ module Acclaim
         # @return [String] empty string
         # @since 0.6.0
         def default
-          String.new
+          ::String.new
         end
 
       end

@@ -27,7 +27,7 @@ module Acclaim
         # @return [BigDecimal] zero as a big decimal
         # @since 0.6.0
         def default
-          BigDecimal.new 0
+          ::BigDecimal.new 0
         end
 
       end

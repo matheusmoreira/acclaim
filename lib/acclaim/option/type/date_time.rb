@@ -26,7 +26,7 @@ module Acclaim
         # @return [DateTime] current local date and time
         # @since 0.6.0
         def default
-          DateTime.now
+          ::DateTime.now
         end
 
       end
