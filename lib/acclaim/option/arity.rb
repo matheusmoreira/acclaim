@@ -5,6 +5,8 @@ module Acclaim
 
     # Represents the the number of arguments an option can take, both mandatory
     # and optional.
+    #
+    # @author Matheus Afonso Martins Moreira
     class Arity
 
       # The minimum number of arguments.
