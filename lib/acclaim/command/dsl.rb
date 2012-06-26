@@ -40,7 +40,7 @@ module Acclaim
 
       # Commands which may be given to this command.
       #
-      # @return [Array<Acclaim::Command>] this command's subcommands
+      # @return [Array<Acclaim::Command::DSL>] this command's subcommands
       def subcommands
         @subcommands ||= []
       end
@@ -86,8 +86,8 @@ module Acclaim
       # Searches the given arguments for one of this command's subcommands.
       #
       # @param [Array<String>] arguments the argument array
-      # @return [Acclaim::Command, nil] a subcommand of this command or nil if
-      #   there was no match
+      # @return [Acclaim::Command::DSL, nil] a subcommand of this command or nil
+      #   if there was no match
       def parse_subcommands_in!(arguments)
         Command::Parser.new(arguments, subcommands).parse!
       end
