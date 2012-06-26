@@ -3,6 +3,7 @@ module Acclaim
 
     # Associates a class with a handler block.
     #
+    # @author Matheus Afonso Martins Moreira
     # @since 0.0.4
     module Type
     end
