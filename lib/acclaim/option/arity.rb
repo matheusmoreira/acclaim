@@ -81,7 +81,11 @@ module Acclaim
       alias to_ary   to_a
       alias to_array to_a
 
-      # Equivalent to <tt>to_a.hash</tt>.
+      # Equivalent to:
+      #
+      #   to_a.hash
+      #
+      # @return [Integer] hash value for this arity
       def hash
         to_a.hash
       end
