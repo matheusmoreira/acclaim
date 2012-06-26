@@ -13,7 +13,10 @@ module Acclaim
 
       class << Complex
 
-        # Simply returns +str.to_c+.
+        # Uses Complex() to convert the string to a complex number
+        #
+        # @param [String] string string representation of the complex number
+        # @param [Rational] the complex number converted from the string
         def handle(string)
           Complex(string)
         end
