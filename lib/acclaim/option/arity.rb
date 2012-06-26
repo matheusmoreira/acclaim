@@ -60,10 +60,10 @@ module Acclaim
         not unlimited?
       end
 
-      # Returns the total number of parameters that the option may take, which
-      # is the number of mandatory parameters plus the number of optional
-      # parameters. Returns +nil+ if the option may take an infinite number of
-      # parameters.
+      # The total number of parameters that the option may take, or +nil+ if the
+      # option can take an infinite number of arguments.
+      #
+      # @return [Integer, nil] the total number of parameters or nil if infinite
       def total
         if bound? then minimum + optional else nil end
       end
