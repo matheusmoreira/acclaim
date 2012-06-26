@@ -138,14 +138,6 @@ module Acclaim
 
       alias call execute
 
-      # Whether this is a top-level command.
-      #
-      # @return [true, false] whether this command is at the root of the
-      #   hierarchy
-      def root?
-        self == root
-      end
-
       # Returns all command ancestors of this command.
       #
       # @return [Array<Acclaim::Command::DSL] this command's parent commands
@@ -158,6 +150,14 @@ module Acclaim
       # @return [Acclaim::Command::DSL] the top-level command
       def root
         command_ancestors.last
+      end
+
+      # Whether this is a top-level command.
+      #
+      # @return [true, false] whether this command is at the root of the
+      #   hierarchy
+      def root?
+        self == root
       end
 
       # Returns the sequence of commands from #root that leads to this command.
