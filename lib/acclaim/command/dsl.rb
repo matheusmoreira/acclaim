@@ -178,10 +178,10 @@ module Acclaim
       #   end
       #
       #   Command::Do::Something.full_line
-      #    => "do something"
+      #   # => "do something"
       #
       #   Command::Do::Something.full_line include_root: true
-      #    => "command do something"
+      #   # => "command do something"
       def full_line(*arguments)
         options = arguments.extract_ribbon!
         command_path.tap do |path|
