@@ -147,6 +147,8 @@ module Acclaim
       end
 
       # Returns all command ancestors of this command.
+      #
+      # @return [Array<Acclaim::Command::DSL] this command's parent commands
       def command_ancestors
         ancestors - Acclaim::Command.ancestors
       end
