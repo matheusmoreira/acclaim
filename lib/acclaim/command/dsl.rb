@@ -154,11 +154,15 @@ module Acclaim
       end
 
       # Returns the root of the command hierarchy.
+      #
+      # @return [Acclaim::Command::DSL] the top-level command
       def root
         command_ancestors.last
       end
 
       # Returns the sequence of commands from #root that leads to this command.
+      #
+      # @return [Array<Acclaim::Command::DSL>] the path to this command
       def command_path
         command_ancestors.reverse
       end
