@@ -21,6 +21,14 @@ module Acclaim
           string.to_sym
         end
 
+        # No sensible default symbol.
+        #
+        # @return [nil] no good default value
+        # @since 0.6.0
+        def default
+          nil
+        end
+
       end
 
       accept ::Symbol, &Symbol.method(:handle)
