@@ -143,7 +143,7 @@ module Acclaim
       # @return [true, false] whether this command is at the root of the
       #   hierarchy
       def root?
-        superclass == Acclaim::Command
+        self == root
       end
 
       # Returns all command ancestors of this command.
