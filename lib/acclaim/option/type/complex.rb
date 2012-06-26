@@ -21,6 +21,16 @@ module Acclaim
           Complex(string)
         end
 
+        # Zero as a complex number:
+        #
+        #   0 + 0i
+        #
+        # @return [Rational] complex number equivalent to 0
+        # @since 0.6.0
+        def default
+          Complex(0)
+        end
+
       end
 
       accept ::Complex, &Complex.method(:handle)
