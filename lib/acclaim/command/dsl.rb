@@ -131,7 +131,9 @@ module Acclaim
       # @param [Ribbon::Wrapper] options ribbon containing options and values
       # @param [Array<String>] arguments additional arguments to the program
       def execute(options, arguments = [])
-        @action.call options, arguments if @action.respond_to? :call
+        action.instance_eval do
+          call options, arguments if respond_to? :call
+        end
       end
 
       alias call execute
