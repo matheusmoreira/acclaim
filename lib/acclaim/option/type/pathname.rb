@@ -14,7 +14,10 @@ module Acclaim
 
       class << Pathname
 
-        # Parses an +URI+ from the string.
+        # Parses the path string.
+        #
+        # @param [String] the string containing the path
+        # @return [Pathname] the pathname
         def handle(string)
           ::Pathname.new string
         end
