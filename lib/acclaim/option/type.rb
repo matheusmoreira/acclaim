@@ -34,21 +34,21 @@ module Acclaim
 
       # Registers a handler for a class.
       #
-      # @param [Class, Module] classes the types to associate with the handler
-      # @param [Proc] block how to handle the type(s)
+      # @param [Class, Module] types the types to associate with the handler
+      # @param [Proc] block the type handler
       # @yieldparam [String] string the command line argument
       # @yieldreturn [Class, Module] new object of the handled type
-      def register(*classes, &block)
-        classes.each { |klass| table[klass] = block }
+      def register(*types, &block)
+        types.each { |type| table[klass] = block }
       end
 
       alias add_handler_for register
       alias accept register
 
       # Returns the handler for the given class.
-      def handler_for(klass)
-        table.fetch klass do
-          raise "#{klass} does not have an associated handler"
+      def handler_for(type)
+        table.fetch type do
+          raise "#{type} does not have an associated handler"
         end
       end
 
