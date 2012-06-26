@@ -13,6 +13,9 @@ module Acclaim
 
       # Yields class, proc pairs if a block was given. Returns an enumerator
       # otherwise.
+      #
+      # @yieldparam [Class, Module] type the class or module
+      # @yieldparam [Proc] handler the type handler
       def each(&block)
         table.each &block
       end
