@@ -75,12 +75,19 @@ module Acclaim
 
       alias when_called action
 
-      # Parses the argument array using this command's set of options.
+      # Parses the given arguments using this command's set of options.
+      #
+      # @param [Array<String>] arguments the argument array
+      # @return [Ribbon::Wrapper] ribbon containing the values
       def parse_options_in!(arguments)
         Option::Parser.new(arguments, options).parse!
       end
 
-      # Looks for this command's subcommands in the argument array.
+      # Searches the given arguments for one of this command's subcommands.
+      #
+      # @param [Array<String>] arguments the argument array
+      # @return [Acclaim::Command, nil] a subcommand of this command or nil if
+      #   there was no match
       def parse_subcommands_in!(arguments)
         Command::Parser.new(arguments, subcommands).parse!
       end
