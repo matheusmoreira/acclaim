@@ -9,10 +9,13 @@ module Acclaim
       #
       # @author Matheus Afonso Martins Moreira
       module URI
+      end
+
+      class << URI
 
         # Parses an +URI+ from the string.
-        def self.handle(str)
-          ::URI.parse str
+        def handle(string)
+          ::URI.parse string
         end
 
       end
