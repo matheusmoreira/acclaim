@@ -1,5 +1,5 @@
 require 'acclaim/option/type'
-require 'uri'
+require 'pathname'
 
 module Acclaim
   class Option
