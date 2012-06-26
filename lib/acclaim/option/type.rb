@@ -33,8 +33,8 @@ module Acclaim
       alias registered all
 
       # Registers a handler for a class.
-      def register(*klasses, &block)
-        klasses.each { |klass| table[klass] = block }
+      def register(*classes, &block)
+        classes.each { |klass| table[klass] = block }
       end
 
       alias add_handler_for register
