@@ -183,8 +183,8 @@ module Acclaim
       #
       #   Command::Do::Something.full_line include_root: true
       #   # => "command do something"
-      def full_line(*arguments)
-        options = arguments.extract_ribbon!
+      def full_line(options = {})
+        options = Ribbon.wrap options
         command_path.tap do |path|
           path.shift unless options.include_root?
         end.map(&:line).join ' '
