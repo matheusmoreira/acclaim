@@ -24,10 +24,15 @@ module Acclaim
         table.keys
       end
 
+      alias registered all
+
       # Registers a handler for a class.
       def register(*klasses, &block)
         klasses.each { |klass| table[klass] = block }
       end
+
+      alias add_handler_for register
+      alias accept register
 
       # Returns the handler for the given class.
       def handler_for(klass)
@@ -36,16 +41,6 @@ module Acclaim
         end
       end
 
-      # Same as <tt>all</tt>.
-      alias registered all
-
-      # Same as <tt>register</tt>.
-      alias add_handler_for register
-
-      # Same as <tt>register</tt>.
-      alias accept register
-
-      # Same as <tt>handler_for</tt>.
       alias [] handler_for
 
       private
