@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles complex numbers given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Complex
 
         # Simply returns +str.to_c+.

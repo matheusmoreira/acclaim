@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles strings given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module String
 
         # Simply returns +str.to_s+.

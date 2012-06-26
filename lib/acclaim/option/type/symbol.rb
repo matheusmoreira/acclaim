@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles symbols given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Symbol
 
         # Simply returns +str.to_sym+.

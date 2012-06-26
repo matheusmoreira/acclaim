@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles floating point numbers given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Float
 
         # Simply returns +str.to_f+.

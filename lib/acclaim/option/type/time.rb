@@ -6,6 +6,8 @@ module Acclaim
     module Type
 
       # Handles times given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Time
 
         # Parses a +Time+ from the string.

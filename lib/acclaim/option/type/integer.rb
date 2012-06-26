@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles integers given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Integer
 
         # Simply returns +str.to_i+.

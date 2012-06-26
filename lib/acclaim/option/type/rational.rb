@@ -5,6 +5,8 @@ module Acclaim
     module Type
 
       # Handles rational numbers given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Rational
 
         # Simply returns +str.to_r+.

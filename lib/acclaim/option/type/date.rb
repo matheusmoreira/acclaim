@@ -6,6 +6,8 @@ module Acclaim
     module Type
 
       # Handles dates given as arguments in the command line.
+      #
+      # @author Matheus Afonso Martins Moreira
       module Date
 
         # Parses a +Date+ from the string.
