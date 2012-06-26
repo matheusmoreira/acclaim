@@ -170,6 +170,7 @@ module Acclaim
       # Computes the full command line of this command, which takes parent
       # commands into account.
       #
+      # @example
       #   class Command < Acclaim::Command
       #     class Do < Command
       #       class Something < Do
