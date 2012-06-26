@@ -40,7 +40,7 @@ module Acclaim
 
       # Commands which may be given to this command.
       #
-      # @return [Array<Acclaim::Command] this command's subcommands
+      # @return [Array<Acclaim::Command>] this command's subcommands
       def subcommands
         @subcommands ||= []
       end
