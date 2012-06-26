@@ -24,6 +24,7 @@ module Acclaim
         # Rational representation of 0.
         #
         # @return [Rational] 0 as a rational object
+        # @since 0.6.0
         def default
           Rational(0)
         end
