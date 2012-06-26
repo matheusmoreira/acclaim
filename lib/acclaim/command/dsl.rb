@@ -138,7 +138,10 @@ module Acclaim
 
       alias call execute
 
-      # True if this is a top-level command.
+      # Whether this is a top-level command.
+      #
+      # @return [true, false] whether this command is at the root of the
+      #   hierarchy
       def root?
         superclass == Acclaim::Command
       end
