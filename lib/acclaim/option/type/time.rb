@@ -14,6 +14,9 @@ module Acclaim
       class << Time
 
         # Parses a +Time+ from the string.
+        #
+        # @param [String] string the string to be parsed
+        # @return [Time] the time parsed from the string
         def handle(string)
           ::Time.parse string
         end
