@@ -12,7 +12,10 @@ module Acclaim
 
       class << String
 
-        # Simply returns +str.to_s+.
+        # Makes sure the given string is a string by coercing it using +to_s+.
+        #
+        # @param [String] the string to coerce
+        # @param [String] the coerced string
         def handle(string)
           string.to_s
         end
