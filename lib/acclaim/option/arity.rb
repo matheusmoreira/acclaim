@@ -28,7 +28,10 @@ module Acclaim
         @minimum, @optional = minimum, optional
       end
 
-      # Returns +true+ if the option takes +n+ and only +n+ parameters.
+      # Whether the option takes +n+ and only +n+ parameters.
+      #
+      # @param [Integer] n the number of parameters
+      # @return [true, false] whether the option takes only +n+ parameters
       def only?(n)
         optional.zero? and minimum == n
       end
