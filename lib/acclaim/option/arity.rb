@@ -68,8 +68,12 @@ module Acclaim
         if bound? then minimum + optional else nil end
       end
 
-      # Converts this arity to an array in the form of
-      # <tt>[ required, optional ]</tt>.
+      # Converts this arity to an array in the form of:
+      #
+      #   [ required, optional ]
+      #
+      # @return [Array<Integer>] number of required and optional parameters in
+      #   order
       def to_a
         [ minimum, optional ]
       end
