@@ -21,6 +21,14 @@ module Acclaim
           ::URI.parse string
         end
 
+        # No sensible default URI.
+        #
+        # @return [nil] no good default value
+        # @since 0.6.0
+        def default
+          nil
+        end
+
       end
 
       self.accept ::URI, &URI.method(:handle)
