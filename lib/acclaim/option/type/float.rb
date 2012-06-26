@@ -13,7 +13,10 @@ module Acclaim
 
       class << Float
 
-        # Simply returns +str.to_f+.
+        # Uses Float() to convert the string to a floating-point number.
+        #
+        # @param [String] the string to be converted
+        # @return [Float] the floating-point number converted from the string
         def handle(string)
           Float(string)
         end
