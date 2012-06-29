@@ -117,13 +117,15 @@ module Acclaim
       #
       # @since 0.0.3
       def normalize_parameters!
-        argv.find_all { |arg| arg =~ SWITCH_PARAM_EQUALS }.each do |switch|
-          switch_index = argv.index switch
-          argv.delete_at switch_index
-          switch, params = switch.split /\=/
-          params = (params or '').split /,/
-          argv.insert switch_index, *[ switch, *params ]
+        argv.each_with_index.find_all do |argument, index|
+          argument =~ SWITCH_PARAM_EQUALS
+        end.each do |switch, index|
+          argv.delete_at index
+          switch, parameters = switch.split /\=/
+          parameters = if parameters.respond_to? :split then parameters else '' end.split /,/
+          argv.insert index, [switch, *parameters]
         end
+        argv.flatten!
       end
 
       # Checks to see if the arguments have any errors
