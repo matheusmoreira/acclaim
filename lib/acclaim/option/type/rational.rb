@@ -16,7 +16,7 @@ module Acclaim
         # Uses Rational() to coerce the string to a Rational number.
         #
         # @param [String] string string representation of the number or fraction
-        # @param [Rational] the rational number
+        # @return [Rational] the rational number
         def handle(string)
           Rational(string)
         end

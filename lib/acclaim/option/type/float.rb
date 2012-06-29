@@ -15,7 +15,7 @@ module Acclaim
 
         # Uses Float() to convert the string to a floating-point number.
         #
-        # @param [String] the string to be converted
+        # @param [String] string the string to be converted
         # @return [Float] the floating-point number converted from the string
         def handle(string)
           Float(string)

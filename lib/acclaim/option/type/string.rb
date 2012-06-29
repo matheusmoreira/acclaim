@@ -14,8 +14,8 @@ module Acclaim
 
         # Makes sure the given string is a string by coercing it using +to_s+.
         #
-        # @param [String] the string to coerce
-        # @param [String] the coerced string
+        # @param [String] string the string to coerce
+        # @return [String] the coerced string
         def handle(string)
           string.to_s
         end

@@ -16,7 +16,7 @@ module Acclaim
 
         # Parses the path string.
         #
-        # @param [String] the string containing the path
+        # @param [String] string the string containing the path
         # @return [Pathname] the pathname
         def handle(string)
           ::Pathname.new string

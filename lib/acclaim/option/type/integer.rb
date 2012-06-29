@@ -15,7 +15,7 @@ module Acclaim
 
         # Uses Integer() to convert the string to an integer.
         #
-        # @param [String] the string to be converted
+        # @param [String] string the string to be converted
         # @return [Integer] the number converted from the string
         def handle(string)
           Integer(string)
