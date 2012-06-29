@@ -98,12 +98,14 @@ module Acclaim
       #
       #   %w(-abcdef PARAM1 PARAM2) => %w(-a -b -c -d -e -f PARAM1 PARAM2)
       def split_multiple_short_options!
-        argv.find_all { |arg| arg =~ MULTIPLE_SHORT_SWITCHES }.each do |multiples|
-          multiples_index = argv.index multiples
-          argv.delete_at multiples_index
-          switches = multiples.sub(/^-/, '').split(//).each { |letter| letter.prepend '-' }
-          argv.insert multiples_index, *switches
+        argv.each_with_index.find_all do |argument, index|
+          argument =~ MULTIPLE_SHORT_SWITCHES
+        end.each do |argument, index|
+          argv.delete_at index
+          switches = argument.gsub(/\A-/, '').split(//).each { |letter| letter.prepend '-' }
+          argv.insert index, switches
         end
+        argv.flatten!
       end
 
       # Splits switches that are connected to a comma-separated parameter list.
