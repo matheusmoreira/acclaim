@@ -124,8 +124,10 @@ module Acclaim
       end
     end
 
-    # The description of this option. If it responds to +call+, it will be
-    # called to determine the description at runtime.
+
+    # Text that describes this option.
+    #
+    # @return [String] this option's description
     def description
       if @description.respond_to? :call then @description.call else @description end.to_s
     end
