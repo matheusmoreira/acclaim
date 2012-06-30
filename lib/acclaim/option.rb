@@ -24,9 +24,6 @@ module Acclaim
     # The strings that refer to this option in the command line.
     attr_accessor :names
 
-    # The description of this option.
-    attr_writer :description
-
     # The type the option's value will be converted to. See Option::Type.
     attr_accessor :type
 
@@ -124,6 +121,23 @@ module Acclaim
       end
     end
 
+    # Sets this option's description.
+    #
+    # If the given object responds to +call+, its return value will be used
+    # {#description when the description is needed}.
+    #
+    # @param [String, #call] description text that describes this option
+    # @example Internationalized description
+    #   require 'acclaim'
+    #
+    #   option = Acclaim::Option.new :verbose
+    #
+    #   option.description = lambda do
+    #     I18n.translate 'application.options.verbose.description'
+    #   end
+    def description=(description)
+      @description = description
+    end
 
     # Text that describes this option.
     #
