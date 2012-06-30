@@ -192,12 +192,12 @@ describe Acclaim::Option::Parser::Regexp do
       long_option.should match(switch)
     end
 
-    it 'should match multiple short options' do
-      multiple_short_options.should match(switch)
+    it 'should not match multiple short options' do
+      multiple_short_options.should_not match(switch)
     end
 
-    it 'should match long options with an equals sign' do
-      long_option_equals_sign.should match(switch)
+    it 'should not match long options with an equals sign' do
+      long_option_equals_sign.should_not match(switch)
     end
 
     it 'should not match a two-dash argument separator' do
