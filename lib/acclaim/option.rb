@@ -1,9 +1,14 @@
-%w(arity parser/regexp type).each do |file|
-  require file.prepend 'acclaim/option/'
-end
+%w(
 
-require 'ribbon'
-%w(array hash).each { |file| require file.prepend 'ribbon/core_extensions/' }
+acclaim/option/arity
+acclaim/option/parser/regexp
+acclaim/option/type
+
+ribbon
+ribbon/core_extensions/array
+ribbon/core_extensions/hash
+
+).each { |file| require file }
 
 module Acclaim
 
