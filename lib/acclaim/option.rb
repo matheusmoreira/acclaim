@@ -127,7 +127,7 @@ module Acclaim
     # The description of this option. If it responds to +call+, it will be
     # called to determine the description at runtime.
     def description
-      (@description.respond_to?(:call) ? @description.call : @description).to_s
+      if @description.respond_to? :call then @description.call else @description end.to_s
     end
 
     # Whether or not this option is required on the command line.
