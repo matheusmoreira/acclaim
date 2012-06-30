@@ -12,7 +12,10 @@ ribbon/core_extensions/hash
 
 module Acclaim
 
-  # Represents a command-line option.
+  # Command-line option.
+  #
+  # @author Matheus Afonso Martins Moreira
+  # @since 0.0.1
   class Option
 
     # The key used to store the value of the option.
