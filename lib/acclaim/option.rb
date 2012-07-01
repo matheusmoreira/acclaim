@@ -123,14 +123,15 @@ module Acclaim
       @arity ||= Arity.new
     end
 
-    # Sets this option's arity. The value given may be an Arity, or an array in
-    # the form of <tt>[ required_parameters, optional_parameters ]</tt>.
-    def arity=(arity_or_array)
-      @arity = if arity.nil? or arity_or_array.is_a? Arity
-        arity_or_array
-      else
-        Arity.new *arity_or_array
-      end
+    # Sets this option's {Arity arity}.
+    #
+    # @param [Arity, Array] arity the arity or the arguments to create a new one
+    # @example Setting the arity to an {Arity} instance
+    #   option.arity = Acclaim::Option::Arity.new 1, 0
+    # @example Setting the arity to an array
+    #   option.arity = [1, 0]
+    def arity=(arity)
+      @arity = if arity.is_a? Arity then arity else Arity.new *arity end
     end
 
     # Sets this option's description.
