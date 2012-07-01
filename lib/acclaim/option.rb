@@ -76,6 +76,8 @@ module Acclaim
     # @option options [:replace, :raise, :append, :collect] :on_multiple
     #   (:replace) what to do if multiple instances of the option are found in
     #   the command line
+    # @example
+    #   option = Acclaim::Option.new :directory, 'Directory to work in', Pathname, arity: [1, 0], default: Pathname.pwd
     def initialize(key, *arguments, &block)
       options = arguments.extract_ribbon!
       type = arguments.find { |arg| arg.is_a? Module }
