@@ -176,7 +176,9 @@ module Acclaim
       @required = true
     end
 
-    # Returns +true+ if this option takes no arguments.
+    # Whether this option takes no arguments.
+    #
+    # @return [true, false] whether this option takes zero arguments
     def flag?
       arity.none?
     end
