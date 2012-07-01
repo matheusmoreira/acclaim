@@ -116,7 +116,9 @@ module Acclaim
       names.include? string.to_s.strip
     end
 
-    # Returns this option's arity. See Arity for details.
+    # This option's {Arity arity}.
+    #
+    # @return [Arity] this option's arity
     def arity
       @arity ||= Arity.new
     end
