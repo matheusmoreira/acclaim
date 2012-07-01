@@ -38,42 +38,44 @@ module Acclaim
     # the new one, but it can also collect all values or raise an error.
     attr_accessor :on_multiple
 
-    # Initializes a command line option. The +key+ is the object used to
-    # associate this option with a value. The other arguments may be:
+    # @!method initialize(key, *arguments, options = {}, &block)
     #
-    # [short switches]  Strings starting with <tt>'-'</tt>, like:
-    #                   <tt>'-h'</tt>; <tt>'-v'</tt>
-    # [long switches]   Strings starting with <tt>'--'</tt>, like:
-    #                   <tt>'--help'</tt>; <tt>'--version'</tt>
-    # [description]     Strings that don't start with either <tt>'-'</tt>
-    #                   nor <tt>'--'</tt>, like:
-    #                   <tt>'Display this help text and exit.'</tt>;
-    #                   <tt>'Display version and exit.'</tt>
-    # [class]           The <tt>Class</tt> which will be used in parameter
-    #                   conversion. The default is <tt>String</tt>.
+    # Initializes a new option.
     #
-    # If no switches were specified, the +key+ will be used to derive one. See
-    # Option::name_from for details.
+    # Command-line switches are specfied as strings or as an array of strings
+    # that start with either <tt>'-'</tt> or <tt>'--'</tt>. The former specifies
+    # a {Parser::Regexp::SHORT_SWITCH short switch} and the latter a
+    # {Parser::Regexp::LONG_SWITCH long switch}.
     #
-    # The last argument can be a hash of options, which may specify:
+    # If no switches were specified, one will be {name_from derived} from the
+    # key.
     #
-    # [:arity]        The number of required and optional arguments. See Arity
-    #                 for defails. Defaults to no arguments.
-    # [:default]      The default value for this option. Defaults to +nil+.
-    # [:description]  The description. Overrides the one given among the other
-    #                 arguments.
-    # [:required]     Whether or not the option must be present on the command
-    #                 line. Default is +false+.
-    # [:on_multiple]  What to do if the option is encountered multiple times.
-    #                 Supported modes are <tt>:replace</tt>, <tt>:raise</tt> and
-    #                 <tt>:append</tt> (or <tt>:collect</tt>). New values will
-    #                 replace old ones by default.
+    # Strings that don't follow the switch format are assumed to be
+    # descriptions.
     #
-    # Additionally, if a block is given, it will be called when the option is
-    # parsed with a ribbon instance and the parameters given to the option. The
-    # parameters will already be converted to this option's specified type; if
-    # this is not desirable consider not specifying a class to the option or
-    # registering a custom type handler.
+    # The type is given as a module or class, and must be a registered {Type}.
+    # Types are used in {#convert_parameters automatic parameter conversion}.
+    # The default type is {Type::String String}.
+    #
+    # If given a block, it will be called when the option is found in the
+    # command line. The block will receive a wrapped Ribbon as its first
+    # argument. If the option takes parameters, they will be converted to the
+    # option's type and passed as the second argument of the block.
+    #
+    # @param [Symbol] key the key used to associate this option with a value
+    # @param [Array] arguments parameters specifying the description, switches
+    #   and type
+    # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+    # @param [Proc] block the custom option handler
+    # @option options [Array, Arity] :arity ([0, 0]) the number of required and
+    #   optional arguments
+    # @option options [Object] :default (nil) the default value for this option
+    # @option options [String, #call] :description the option's description
+    # @option options [true, false] :required (false) whether the option must be
+    #   present in the command line
+    # @option options [:replace, :raise, :append, :collect] :on_multiple
+    #   (:replace) what to do if multiple instances of the option are found in
+    #   the command line
     def initialize(key, *arguments, &block)
       options = arguments.extract_ribbon!
       type = arguments.find { |arg| arg.is_a? Module }
