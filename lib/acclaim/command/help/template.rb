@@ -28,8 +28,8 @@ module Acclaim
 
         # Computes the result of the template +file+ using the +command+'s
         # binding.
-        def for(*args)
-          template_options, command = args.extract_ribbon!, args.shift
+        def for(command, template_options = {})
+          template_options = Ribbon.wrap options
           template = create_from template_options.file? 'command.erb'
           command_binding = command.instance_eval { binding }
           # Since blocks are closures, the binding has access to the
