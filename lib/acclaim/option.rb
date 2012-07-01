@@ -222,5 +222,7 @@ module Acclaim
       name
     end
 
+    alias name_from derive_switch_from
+
   end
 end
