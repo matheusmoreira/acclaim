@@ -46,8 +46,8 @@ module Acclaim
       #
       # [:include_root]  Includes the root command when displaying a command's
       #                  usage.
-      def display_for(*args)
-        options, command = args.extract_ribbon!, args.shift
+      def display_for(command, options = {})
+        options = Ribbon.wrap options
         puts Help::Template.for(command, options) if command.options.any?
         command.subcommands.each { |subcommand| display_for(subcommand, options) }
       end
