@@ -157,7 +157,9 @@ module Acclaim
       if @description.respond_to? :call then @description.call else @description end.to_s
     end
 
-    # Whether or not this option is required on the command line.
+    # Whether or not this option must be present in the command line.
+    #
+    # @return [true, false] whether this option must be specified
     def required?
       @required
     end
