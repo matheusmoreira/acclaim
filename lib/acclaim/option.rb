@@ -165,8 +165,8 @@ module Acclaim
     end
 
     # Sets whether or not this option is required.
-    def required=(value)
-      @required = !!value
+    def required=(required)
+      @required = !!required
     end
 
     # Require that this option be given on the command line.
