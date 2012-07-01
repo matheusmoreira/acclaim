@@ -107,7 +107,7 @@ module Acclaim
 
     # Whether the given string matches any of {#names this option's names}.
     #
-    # @param [String, #to_s] string the string to be matched
+    # @param [#to_s] string the string to be matched
     # @return [true, false] whether the string refers to this option
     def =~(string)
       names.include? string.to_s.strip

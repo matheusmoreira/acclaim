@@ -45,7 +45,7 @@ module Acclaim
 
     # Applies foreground color to the given string.
     #
-    # @param [String, #to_s] string the string the color will be applied to
+    # @param [#to_s] string the string the color will be applied to
     # @param [Symbol] color the name of the color that will be applied
     # @return [String] new string with the color applied
     # @see background_color
@@ -56,7 +56,7 @@ module Acclaim
 
     # Applies background color to the given string.
     #
-    # @param [String, #to_s] string the string the color will be applied to
+    # @param [#to_s] string the string the color will be applied to
     # @param [Symbol] color the name of the color that will be applied
     # @return [String] new string with the color applied
     # @see foreground_color
@@ -67,7 +67,7 @@ module Acclaim
 
     # Applies text effects to the given string.
     #
-    # @param [String, #to_s] string the string the effects will be applied to
+    # @param [#to_s] string the string the effects will be applied to
     # @param [Array<Symbol>] effects the text effects to apply
     # @return [String] new string with the text effects applied
     # @see supported_effects
@@ -85,7 +85,7 @@ module Acclaim
 
     # Computes the color escape code and applies it to the string.
     #
-    # @param [String, #to_s] string the string the color will be applied to
+    # @param [#to_s] string the string the color will be applied to
     # @param [Symbol] color the name of the color that will be applied
     # @param [Integer] offset background or foreground color code offset
     # @return [String] new string with the color applied
@@ -100,7 +100,7 @@ module Acclaim
     # @note A reset escape code will be appended to the string if it does not
     #   end with one.
     #
-    # @param [String, #to_s] string the string the code will be applied to
+    # @param [#to_s] string the string the code will be applied to
     # @yieldreturn [Integer, Array<Integer>] escape code(s) to apply
     # @return [String] new string with the escape codes applied
     def apply_escape_codes_to(string)
