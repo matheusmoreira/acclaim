@@ -21,14 +21,14 @@ module Acclaim
         #
         # @see Acclaim::Command::Help.create
         def help(*arguments, &block)
-          Help.create root, *arguments, &block
+          Help.create root, arguments.extract_ribbon!, &block
         end
 
         # Adds version subcommand and options to this command.
         #
         # @see Acclaim::Command::Help.create
-        def version(*arguments, &block)
-          Version.create root, *arguments, &block
+        def version(string, *arguments, &block)
+          Version.create root, string, arguments.extract_ribbon!, &block
         end
 
       end
