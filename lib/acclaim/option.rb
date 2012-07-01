@@ -183,13 +183,8 @@ module Acclaim
       arity.none?
     end
 
-    # Same as <tt>flag?</tt>
     alias bool? flag?
-
-    # Same as <tt>flag?</tt>
     alias boolean? flag?
-
-    # Same as <tt>flag?</tt>
     alias switch? flag?
 
     # Generate human-readable string containing this option's data.
