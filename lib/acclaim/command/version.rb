@@ -41,7 +41,9 @@ module Acclaim
         options = Ribbon.wrap options
         switches = options.switches? { %w(-v --version) }
         description = options.description? { 'Show version and exit.' }
-        command.option :acclaim_version, *switches, description
+        base_command.option :acclaim_version, switches, description do |ribbon|
+          version_command.execute ribbon
+        end
       end
 
     end

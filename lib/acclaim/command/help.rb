@@ -62,7 +62,9 @@ module Acclaim
         options = Ribbon.wrap options
         switches = options.switches? { %w(-h --help) }
         description = options.description? { 'Show usage information and exit.' }
-        command.option :acclaim_help, *switches, description
+        base_command.option :acclaim_help, switches, description do |ribbon|
+          help_command.execute ribbon
+        end
       end
 
     end
