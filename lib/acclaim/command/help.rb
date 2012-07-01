@@ -31,7 +31,7 @@ module Acclaim
             # TODO: implement a way to specify a command to the help option
             # and command.
             #   display_for options.command || args.pop
-            display_for base.root, opts
+            display_for base_command.root, options
           end
           base_command.const_set :Help, help_command
         end
