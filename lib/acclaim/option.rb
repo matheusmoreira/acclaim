@@ -165,6 +165,8 @@ module Acclaim
     end
 
     # Sets whether or not this option is required.
+    #
+    # @param [true, false] required whether this option must be specified
     def required=(required)
       @required = !!required
     end
