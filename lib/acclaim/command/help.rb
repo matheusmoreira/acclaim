@@ -15,14 +15,18 @@ module Acclaim
       # command displays a help screen including information for all commands
       # and then exits.
       #
-      # The last argument can be a configuration hash, which accepts the
-      # following options:
-      #
-      # [:options]       If +true+, will add a help option to the +base+
-      #                  command.
-      # [:switches]      The switches used when creating the help option.
-      # [:include_root]  Includes the root command when displaying a command's
-      #                  usage.
+      # @param [Acclaim::Command::DSL] base_command the command the new help
+      #   subcommand will inherit from
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [false, true] :options (true) whether help options
+      #   are to be added to the base command
+      # @option options [Array] :switches (['-h', '--help']) the switches of the
+      #   help option
+      # @option options [String, #call] :description
+      #   ('Show usage information and exit.') the description of the help
+      #   option
+      # @option options [Array] :include_root (false) whether to include the
+      #   root command in command invocation lines when displaying help
       def create(base_command, options = {})
         options = Ribbon.wrap options
         Class.new(base_command).tap do |help_command|
@@ -41,11 +45,10 @@ module Acclaim
       # Displays a very simple help screen for the given command and all its
       # subcommands.
       #
-      # The last argument can be a configuration hash, which accepts the
-      # following options:
-      #
-      # [:include_root]  Includes the root command when displaying a command's
-      #                  usage.
+      # @param [Acclaim::Command::DSL] command the command to display help for
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [Array] :include_root (false) whether to include the
+      #   root command in command invocation lines
       def display_for(command, options = {})
         options = Ribbon.wrap options
         puts Help::Template.for command, options if command.options.any?
@@ -56,10 +59,15 @@ module Acclaim
 
       # Adds a special help option to the given +command+.
       #
-      # The last argument can be a configuration hash, which accepts the
-      # following options:
-      #
-      # [:switches]  The switches used when creating the help option.
+      # @param [Acclaim::Command::DSL] base_command the command the new help
+      #   subcommand inherited from
+      # @param [Acclaim::Command::DSL] help_command the new help subcommand
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [Array] :switches (['-h', '--help']) the switches of the
+      #   help option
+      # @option options [String, #call] :description
+      #   ('Show usage information and exit.') the description of the help
+      #   option
       def add_options_to!(base_command, help_command, options = {})
         options = Ribbon.wrap options
         switches = options.switches? { %w(-h --help) }

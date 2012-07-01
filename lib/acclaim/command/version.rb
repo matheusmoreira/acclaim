@@ -14,11 +14,15 @@ module Acclaim
       # When called, the command displays the +version_string+ of the program
       # and then exits.
       #
-      # The last argument can be a configuration hash, which accepts the
-      # following options:
-      #
-      # [:options]   If +true+, will add a version option to the +base+ command.
-      # [:switches]  The switches used when creating the version option.
+      # @param [Acclaim::Command::DSL] base_command the command the new version
+      #   subcommand will inherit from
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [false, true] :options (true) whether version options
+      #   are to be added to the base command
+      # @option options [Array] :switches (['-v', '--version']) the switches of
+      #   the version option
+      # @option options [String, #call] :description ('Show version and exit.')
+      #   the description of the version option
       def create(base_command, version_string, options = {})
         options = Ribbon.wrap options
         Class.new(base_command).tap do |version_command|
@@ -35,10 +39,15 @@ module Acclaim
 
       # Adds a special version option to the given +command+.
       #
-      # The last argument can be a configuration hash, which accepts the
-      # following options:
-      #
-      # [:switches]  The switches used when creating the version option.
+      # @param [Acclaim::Command::DSL] base_command the command the new version
+      #   subcommand will inherit from
+      # @param [Acclaim::Command::DSL] version_command the new version
+      #   subcommand
+      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @option options [Array] :switches (['-v', '--version']) the switches of
+      #   the version option
+      # @option options [String, #call] :description ('Show version and exit.')
+      #   the description of the version option
       def add_options_to!(base_command, version_command, options = {})
         options = Ribbon.wrap options
         switches = options.switches? { %w(-v --version) }
