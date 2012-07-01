@@ -108,7 +108,10 @@ module Acclaim
       arguments.map { |argument| Type.handler_for(type).call argument }
     end
 
-    # Returns true if the given string is equal to any of this option's names.
+    # Whether the given string matches any of {#names this option's names}.
+    #
+    # @param [String, #to_s] string the string to be matched
+    # @return [true, false] whether the string refers to this option
     def =~(string)
       names.include? string.to_s.strip
     end
