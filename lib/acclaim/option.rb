@@ -109,8 +109,8 @@ module Acclaim
     end
 
     # Returns true if the given string is equal to any of this option's names.
-    def =~(str)
-      names.include? str.strip
+    def =~(string)
+      names.include? string.to_s.strip
     end
 
     # Returns this option's arity. See Arity for details.
