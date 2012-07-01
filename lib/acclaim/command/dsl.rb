@@ -35,7 +35,7 @@ module Acclaim
       #   @return [String] the name used to invoke this command
       def line(*arguments)
         @line = arguments.first unless arguments.empty?
-        @line ||= (name.gsub(/^.*::/, '').downcase if respond_to? :name)
+        @line ||= begin name.gsub(/^.*::/, '').downcase rescue NoMethodError nil end
       end
 
       # Commands which may be given to this command.
