@@ -216,7 +216,7 @@ module Acclaim
     def derive_switch_from(key)
       key = key.to_s
       raise ArgumentError, "Can't derive switch from empty string." if key.empty?
-      switch = (key.length == 1 ? '-' : '--') << key
+      switch = key.prepend(if key.length == 1 then '-' else '--' end)
       switch.gsub! '_', '-'
       raise NameError, "Derived switch is invalid: #{switch}" unless switch =~ Option::Parser::Regexp::SWITCH
       switch
