@@ -74,11 +74,11 @@ module Acclaim
     # parameters will already be converted to this option's specified type; if
     # this is not desirable consider not specifying a class to the option or
     # registering a custom type handler.
-    def initialize(key, *args, &block)
-      options = args.extract_ribbon!
-      type = args.find { |arg| arg.is_a? Module }
+    def initialize(key, *arguments, &block)
+      options = arguments.extract_ribbon!
+      type = arguments.find { |arg| arg.is_a? Module }
 
-      strings = args.flatten.select do |arg|
+      strings = arguments.flatten.select do |arg|
         arg.is_a? String
       end.group_by do |arg|
         arg =~ Parser::Regexp::SWITCH ? :switches : :description
@@ -97,8 +97,8 @@ module Acclaim
 
     # Converts all given arguments using the type handler for this option's
     # type.
-    def convert_parameters(*args)
-      args.map { |arg| Type.handler_for(type).call arg }
+    def convert_parameters(*arguments)
+      arguments.map { |argument| Type.handler_for(type).call argument }
     end
 
     # Returns true if the given string is equal to any of this option's names.
