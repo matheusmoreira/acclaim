@@ -101,6 +101,9 @@ module Acclaim
 
     # Converts all given arguments using the type handler for this option's
     # type.
+    #
+    # @param [Array<String>] arguments the arguments to convert
+    # @return [Array] the arguments converted to this option's type
     def convert_parameters(*arguments)
       arguments.map { |argument| Type.handler_for(type).call argument }
     end
