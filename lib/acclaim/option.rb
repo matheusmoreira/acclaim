@@ -21,9 +21,6 @@ module Acclaim
     # The key used to store the value of the option.
     attr_accessor :key
 
-    # The strings that refer to this option in the command line.
-    attr_accessor :names
-
     # The type the option's value will be converted to. See Option::Type.
     attr_accessor :type
 
@@ -115,6 +112,29 @@ module Acclaim
     def =~(string)
       names.include? string.to_s.strip
     end
+
+    # The switches that refer to this option in the command line.
+    #
+    # @return [Array<String>] the list of switches
+    # @since 0.6.0
+    def switches
+      @switches ||= []
+    end
+
+    alias names switches
+
+    # Sets the switches that refer to this option in the command line.
+    #
+    # @param [#to_s, Array<#to_s>] switches the switch or array of switches
+    # @return [Array<String>] the new list of switches
+    # @since 0.6.0
+    def switches=(switches)
+      @switches = [*switches].map &:to_s
+    end
+
+    alias switch= switches=
+    alias name= switches=
+    alias names= switches=
 
     # This option's {Arity arity}.
     #
