@@ -48,8 +48,8 @@ module Acclaim
       #                  usage.
       def display_for(command, options = {})
         options = Ribbon.wrap options
-        puts Help::Template.for(command, options) if command.options.any?
-        command.subcommands.each { |subcommand| display_for(subcommand, options) }
+        puts Help::Template.for command, options if command.options.any?
+        command.subcommands.each { |subcommand| display_for subcommand, options }
       end
 
       private
