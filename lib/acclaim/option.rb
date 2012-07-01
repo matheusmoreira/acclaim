@@ -85,7 +85,7 @@ module Acclaim
       strings = arguments.flatten.select do |argument|
         argument.is_a? String
       end.group_by do |argument|
-        argument =~ Parser::Regexp::SWITCH ? :switches : :description
+        if argument =~ Parser::Regexp::SWITCH then :switches else :description end
       end.to_ribbon
 
       self.key = key
