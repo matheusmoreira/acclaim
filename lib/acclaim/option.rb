@@ -90,7 +90,7 @@ module Acclaim
 
       self.key = key
       self.names = strings.switches? { [ Option.name_from(key) ] }
-      self.description = options.description? strings.description?([]).first
+      self.description = options.description? { strings.description?([]).first }
       self.on_multiple = options.on_multiple? :replace
       self.arity = options.arity?
       self.default = options.default?
