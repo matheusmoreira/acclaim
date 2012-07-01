@@ -28,6 +28,12 @@ module Acclaim
 
         # Computes the result of the template +file+ using the +command+'s
         # binding.
+        #
+        # @param [Acclaim::Command::DSL] command the command to display help for
+        # @param [Hash, Ribbon, Ribbon::Wrapper] template_options template
+        #   configuration options
+        # @option template_options [true, false] :include_root (false) whether
+        #   to include the root command in command invocation lines
         def for(command, template_options = {})
           template_options = Ribbon.wrap options
           template = create_from template_options.file? 'command.erb'
