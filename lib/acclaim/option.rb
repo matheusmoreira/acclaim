@@ -132,8 +132,6 @@ module Acclaim
     #
     # @param [String, #call] description text that describes this option
     # @example Internationalized description
-    #   require 'acclaim'
-    #
     #   option = Acclaim::Option.new :verbose
     #
     #   option.description = lambda do
