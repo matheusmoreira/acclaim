@@ -3,6 +3,8 @@
 acclaim/command/help
 acclaim/command/version
 
+ribbon/core_extensions/array
+
 ).each { |file| require file }
 
 module Acclaim
