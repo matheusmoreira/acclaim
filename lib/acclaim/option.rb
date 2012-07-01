@@ -173,7 +173,7 @@ module Acclaim
 
     # Require that this option be given on the command line.
     def require
-      self.required = true
+      @required = true
     end
 
     # Returns +true+ if this option takes no arguments.
