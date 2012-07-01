@@ -27,7 +27,7 @@ module Acclaim
         options = Ribbon.wrap options
         Class.new(base_command).tap do |help_command|
           add_options_to! base_command, help_command, options if options.options? true
-          help_command.when_called do |options, args|
+          help_command.when_called do |options, arguments|
             # TODO: implement a way to specify a command to the help option
             # and command.
             #   display_for options.command || args.pop

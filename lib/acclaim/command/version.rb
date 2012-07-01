@@ -23,7 +23,7 @@ module Acclaim
         options = Ribbon.wrap options
         Class.new(base_command).tap do |version_command|
           add_options_to! base_command, version_command, options if options.options? true
-          version_command.when_called do |options, args|
+          version_command.when_called do |options, arguments|
             puts version_string
             exit
           end
