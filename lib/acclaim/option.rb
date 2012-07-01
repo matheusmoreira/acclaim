@@ -214,12 +214,12 @@ module Acclaim
     # If the string is empty, an +ArgumentError+ will be raised. If the
     # resulting name is not a valid switch, a +NameError+ will be raised.
     def derive_switch_from(key)
-      name = key.to_s
-      raise ArgumentError, "Can't derive name from empty key." if name.empty?
-      name = (name.length == 1 ? '-' : '--') + name
-      name.gsub! '_', '-'
-      raise NameError, "Derived name is invalid: #{name}" unless name =~ Option::Parser::Regexp::SWITCH
-      name
+      key = key.to_s
+      raise ArgumentError, "Can't derive switch from empty string." if key.empty?
+      switch = (key.length == 1 ? '-' : '--') + key
+      switch.gsub! '_', '-'
+      raise NameError, "Derived switch is invalid: #{switch}" unless switch =~ Option::Parser::Regexp::SWITCH
+      switch
     end
 
     alias name_from derive_switch_from
