@@ -25,6 +25,7 @@ module Acclaim
           add_options_to! base_command, version_command, options if options.options? true
           version_command.when_called do |options, args|
             puts version_string
+            exit
           end
           base_command.const_set :Version, version_command
         end

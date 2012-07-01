@@ -32,6 +32,7 @@ module Acclaim
             # and command.
             #   display_for options.command || args.pop
             display_for base_command.root, options
+            exit
           end
           base_command.const_set :Help, help_command
         end
