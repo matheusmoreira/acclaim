@@ -22,7 +22,7 @@ module Acclaim
       def create(base_command, version_string, options = {})
         options = Ribbon.wrap options
         Class.new(base_command).tap do |version_command|
-        add_options_to! base, opts if opts.options? true
+          add_options_to! base_command, version_command, options if options.options? true
           version_command.when_called do |options, args|
             puts version_string
           end
