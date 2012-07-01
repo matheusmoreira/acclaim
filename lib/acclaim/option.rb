@@ -63,8 +63,8 @@ module Acclaim
     # option's type and passed as the second argument of the block.
     #
     # @param [Symbol] key the key used to associate this option with a value
-    # @param [Array] arguments parameters specifying the description, switches
-    #   and type
+    # @param [Array<String, Array<String>, Module, Class>] arguments parameters
+    #   specifying the description, switches and type
     # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
     # @param [Proc] block the custom option handler
     # @option options [Array, Arity] :arity ([0, 0]) the number of required and
