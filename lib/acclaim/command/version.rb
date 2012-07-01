@@ -19,8 +19,8 @@ module Acclaim
       #
       # [:options]   If +true+, will add a version option to the +base+ command.
       # [:switches]  The switches used when creating the version option.
-      def create(*args)
-        opts, base, version_string = args.extract_ribbon!, args.shift, args.shift
+      def create(base_command, version_string, options = {})
+        options = Ribbon.wrap options
         add_options_to! base, opts if opts.options? true
         base.const_set(:Version, Class.new(base)).tap do |version_command|
           version_command.when_called do |options, args|
@@ -37,10 +37,10 @@ module Acclaim
       # following options:
       #
       # [:switches]  The switches used when creating the version option.
-      def add_options_to!(*args)
-        opts, command = args.extract_ribbon!, args.shift
-        switches = opts.switches? { %w(-v --version) }
-        description = opts.description? { 'Show version and exit.' }
+      def add_options_to!(base_command, version_command, options = {})
+        options = Ribbon.wrap options
+        switches = options.switches? { %w(-v --version) }
+        description = options.description? { 'Show version and exit.' }
         command.option :acclaim_version, *switches, description
       end
 
