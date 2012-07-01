@@ -21,11 +21,12 @@ module Acclaim
       # [:switches]  The switches used when creating the version option.
       def create(base_command, version_string, options = {})
         options = Ribbon.wrap options
+        Class.new(base_command).tap do |version_command|
         add_options_to! base, opts if opts.options? true
-        base.const_set(:Version, Class.new(base)).tap do |version_command|
           version_command.when_called do |options, args|
             puts version_string
           end
+          base_command.const_set :Version, version_command
         end
       end
 

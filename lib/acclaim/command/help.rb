@@ -25,14 +25,15 @@ module Acclaim
       #                  usage.
       def create(base_command, options = {})
         options = Ribbon.wrap options
+        Class.new(base_command).tap do |help_command|
         add_options_to! base, opts if opts.options? true
-        base.const_set(:Help, Class.new(base)).tap do |help_command|
           help_command.when_called do |options, args|
             # TODO: implement a way to specify a command to the help option
             # and command.
             #   display_for options.command || args.pop
             display_for base.root, opts
           end
+          base_command.const_set :Help, help_command
         end
       end
 
