@@ -196,19 +196,6 @@ module Acclaim
 
       private
 
-      # Handles special options such as <tt>--help</tt> or <tt>--version</tt>.
-      def handle_special_options!(options, arguments)
-        const_get(:Help).execute options, arguments if options.acclaim_help?
-        const_get(:Version).execute options, arguments if options.acclaim_version?
-      # TODO:
-      #   possibly rescue a NameError and warn user
-      #   fix bug:
-      #     calling this method causes a subcommand to be executed even if it
-      #     wasn't given on the command line. This may result up to **three**
-      #     commands (help, version and the actual command) running in one
-      #     invocation.
-      end
-
       # Deletes all argument separators in the given argument array.
       def delete_argument_separators_in!(arguments)
         arguments.delete_if do |arg|
