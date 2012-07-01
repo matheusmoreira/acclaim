@@ -213,7 +213,7 @@ module Acclaim
     #
     # If the string is empty, an +ArgumentError+ will be raised. If the
     # resulting name is not a valid switch, a +NameError+ will be raised.
-    def name_from(key)
+    def derive_switch_from(key)
       name = key.to_s
       raise ArgumentError, "Can't derive name from empty key." if name.empty?
       name = (name.length == 1 ? '-' : '--') + name
