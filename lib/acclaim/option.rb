@@ -208,11 +208,13 @@ module Acclaim
 
   class << Option
 
-    # Derives a name from the given key's string representation. All
-    # underscores will be replaced with dashes.
+    # Derives a switch from a key. All underscores will be replaced with dashes.
     #
-    # If the string is empty, an +ArgumentError+ will be raised. If the
-    # resulting name is not a valid switch, a +NameError+ will be raised.
+    # @param [Symbol, #to_s] key the key to derive a switch from
+    # @return [String] the switch derived from the key
+    # @raise [ArgumentError] if the string representation of the key is empty
+    # @raise [NameError] if the derived switch is invalid
+    # @since 0.6.0
     def derive_switch_from(key)
       key = key.to_s
       raise ArgumentError, "Can't derive switch from empty string." if key.empty?
