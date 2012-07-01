@@ -80,12 +80,12 @@ module Acclaim
     #   option = Acclaim::Option.new :directory, 'Directory to work in', Pathname, arity: [1, 0], default: Pathname.pwd
     def initialize(key, *arguments, &block)
       options = arguments.extract_ribbon!
-      type = arguments.find { |arg| arg.is_a? Module }
+      type = arguments.find { |argument| argument.is_a? Module }
 
-      strings = arguments.flatten.select do |arg|
-        arg.is_a? String
-      end.group_by do |arg|
-        arg =~ Parser::Regexp::SWITCH ? :switches : :description
+      strings = arguments.flatten.select do |argument|
+        argument.is_a? String
+      end.group_by do |argument|
+        argument =~ Parser::Regexp::SWITCH ? :switches : :description
       end.to_ribbon
 
       self.key = key
