@@ -22,6 +22,8 @@ module Acclaim
           Acclaim::Gem.root.templates.help('template').to_s
         end
 
+        alias folder directory
+
         # Loads the contents of a template file from the template #folder.
         def load(template_file)
           File.read File.join(folder, template_file)
