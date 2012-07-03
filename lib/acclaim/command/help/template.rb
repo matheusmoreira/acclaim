@@ -24,7 +24,10 @@ module Acclaim
 
         alias folder directory
 
-        # Loads the contents of a template file from the template #folder.
+        # Loads the contents of a template file from the template directory.
+        #
+        # @param [String] template_file the name of the template file
+        # @return [String] the contents of the template file
         def load(template_file)
           File.read File.join(folder, template_file)
         end
