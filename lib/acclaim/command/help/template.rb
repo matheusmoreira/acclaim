@@ -16,7 +16,7 @@ module Acclaim
 
         # Returns the +template+ folder relative to this directory.
         def folder
-          File.join File.dirname(__FILE__), 'template'
+          Acclaim::Gem.root.templates.help('template').to_s
         end
 
         # Loads the contents of a template file from the template #folder.
