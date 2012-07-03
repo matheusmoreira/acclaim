@@ -15,7 +15,7 @@ module Acclaim
       class << Template
 
         # Returns the +template+ folder relative to this directory.
-        def folder
+        def directory
           Acclaim::Gem.root.templates.help('template').to_s
         end
 
