@@ -6,6 +6,9 @@ module Acclaim
     module Help
 
       # Manages help templates.
+      #
+      # @author Matheus Afonso Martins Moreira
+      # @since 0.0.5
       module Template
       end
 
