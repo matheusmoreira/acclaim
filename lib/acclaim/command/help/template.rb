@@ -14,7 +14,10 @@ module Acclaim
 
       class << Template
 
-        # Returns the +template+ folder relative to this directory.
+        # Returns the path to the directory where templates are stored.
+        #
+        # @return [String] absolute path to the templates directory
+        # @since 0.6.0
         def directory
           Acclaim::Gem.root.templates.help('template').to_s
         end
