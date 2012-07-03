@@ -19,7 +19,7 @@ module Acclaim
         # @return [String] absolute path to the templates directory
         # @since 0.6.0
         def directory
-          Acclaim::Gem.root.templates.help('template').to_s
+          Acclaim::Gem.root.templates.help.to_s
         end
 
         alias folder directory
