@@ -32,7 +32,11 @@ module Acclaim
           File.read File.join(folder, template_file)
         end
 
-        # Creates a new ERB instance with the contents of +template+.
+        # Creates a new ERB instance with the contents of the template.
+        #
+        # @param [String] template_file the name of the template file
+        # @return [ERB] a new ERB template
+        # @since 0.2.0
         def create_from(template_file)
           ERB.new load(template_file), nil, '%<>'
         end
