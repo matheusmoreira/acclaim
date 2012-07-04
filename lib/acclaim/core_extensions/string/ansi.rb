@@ -40,6 +40,26 @@ module Acclaim
           Acclaim::ANSI.effects self, *effects
         end
 
+        colors, effects = Acclaim::ANSI.supported_colors, Acclaim::ANSI.supported_effects
+
+        colors.each do |color|
+          define_method color do
+            foreground color
+          end
+        end
+
+        effects.each do |effect|
+          define_method effect do
+            effects effect
+          end
+        end
+
+        colors.product(colors).each do |(fg, bg)|
+          define_method :"#{fg}_on_#{bg}" do
+            foreground(fg).background bg
+          end
+        end
+
       end
 
       ::String.send :include, ANSI
