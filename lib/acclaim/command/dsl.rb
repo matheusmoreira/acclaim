@@ -1,5 +1,6 @@
 %w(
 
+acclaim/command/dsl/io
 acclaim/command/dsl/root
 acclaim/command/parser
 acclaim/io
@@ -229,6 +230,7 @@ module Acclaim
       end
 
       include Root
+      include IO
 
     end
 
