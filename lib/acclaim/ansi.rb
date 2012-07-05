@@ -110,7 +110,7 @@ module Acclaim
         end
 
         code = reset
-        string.concat code unless self =~ /#{Regexp.escape code}\z/ix
+        string.concat code unless string =~ /#{Regexp.escape code}\z/ix
       end
     end
 
