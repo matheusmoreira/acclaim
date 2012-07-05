@@ -45,7 +45,7 @@ module Acclaim
         # binding.
         #
         # @param [Acclaim::Command::DSL] command the command to display help for
-        # @param [Hash, Ribbon, Ribbon::Wrapper] template_options template
+        # @param [Hash, Ribbon, Ribbon::Raw] template_options template
         #   configuration options
         # @option template_options [true, false] :include_root (false) whether
         #   to include the root command in command invocation lines
