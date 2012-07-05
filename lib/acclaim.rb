@@ -10,6 +10,7 @@ end
 acclaim/ansi
 acclaim/command
 acclaim/gem
+acclaim/io
 acclaim/option
 
 ).each { |file| require file }
