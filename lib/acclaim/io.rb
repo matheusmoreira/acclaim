@@ -181,7 +181,7 @@ class Acclaim::IO
   # @param [Integer] level the increase in identation
   # @return [Object] the return value of the block
   # @see #unindent
-  def indent(level = 2)
+  def indent(level = 4)
     self.indentation_level += level
     yield
   ensure
@@ -194,7 +194,7 @@ class Acclaim::IO
   # @param [Integer] level the decrease in identation
   # @return [Object] the return value of the block
   # @see #unindent
-  def unindent(level = 2, &block)
+  def unindent(level = 4, &block)
     indent -level, &block
   end
 
