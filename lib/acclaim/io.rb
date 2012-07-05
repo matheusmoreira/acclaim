@@ -45,9 +45,9 @@ class Acclaim::IO
   # Encapsulates the specified input, output and error streams.
   #
   # @param [Hash, Ribbon, Ribbon::Raw] options method options
-  # @option options [::IO] :input (STDIN) the input stream
-  # @option options [::IO] :output (STDOUT) the output stream
-  # @option options [::IO] :error (STDERR) the error stream
+  # @option options [::IO, nil] :input (STDIN) the input stream
+  # @option options [::IO, nil] :output (STDOUT) the output stream
+  # @option options [::IO, nil] :error (STDERR) the error stream
   # @option options [true, false] :formatting (true) whether to enable text
   #   formatting
   def initialize(options = {})
@@ -222,6 +222,7 @@ class Acclaim::IO
   # @see #supports_formatting?
   # @see #format
   def write_to(stream, message, options = {})
+    return if stream.nil?
     options = Ribbon.new options
     message = message.to_s
     stream = stream.to_io
@@ -241,7 +242,7 @@ class Acclaim::IO
   #
   # @return [true, false] whether output to the given stream should be formatted
   def should_format_output_for?(stream)
-    formatting? and stream.tty?
+    formatting? and stream and stream.tty?
   end
 
   # Applies the given formatting options to the message.
