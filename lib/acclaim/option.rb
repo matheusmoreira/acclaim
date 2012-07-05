@@ -55,14 +55,14 @@ module Acclaim
     # The default type is {Type::String String}.
     #
     # If given a block, it will be called when the option is found in the
-    # command line. The block will receive a wrapped Ribbon as its first
-    # argument. If the option takes parameters, they will be converted to the
-    # option's type and passed as the second argument of the block.
+    # command line. The block will receive a ribbon as its first argument. If
+    # the option takes parameters, they will be converted to the option's type
+    # and passed as the second argument of the block.
     #
     # @param [Symbol] key the key used to associate this option with a value
     # @param [Array<String, Array<String>, Module, Class>] arguments parameters
     #   specifying the description, switches and type
-    # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+    # @param [Hash, Ribbon, Ribbon::Raw] options method options
     # @param [Proc] block the custom option handler
     # @option options [Array, Arity] :arity ([0, 0]) the number of required and
     #   optional arguments

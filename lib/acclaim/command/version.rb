@@ -16,7 +16,7 @@ module Acclaim
       #
       # @param [Acclaim::Command::DSL] base_command the command the new version
       #   subcommand will inherit from
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [false, true] :options (true) whether version options
       #   are to be added to the base command
       # @option options [Array] :switches (['-v', '--version']) the switches of
@@ -24,7 +24,7 @@ module Acclaim
       # @option options [String, #call] :description ('Show version and exit.')
       #   the description of the version option
       def create(base_command, version_string, options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         Class.new(base_command).tap do |version_command|
           add_options_to! base_command, version_command, options if options.options? true
           version_command.when_called do
@@ -43,13 +43,13 @@ module Acclaim
       #   subcommand will inherit from
       # @param [Acclaim::Command::DSL] version_command the new version
       #   subcommand
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [Array] :switches (['-v', '--version']) the switches of
       #   the version option
       # @option options [String, #call] :description ('Show version and exit.')
       #   the description of the version option
       def add_options_to!(base_command, version_command, options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         switches = options.switches? { %w(-v --version) }
         description = options.description? { 'Show version and exit.' }
         base_command.option :acclaim_version, switches, description do |ribbon|

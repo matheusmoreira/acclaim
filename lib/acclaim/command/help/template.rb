@@ -50,8 +50,8 @@ module Acclaim
         # @option template_options [true, false] :include_root (false) whether
         #   to include the root command in command invocation lines
         def for(command, template_options = {})
-          template_options = Ribbon.wrap template_options
-          template = create_from template_options.file? 'command.erb'
+          template_options = Ribbon.new template_options
+          template = create_from template_options.file? { 'command.erb' }
           command_binding = command.instance_eval { binding }
           # Since blocks are closures, the binding has access to the
           # template_options ribbon:

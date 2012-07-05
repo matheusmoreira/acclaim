@@ -63,7 +63,7 @@ module Acclaim
 
       # The block which is executed when this command is called.
       #
-      # @yieldparam [Ribbon] options a Ribbon instance which associates options
+      # @yieldparam [Ribbon] options a ribbon instance which associates options
       #   with their corresponding values
       # @yieldparam [Array<String>] arguments the arguments that remained in the
       #   command line
@@ -78,7 +78,7 @@ module Acclaim
       # Parses the given arguments using this command's set of options.
       #
       # @param [Array<String>] arguments the argument array
-      # @return [Ribbon::Wrapper] ribbon containing the values
+      # @return [Ribbon] ribbon containing the values
       def parse_options_in!(arguments)
         Option::Parser.new(arguments, options).parse!
       end
@@ -128,7 +128,7 @@ module Acclaim
       # Calls this command's {#action action block} with the given option values
       # and arguments.
       #
-      # @param [Ribbon::Wrapper] options ribbon containing options and values
+      # @param [Ribbon] options ribbon containing options and values
       # @param [Array<String>] arguments additional arguments to the program
       def execute(options, arguments = [])
         action.instance_eval do
@@ -170,7 +170,7 @@ module Acclaim
       # Computes the full command line of this command, taking parent commands
       # into account.
       #
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [true, false] :include_root (false) whether to include
       #   the {#root root} command in the full command line
       #
@@ -188,7 +188,7 @@ module Acclaim
       #   Command::Do::Something.full_line include_root: true
       #   # => "command do something"
       def full_line(options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         command_path.tap do |path|
           path.shift unless options.include_root?
         end.map(&:line).join ' '

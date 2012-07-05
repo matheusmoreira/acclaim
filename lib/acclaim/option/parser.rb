@@ -163,27 +163,27 @@ module Acclaim
       end
 
       # Parses the options and their arguments, associating that information
-      # with a Ribbon instance.
+      # with a ribbon.
       #
       # @since 0.0.3
       def parse_values!
-        values = Ribbon.wrap
-        argv.each_with_index do |argument, index|
-          options.find_all do |option|
-            option =~ argument
-          end.each do |option|
-            key = option.key
-            values[key] = option.default unless values.has_key? key
-            if option.flag?
-              found_boolean option, values.ribbon
-              deleted_options << index
-            else
-              parameters = extract_parameters_of! option, index
-              found_params_for option, parameters, values.ribbon
+        Ribbon.new.tap do |values|
+          argv.each_with_index do |argument, index|
+            options.find_all do |option|
+              option =~ argument
+            end.each do |option|
+              key = option.key
+              values[key] = option.default unless values.has_key? key
+              if option.flag?
+                found_boolean option, values
+                deleted_options << index
+              else
+                parameters = extract_parameters_of! option, index
+                found_params_for option, parameters, values
+              end
             end
           end
         end
-        values
       end
 
       # Starting from the given index, extracts parameters from the following

@@ -17,7 +17,7 @@ module Acclaim
       #
       # @param [Acclaim::Command::DSL] base_command the command the new help
       #   subcommand will inherit from
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [false, true] :options (true) whether help options
       #   are to be added to the base command
       # @option options [Array] :switches (['-h', '--help']) the switches of the
@@ -28,7 +28,7 @@ module Acclaim
       # @option options [Array] :include_root (false) whether to include the
       #   root command in command invocation lines when displaying help
       def create(base_command, options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         Class.new(base_command).tap do |help_command|
           add_options_to! base_command, help_command, options if options.options? true
           help_command.when_called do
@@ -46,11 +46,11 @@ module Acclaim
       # subcommands.
       #
       # @param [Acclaim::Command::DSL] command the command to display help for
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [Array] :include_root (false) whether to include the
       #   root command in command invocation lines
       def display_for(command, options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         puts Help::Template.for command, options if command.options.any?
         command.subcommands.each { |subcommand| display_for subcommand, options }
       end
@@ -62,14 +62,14 @@ module Acclaim
       # @param [Acclaim::Command::DSL] base_command the command the new help
       #   subcommand inherited from
       # @param [Acclaim::Command::DSL] help_command the new help subcommand
-      # @param [Hash, Ribbon, Ribbon::Wrapper] options method options
+      # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [Array] :switches (['-h', '--help']) the switches of the
       #   help option
       # @option options [String, #call] :description
       #   ('Show usage information and exit.') the description of the help
       #   option
       def add_options_to!(base_command, help_command, options = {})
-        options = Ribbon.wrap options
+        options = Ribbon.new options
         switches = options.switches? { %w(-h --help) }
         description = options.description? { 'Show usage information and exit.' }
         base_command.option :acclaim_help, switches, description do |ribbon|

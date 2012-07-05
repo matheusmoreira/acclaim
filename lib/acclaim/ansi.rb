@@ -159,7 +159,7 @@ module Acclaim
     # @see foreground_offset
     # @see background_offset
     def colors
-      @colors ||= Ribbon.wrap do
+      @colors ||= Ribbon.new do
         black 0
         red 1
         green 2
@@ -176,7 +176,7 @@ module Acclaim
     #
     # @return [Hash] effects associated with their escape codes
     def text_effects
-      @text_effects ||= Ribbon.wrap do
+      @text_effects ||= Ribbon.new do
         bright bold 1
         faint 2
         italic 3
