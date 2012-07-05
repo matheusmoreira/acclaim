@@ -2,6 +2,7 @@
 
 acclaim/command/dsl/root
 acclaim/command/parser
+acclaim/io
 acclaim/option
 acclaim/option/parser
 acclaim/option/parser/regexp
@@ -74,6 +75,30 @@ module Acclaim
       end
 
       alias when_called action
+
+      # The high-level input/output interface used by this command.
+      #
+      # @overload io
+      #   If not set, will use the standard streams.
+      #
+      #   @return [Acclaim::IO] the high-level I/O interface
+      #   @see Acclaim::IO.standard
+      #
+      # @overload io(interface)
+      #   Sets this command's high-level I/O interface.
+      #
+      #   @param [Acclaim::IO] interface the high-level I/O interface
+      #   @return [Acclaim::IO] the given I/O interface
+      #   @example
+      #     io = Acclaim::IO.new output: nil, error: nil
+      #     Some::Command.terminal io
+      def io(*arguments)
+        @io = arguments.first unless arguments.empty?
+        @io ||= Acclaim::IO.standard
+      end
+
+      alias shell io
+      alias terminal io
 
       # Parses the given arguments using this command's set of options.
       #
