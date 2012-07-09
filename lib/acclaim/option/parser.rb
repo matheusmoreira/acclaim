@@ -168,12 +168,17 @@ module Acclaim
       # @since 0.0.3
       def parse_values!
         Ribbon.new.tap do |values|
+          # Pre-initialize the ribbon with default values
+          options.each do |option|
+            key = option.key
+            values[key] = option.default unless values.has_key? key
+          end
+
+          # Now, with that out of the way, let's parse the command line.
           argv.each_with_index do |argument, index|
             options.find_all do |option|
               option =~ argument
             end.each do |option|
-              key = option.key
-              values[key] = option.default unless values.has_key? key
               if option.flag?
                 found_boolean option, values
                 deleted_options << index
