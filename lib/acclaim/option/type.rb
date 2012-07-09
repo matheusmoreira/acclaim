@@ -45,6 +45,14 @@ module Acclaim
       alias add_handler_for register
       alias accept register
 
+      # Whether the given type is registered.
+      #
+      # @param [Module, Class] type the type to check for registration
+      # @return [true, false] whether the type is registered
+      def registered?(type)
+        table.has_key? type
+      end
+
       # Returns the handler for the given class.
       #
       # @param [Class, Module] type the handler associated with the given type
