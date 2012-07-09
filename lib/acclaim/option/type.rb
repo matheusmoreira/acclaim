@@ -53,6 +53,8 @@ module Acclaim
         table.has_key? type
       end
 
+      alias accepted? registered?
+
       # Returns the handler for the given class.
       #
       # @param [Class, Module] type the handler associated with the given type
