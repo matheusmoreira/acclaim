@@ -83,7 +83,7 @@ module Acclaim
       options = arguments.extract_ribbon!
       options.default! do |default|
         default_type = default.class
-        type ||= default_type if Type.registered? default_type
+        type ||= (default_type if Type.registered? default_type)
       end
 
       strings = arguments.flatten.select do |argument|
