@@ -50,9 +50,12 @@ module Acclaim
     # Strings that don't follow the switch format are assumed to be
     # descriptions.
     #
-    # The type is given as a module or class, and must be a registered {Type}.
-    # Types are used in {#convert_parameters automatic parameter conversion}.
-    # The default type is {Type::String String}.
+    # The type of the option's parameters is given as a module or class, and
+    # must be a  {Type.registered? registered type}. Types are needed for
+    # {#convert_parameters automatic parameter conversion}. If omitted, the
+    # class of the supplied default value will be used if it is a registered
+    # type. If the type cannot be determined, it will be assumed to be
+    # {Type::String String}.
     #
     # If given a block, it will be called when the option is found in the
     # command line. The block will receive a ribbon as its first argument. If
