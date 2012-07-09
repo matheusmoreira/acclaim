@@ -141,29 +141,39 @@ describe Acclaim::Option::Parser do
       end
 
       context 'containing an option with an optional argument' do
-        let(:options) { [ Acclaim::Option.new(:volume, '-V', arity: [0,1], default: 2) ] }
+        let(:default) { 2 }
+        let(:options) { [ Acclaim::Option.new(:volume, arity: [0,1], default: default) ] }
+
+        context 'and not given any arguments' do
+          let!(:args) { [] }
+
+          it 'should initialize the option to its default value' do
+            subject.parse!.volume.should == default
+          end
+        end
 
         context 'and not given the option a parameter' do
-          let!(:args) { %w(-V) }
+          let!(:args) { %w(--volume) }
 
           it 'should not raise an error' do
             expect { subject.parse! }.to_not raise_error Acclaim::Option::Parser::Error, /arguments/
           end
 
-          it 'should initialize the option to its default' do
-            subject.parse!.volume.should == 2
+          it 'should initialize the option to its default value' do
+            subject.parse!.volume.should == default
           end
         end
 
         context 'and given the option a parameter' do
-          let!(:args) { %w(-V 5) }
+          let(:value) { 5.to_s }
+          let!(:args) { %w(--volume) << value }
 
           it 'should not raise an error' do
             expect { subject.parse! }.to_not raise_error Acclaim::Option::Parser::Error, /arguments/
           end
 
           it 'should initialize the option to the value given' do
-            subject.parse!.volume.should == '5'
+            subject.parse!.volume.should == value
           end
         end
       end
