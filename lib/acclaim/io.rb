@@ -38,6 +38,8 @@ end
 
 class Acclaim::IO
 
+  include Terminal
+
   default_formats.instance_eval do
     error :red
     warning :yellow
