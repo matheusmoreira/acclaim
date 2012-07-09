@@ -1,4 +1,9 @@
-require 'acclaim/ansi'
+%w(
+
+acclaim/ansi
+acclaim/io/terminal
+
+).each { |file| require file }
 
 Acclaim::ANSI.extend_string!
 
