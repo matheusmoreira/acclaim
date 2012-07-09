@@ -76,8 +76,12 @@ module Acclaim
     # @example
     #   option = Acclaim::Option.new :directory, 'Directory to work in', Pathname, arity: [1, 0], default: Pathname.pwd
     def initialize(key, *arguments, &block)
-      options = arguments.extract_ribbon!
       type = arguments.find { |argument| argument.is_a? Module }
+      options = arguments.extract_ribbon!
+      options.default! do |default|
+        default_type = default.class
+        type ||= default_type if Type.registered? default_type
+      end
 
       strings = arguments.flatten.select do |argument|
         argument.is_a? String
