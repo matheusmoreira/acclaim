@@ -27,33 +27,31 @@ module Acclaim
 
         # Default values for options, identified by their keys.
         #
-        # @overload option_defaults
+        # @overload defaults
         #   Returns the default values identified by their option's key.
         #
-        # @overload option_defaults(option_defaults)
+        # @overload defaults(defaults)
         #   Replaces the current configuration with that of the given hash.
         #
-        #   @param [Hash, Ribbon, Ribbon::Raw] option_defaults the default
-        #     values identified by their option's key
+        #   @param [Hash, Ribbon, Ribbon::Raw] defaults the default values
+        #     identified by their option's key
         #
         # @return [Ribbon] default values associated with an option key
-        def option_defaults(*arguments)
-          @option_defaults = arguments.extract_ribbon! unless arguments.empty?
-          @option_defaults ||= Ribbon.new
+        def defaults(*arguments)
+          @defaults = arguments.extract_ribbon! unless arguments.empty?
+          @defaults ||= Ribbon.new
         end
-
-        alias defaults option_defaults
 
         # Adds an option to this command.
         #
-        # Will use the default value provided by {#option_defaults} if there is
-        # one registered for the given option and no default value was
-        # explicitly specified.
+        # Will use the default value provided by {#defaults} if there is one
+        # registered for the given option and no default value was explicitly
+        # specified.
         #
         # @see Acclaim::Option#initialize
         def option(key, *arguments, &block)
-          if option_defaults.include? key
-            default = Ribbon.new default: option_defaults[key]
+          if defaults.include? key
+            default = Ribbon.new default: defaults[key]
             method_options = arguments.extract_ribbon!
             arguments << default.deep_merge(method_options)
           end
