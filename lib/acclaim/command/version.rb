@@ -23,14 +23,21 @@ module Acclaim
       #   the version option
       # @option options [String, #call] :description ('Show version and exit.')
       #   the description of the version option
+      # @option options [Acclaim::IO] :io the high-level I/O object that will be
+      #   used to output the help text
       def create(base_command, version_string, options = {})
         options = Ribbon.new options
+
         Class.new(base_command).tap do |version_command|
           add_options_to! base_command, version_command, options if options.options? true
+
           version_command.when_called do
-            puts version_string
+            io = options.io? { version_command.io }
+
+            io.output version_string
             exit
           end
+
           base_command.const_set :Version, version_command
         end
       end
@@ -52,6 +59,7 @@ module Acclaim
         options = Ribbon.new options
         switches = options.switches? { %w(-v --version) }
         description = options.description? { 'Show version and exit.' }
+
         base_command.option :acclaim_version, switches, description do |ribbon|
           version_command.execute ribbon
         end
