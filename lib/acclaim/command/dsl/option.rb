@@ -26,7 +26,7 @@ module Acclaim
         #
         # @see Acclaim::Option#initialize
         def option(*arguments, &block)
-          options << Option.new(*arguments, &block)
+          options << Acclaim::Option.new(*arguments, &block)
         end
 
         alias opt option
@@ -36,7 +36,7 @@ module Acclaim
         # @param [Array<String>] arguments the argument array
         # @return [Ribbon] ribbon containing the values
         def parse_options_in!(arguments)
-          Option::Parser.new(arguments, options).parse!
+          Acclaim::Option::Parser.new(arguments, options).parse!
         end
 
       end

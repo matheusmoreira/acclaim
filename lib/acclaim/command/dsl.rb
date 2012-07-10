@@ -102,7 +102,7 @@ module Acclaim
       # @see #invoke
       def run(*arguments)
         invoke arguments
-      rescue Option::Parser::Error => error
+      rescue Acclaim::Option::Parser::Error => error
         $stderr.puts error.message
       end
 
@@ -119,7 +119,7 @@ module Acclaim
         subcommand = parse_subcommands_in! arguments
         if subcommand.nil?
           all_options = command_ancestors.collect(&:options).flatten
-          parsed_options = Option::Parser.new(arguments, all_options).parse!
+          parsed_options = Acclaim::Option::Parser.new(arguments, all_options).parse!
           delete_argument_separators_in! arguments
           execute parsed_options, arguments
         else
@@ -201,7 +201,7 @@ module Acclaim
       # Deletes all argument separators in the given argument array.
       def delete_argument_separators_in!(arguments)
         arguments.delete_if do |arg|
-          arg =~ Option::Parser::Regexp::ARGUMENT_SEPARATOR
+          arg =~ Acclaim::Option::Parser::Regexp::ARGUMENT_SEPARATOR
         end
       end
 
