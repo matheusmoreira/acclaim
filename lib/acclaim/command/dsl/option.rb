@@ -42,6 +42,8 @@ module Acclaim
           @option_defaults ||= Ribbon.new
         end
 
+        alias defaults option_defaults
+
         # Adds an option to this command.
         #
         # Will use the default value provided by {#option_defaults} if there is
