@@ -51,6 +51,7 @@ module Acclaim
             method_options = arguments.extract_ribbon!
             arguments << default.deep_merge(method_options)
           end
+
           options << Acclaim::Option.new(key, *arguments, &block)
         end
 
