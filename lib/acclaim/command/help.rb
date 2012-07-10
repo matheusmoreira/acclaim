@@ -49,9 +49,13 @@ module Acclaim
       # @param [Hash, Ribbon, Ribbon::Raw] options method options
       # @option options [Array] :include_root (false) whether to include the
       #   root command in command invocation lines
+      # @option options [Acclaim::IO] :io (Acclaim::IO.standard) the high-level
+      #   I/O object that will be used to output the help text
       def display_for(command, options = {})
         options = Ribbon.new options
-        puts Help::Template.for command, options if command.options.any?
+        io = options.io? Acclaim::IO.standard
+
+        io.output Help::Template.for(command, options) if command.options.any?
         command.subcommands.each { |subcommand| display_for subcommand, options }
       end
 
