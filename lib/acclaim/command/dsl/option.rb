@@ -25,6 +25,23 @@ module Acclaim
           @options ||= []
         end
 
+        # Default values for options, identified by their keys.
+        #
+        # @overload option_defaults
+        #   Returns the default values identified by their option's key.
+        #
+        # @overload option_defaults(option_defaults)
+        #   Replaces the current configuration with that of the given hash.
+        #
+        #   @param [Hash, Ribbon, Ribbon::Raw] option_defaults the default
+        #     values identified by their option's key
+        #
+        # @return [Ribbon] default values associated with an option key
+        def option_defaults(*arguments)
+          @option_defaults = arguments.extract_ribbon! unless arguments.empty?
+          @option_defaults ||= Ribbon.new
+        end
+
         # Adds an option to this command.
         #
         # @see Acclaim::Option#initialize
