@@ -44,6 +44,10 @@ module Acclaim
 
         # Adds an option to this command.
         #
+        # Will use the default value provided by {#option_defaults} if there is
+        # one registered for the given option and no default value was
+        # explicitly specified.
+        #
         # @see Acclaim::Option#initialize
         def option(key, *arguments, &block)
           if option_defaults.include? key
