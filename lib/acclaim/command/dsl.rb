@@ -102,8 +102,8 @@ module Acclaim
       # @see #invoke
       def run(*arguments)
         invoke arguments
-      rescue Acclaim::Option::Parser::Error => error
-        $stderr.puts error.message
+      rescue Acclaim::Option::Parser::Error => parser_error
+        error parser_error.message
       end
 
       # Searches the given arguments for subcommands and {#invoke invokes} it.
