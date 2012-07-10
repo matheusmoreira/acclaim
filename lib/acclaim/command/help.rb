@@ -57,7 +57,7 @@ module Acclaim
       #   I/O object that will be used to output the help text
       def display_for(command, options = {})
         options = Ribbon.new options
-        io = options.io? Acclaim::IO.standard
+        io = options.io? { Acclaim::IO.standard }
 
         io.output Help::Template.for(command, options) if command.options.any?
         command.subcommands.each { |subcommand| display_for subcommand, options }
