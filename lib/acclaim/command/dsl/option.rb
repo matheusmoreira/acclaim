@@ -45,8 +45,13 @@ module Acclaim
         # Adds an option to this command.
         #
         # @see Acclaim::Option#initialize
-        def option(*arguments, &block)
-          options << Acclaim::Option.new(*arguments, &block)
+        def option(key, *arguments, &block)
+          if option_defaults.include? key
+            default = Ribbon.new default: option_defaults[key]
+            method_options = arguments.extract_ribbon!
+            arguments << default.deep_merge(method_options)
+          end
+          options << Acclaim::Option.new(key, *arguments, &block)
         end
 
         alias opt option
