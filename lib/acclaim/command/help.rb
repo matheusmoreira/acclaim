@@ -34,14 +34,17 @@ module Acclaim
 
         Class.new(base_command).tap do |help_command|
           add_options_to! base_command, help_command, options if options.options? true
+
           help_command.when_called do
             # TODO: implement a way to specify a command to the help option
             # and command.
             #   display_for options.command || args.pop
             help_options = Ribbon.merge({ io: help_command.io }, options)
+
             display_for base_command.root, help_options
             exit
           end
+
           base_command.const_set :Help, help_command
         end
       end
