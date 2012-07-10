@@ -2,6 +2,9 @@
 
 acclaim/option
 
+ribbon
+ribbon/core_extensions/array
+
 ).each { |file| require file }
 
 module Acclaim
