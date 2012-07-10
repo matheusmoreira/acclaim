@@ -27,8 +27,8 @@ module Acclaim
       #   option
       # @option options [Array] :include_root (false) whether to include the
       #   root command in command invocation lines when displaying help
-      # @option options [Acclaim::IO] :io (Acclaim::IO.standard) the high-level
-      #   I/O object that will be used to output the help text
+      # @option options [Acclaim::IO] :io the high-level I/O object that will be
+      #   used to output the help text
       def create(base_command, options = {})
         options = Ribbon.new options
 
