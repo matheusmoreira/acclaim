@@ -1,10 +1,10 @@
 %w(
 
 acclaim/command/dsl/io
+acclaim/command/dsl/option
 acclaim/command/dsl/root
 acclaim/command/parser
 acclaim/io
-acclaim/option
 acclaim/option/parser
 acclaim/option/parser/regexp
 
@@ -47,22 +47,6 @@ module Acclaim
         @subcommands ||= []
       end
 
-      # The options this command can take.
-      #
-      # @return [Array<Acclaim::Option>] the options this command takes
-      def options
-        @options ||= []
-      end
-
-      # Adds an option to this command.
-      #
-      # @see Acclaim::Option#initialize
-      def option(*arguments, &block)
-        options << Option.new(*arguments, &block)
-      end
-
-      alias opt option
-
       # The block which is executed when this command is called.
       #
       # @yieldparam [Ribbon] options a ribbon instance which associates options
@@ -100,14 +84,6 @@ module Acclaim
 
       alias shell io
       alias terminal io
-
-      # Parses the given arguments using this command's set of options.
-      #
-      # @param [Array<String>] arguments the argument array
-      # @return [Ribbon] ribbon containing the values
-      def parse_options_in!(arguments)
-        Option::Parser.new(arguments, options).parse!
-      end
 
       # Searches the given arguments for one of this command's subcommands.
       #
@@ -231,6 +207,7 @@ module Acclaim
 
       include Root
       include IO
+      include Option
 
     end
 
