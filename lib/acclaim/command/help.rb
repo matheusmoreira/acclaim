@@ -27,15 +27,19 @@ module Acclaim
       #   option
       # @option options [Array] :include_root (false) whether to include the
       #   root command in command invocation lines when displaying help
+      # @option options [Acclaim::IO] :io (Acclaim::IO.standard) the high-level
+      #   I/O object that will be used to output the help text
       def create(base_command, options = {})
         options = Ribbon.new options
+
         Class.new(base_command).tap do |help_command|
           add_options_to! base_command, help_command, options if options.options? true
           help_command.when_called do
             # TODO: implement a way to specify a command to the help option
             # and command.
             #   display_for options.command || args.pop
-            display_for base_command.root, options
+            help_options = Ribbon.merge({ io: help_command.io }, options)
+            display_for base_command.root, help_options
             exit
           end
           base_command.const_set :Help, help_command
@@ -76,6 +80,7 @@ module Acclaim
         options = Ribbon.new options
         switches = options.switches? { %w(-h --help) }
         description = options.description? { 'Show usage information and exit.' }
+
         base_command.option :acclaim_help, switches, description do |ribbon|
           help_command.execute ribbon
         end
