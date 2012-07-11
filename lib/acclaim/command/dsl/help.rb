@@ -18,6 +18,7 @@ module Acclaim
 
         # Adds help subcommand and options to the root command.
         #
+        # @return [void]
         # @see Acclaim::Command::Help.create
         def help(*arguments, &block)
           Command::Help.create root, arguments.extract_ribbon!, &block
@@ -34,13 +35,13 @@ module Acclaim
         #   Stores the given string as this command's description.
         #
         #   @param [#to_s] string the description
-        #   @return [String] the given description
+        #   @return [void]
         #
         # @overload description(&block)
         #   Calls the given block to determine the description when needed.
         #
         #   @param [#call] block the block to call
-        #   @return [Proc] the given block
+        #   @return [void]
         #   @yieldreturn [String] the description
         def description(*arguments, &block)
           help_data :description, *arguments, &block
@@ -57,13 +58,13 @@ module Acclaim
         #   Stores the given string as this command's usage notes.
         #
         #   @param [#to_s] string the notes
-        #   @return [String] the given notes
+        #   @return [void]
         #
         # @overload note(&block)
         #   Calls the given block to determine the usage notes when needed.
         #
         #   @param [#call] block the block to call
-        #   @return [Proc] the given block
+        #   @return [void]
         #   @yieldreturn [String] the usage notes
         def note(*arguments, &block)
           help_data :note, *arguments, &block
@@ -83,13 +84,13 @@ module Acclaim
         #   Stores the given string as this command's help text.
         #
         #   @param [#to_s] string the help text
-        #   @return [String] the given text
+        #   @return [void]
         #
         # @overload text(&block)
         #   When needed, the block will be called to determine the help text.
         #
         #   @param [#call] block the block to call
-        #   @return [Proc] the given block
+        #   @return [void]
         #   @yieldreturn [String] the help text
         def text(*arguments, &block)
           help_data :text, *arguments, &block
@@ -110,13 +111,13 @@ module Acclaim
         #   Associates the data with the given key.
         #
         #   @param [#to_s] data the data to store
-        #   @return [String] the data
+        #   @return [void]
         #
         # @overload help_data(key, &block)
         #   When needed, the block will be called to obtain the data.
         #
         #   @param [#call] block the block to call
-        #   @return [Proc] the given block
+        #   @return [void]
         #   @yieldreturn [String] the data
         def help_data(key, *arguments, &block)
           @help_data ||= Ribbon.new
