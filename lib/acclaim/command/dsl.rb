@@ -3,7 +3,7 @@
 acclaim/command/dsl/help
 acclaim/command/dsl/io
 acclaim/command/dsl/option
-acclaim/command/dsl/root
+acclaim/command/dsl/version
 acclaim/command/parser
 acclaim/io
 acclaim/option/parser
@@ -24,7 +24,14 @@ module Acclaim
     # @since 0.4.0
     module DSL
 
-      [Help, IO, Option, Root].each { |dsl| include dsl }
+      [
+
+        Help,
+        IO,
+        Option,
+        Version
+
+      ].each { |dsl| include dsl }
 
       # The string used to invoke this command from the command line.
       #
