@@ -17,13 +17,6 @@ module Acclaim
       # @since 0.4.0
       module Root
 
-        # Adds help subcommand and options to this command.
-        #
-        # @see Acclaim::Command::Help.create
-        def help(*arguments, &block)
-          Help.create root, arguments.extract_ribbon!, &block
-        end
-
         # Adds version subcommand and options to this command.
         #
         # @see Acclaim::Command::Help.create

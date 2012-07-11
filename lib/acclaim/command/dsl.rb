@@ -1,5 +1,6 @@
 %w(
 
+acclaim/command/dsl/help
 acclaim/command/dsl/io
 acclaim/command/dsl/option
 acclaim/command/dsl/root
@@ -22,6 +23,8 @@ module Acclaim
     # @author Matheus Afonso Martins Moreira
     # @since 0.4.0
     module DSL
+
+      [Help, IO, Option, Root].each { |dsl| include dsl }
 
       # The string used to invoke this command from the command line.
       #
@@ -204,10 +207,6 @@ module Acclaim
           arg =~ Acclaim::Option::Parser::Regexp::ARGUMENT_SEPARATOR
         end
       end
-
-      include Root
-      include IO
-      include Option
 
     end
 
