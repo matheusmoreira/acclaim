@@ -72,6 +72,29 @@ module Acclaim
         alias notes note
         alias notice note
 
+        # This command's arbitrary, noncontextual help text.
+        #
+        # @overload text
+        #   Returns this command's help text.
+        #
+        #   @return [String] the help text
+        #
+        # @overload text(string)
+        #   Stores the given string as this command's help text.
+        #
+        #   @param [#to_s] string the help text
+        #   @return [String] the given text
+        #
+        # @overload text(&block)
+        #   When needed, the block will be called to determine the help text.
+        #
+        #   @param [#call] block the block to call
+        #   @return [Proc] the given block
+        #   @yieldreturn [String] the help text
+        def text(*arguments, &block)
+          help_data :text, *arguments, &block
+        end
+
         private
 
         # Stores data such as description, usage notes and examples.
