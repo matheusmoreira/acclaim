@@ -43,10 +43,7 @@ module Acclaim
         #   @return [Proc] the given block
         #   @yieldreturn [String] the description
         def description(*arguments, &block)
-          if block.respond_to? :call then @description = block
-          elsif arguments.any? then @description = arguments.first.to_s
-          elsif @description.respond_to? :call then @description.call.to_s
-          else @description.to_s end
+          help_data :description, *arguments, &block
         end
 
         # This command's usage notes.
@@ -69,13 +66,48 @@ module Acclaim
         #   @return [Proc] the given block
         #   @yieldreturn [String] the usage notes
         def note(*arguments, &block)
-          if block.respond_to? :call then @note = block
-          elsif arguments.any? then @note = arguments.first.to_s
-          elsif @note.respond_to? :call then @note.call.to_s
-          else @note.to_s end
+          help_data :note, *arguments, &block
         end
 
         alias notice note
+
+        private
+
+        # Stores data such as description, usage notes and examples.
+        #
+        # @param [#to_sym] key the key the data is associated with
+        #
+        # @overload help_data(key)
+        #   Returns the data associated with the given key.
+        #
+        #   @return [String] the data
+        #
+        # @overload help_data(key, data)
+        #   Associates the data with the given key.
+        #
+        #   @param [#to_s] data the data to store
+        #   @return [String] the data
+        #
+        # @overload help_data(key, &block)
+        #   When needed, the block will be called to obtain the data.
+        #
+        #   @param [#call] block the block to call
+        #   @return [Proc] the given block
+        #   @yieldreturn [String] the data
+        def help_data(key, *arguments, &block)
+          @help_data ||= Ribbon.new
+
+          if block.respond_to? :call then @help_data[key] = block
+          elsif arguments.any? then @help_data[key] = arguments.first.to_s
+          else
+            data = @help_data[key]
+
+            if data.nil? then data
+            else
+              if data.respond_to? :call then data.call else data end.to_s
+            end
+          end
+        end
 
       end
     end
