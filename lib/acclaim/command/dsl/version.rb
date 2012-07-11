@@ -14,7 +14,7 @@ module Acclaim
       #
       # @author Matheus Afonso Martins Moreira
       # @since 0.6.0
-      module Help
+      module Version
 
         # Adds version subcommand and options to this command.
         #
