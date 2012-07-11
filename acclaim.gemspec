@@ -4,7 +4,7 @@
 Gem::Specification.new 'acclaim' do |gem|
 
   current_directory = File.dirname __FILE__
-  version_file = File.expand_path "#{gem.name}.version", current_directory
+  version_file = File.expand_path 'VERSION', current_directory
 
   gem.version = File.read(version_file).chomp
 
