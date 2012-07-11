@@ -69,6 +69,7 @@ module Acclaim
           help_data :note, *arguments, &block
         end
 
+        alias notes note
         alias notice note
 
         private
