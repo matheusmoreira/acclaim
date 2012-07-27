@@ -123,7 +123,7 @@ class Acclaim::IO
   # @example
   #   io.output result
   def output(message, *format)
-    write_to output_stream, message, format: format
+    write_to output_stream, message, format: format, word_wrap: false
   end
 
   # Prints a message to the user.
