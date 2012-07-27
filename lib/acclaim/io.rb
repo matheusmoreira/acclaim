@@ -57,12 +57,15 @@ class Acclaim::IO
   # @option options [::IO, nil] :error (STDERR) the error stream
   # @option options [true, false] :formatting (true) whether to enable text
   #   formatting
+  # @option options [true, false] :word_wrapping (true) whether to enable word
+  #   wrapping
   def initialize(options = {})
     options = Ribbon.new options
     self.input_stream = options.input? STDIN
     self.output_stream = options.output? STDOUT
     self.error_stream = options.error? STDERR
     self.formatting = options.formatting? true
+    self.word_wrapping = options.word_wrapping? true
   end
 
   # Enables or disables formatted output support.
