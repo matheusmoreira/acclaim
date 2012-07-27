@@ -252,6 +252,7 @@ class Acclaim::IO
   #   the message
   # @option options [#to_sym] :method (:puts) the method to send to the stream
   # @option options [true, false] :indent (true) whether to indent the output
+  # @option options [true, false] :word_wrap whether to word wrap the output
   # @see #identation_level
   # @see #should_format_output_for?
   # @see #should_word_wrap_output_for?
