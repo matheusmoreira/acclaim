@@ -36,7 +36,7 @@ module Acclaim
       # @return [Array<Integer>, nil] the number of lines and columns of the
       #   terminal, or +nil+ if it couldn't be determined
       def measurements
-        measurement_algorithms.each do |key, algorithm|
+        Terminal.measurement_algorithms.each do |key, algorithm|
           begin
             @terminal_measurements = algorithm.call.to_a.map &:to_i
             break
