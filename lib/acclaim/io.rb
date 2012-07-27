@@ -178,7 +178,7 @@ class Acclaim::IO
   alias info information
 
   # Prints the status followed by the details. The details will not be
-  # formatted.
+  # formatted or word wrapped.
   #
   # @param [#to_s] symbol the symbolic status name
   # @param [#to_s] details the details
@@ -188,9 +188,9 @@ class Acclaim::IO
   def status(symbol, details, *format)
     format.push *self.class.default_formats.status if format.empty?
     error_stream.tap do |stream|
-      write_to stream, symbol.to_s.strip, format: format, method: :print
-      write_to stream, ' ', method: :print, indent: false
-      write_to stream, details, indent: false
+      write_to stream, symbol.to_s.strip, format: format, word_wrap: false, method: :print
+      write_to stream, ' ', method: :print, indent: false, word_wrap: false
+      write_to stream, details, indent: false, word_wrap: false
     end
   end
 
