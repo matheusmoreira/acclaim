@@ -1,5 +1,9 @@
-require 'erb'
-require 'ribbon/core_extensions/array'
+%w(
+
+erb
+ribbon/core_extensions/array
+
+).each { |file| require file }
 
 module Acclaim
   class Command
