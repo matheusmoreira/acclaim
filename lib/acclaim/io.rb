@@ -273,7 +273,7 @@ class Acclaim::IO
   #
   # @return [true, false] whether output to the given stream should be formatted
   def should_format_output_for?(stream)
-    formatting? and stream and stream.tty?
+    formatting? and stream.tty?
   end
 
   # Applies the given formatting options to the message.
