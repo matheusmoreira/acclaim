@@ -67,6 +67,29 @@ module Acclaim
 
       alias line_width columns
 
+      # Wraps the given string into lines no longer than the specified width.
+      #
+      # @param [#to_s] string the string to wrap
+      # @param [Integer] width the maxium line width
+      # @return [String] the word-wrapped string
+      def word_wrap(string, width = line_width)
+        string.to_s.lines.collect do |line|
+          [].tap do |slices|
+
+            until line.empty?
+              match = line.match /(.{1,#{width}})( +|$)/m
+              line.slice! match.begin(0)...match.end(0)
+
+              words, spaces = match.captures
+
+              slices << words
+              slices << $/ unless words.end_with? $/
+            end
+
+          end.join
+        end.join
+      end
+
       private
 
       # Stores the given block as a measurement algorithm.
