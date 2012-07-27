@@ -264,7 +264,7 @@ class Acclaim::IO
       message = format message, *formatting_options if should_format_output_for? stream
     end
 
-    message = indentation + message if should_indent = options.indent? true
+    message = indentation + message if should_indent = options.indent?(true)
 
     if options.word_wrap? { should_word_wrap_output_for? stream }
       width = if should_indent then line_width - indentation_level else line_width end
