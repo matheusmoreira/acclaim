@@ -254,6 +254,7 @@ class Acclaim::IO
   # @see #format
   def write_to(stream, message, options = {})
     return if stream.nil?
+
     options = Ribbon.new options
     message = message.to_s
     stream = stream.to_io
