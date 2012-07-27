@@ -276,6 +276,15 @@ class Acclaim::IO
     formatting? and stream.tty?
   end
 
+  # Whether the output that will be written to the given stream should be word
+  # wrapped.
+  #
+  # @return [true, false] whether output to the given stream should be word
+  #   wrapped
+  def should_word_wrap_output_for?(stream)
+    word_wrapping? and stream.tty? and not line_width.nil?
+  end
+
   # Applies the given formatting options to the message.
   #
   # @note The message must respond to all format symbols given.
