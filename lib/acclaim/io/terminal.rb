@@ -65,6 +65,8 @@ module Acclaim
         measurements and measurements.last
       end
 
+      alias line_width columns
+
       private
 
       # Stores the given block as a measurement algorithm.
