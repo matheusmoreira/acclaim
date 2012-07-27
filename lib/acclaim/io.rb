@@ -89,6 +89,30 @@ class Acclaim::IO
     self.formatting = false
   end
 
+  # Enables or disables word wrapping.
+  #
+  # @param [true, false] value whether word wrapped output is enabled
+  def word_wrapping=(value)
+    @word_wrapping = value
+  end
+
+  # Whether word wrapping is enabled.
+  #
+  # @return [true, false] whether output should be word wrapped
+  def word_wrapping?
+    !!@word_wrapping
+  end
+
+  # Enables word wrapping.
+  def enable_word_wrapping
+    self.word_wrapping = true
+  end
+
+  # Disables word wrapping.
+  def disable_word_wrapping
+    self.word_wrapping = false
+  end
+
   # Prints essential program output.
   #
   # @param [#to_s] message the output message
