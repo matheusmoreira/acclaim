@@ -263,7 +263,7 @@ class Acclaim::IO
       message = format message, *formatting_options if should_format_output_for? stream
     end
 
-    message = indentation + message if options.indent? true
+    message = indentation + message if should_indent = options.indent? true
 
     stream.send method, message unless message.empty?
   end
