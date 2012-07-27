@@ -253,7 +253,7 @@ class Acclaim::IO
   # @option options [#to_sym] :method (:puts) the method to send to the stream
   # @option options [true, false] :indent (true) whether to indent the output
   # @see #identation_level
-  # @see #supports_formatting?
+  # @see #should_format_output_for?
   # @see #format
   def write_to(stream, message, options = {})
     return if stream.nil?
